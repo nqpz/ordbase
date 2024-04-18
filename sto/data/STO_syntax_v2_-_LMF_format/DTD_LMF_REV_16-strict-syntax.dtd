@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- LMF DTD --> 
+<!--
+***********************************************************************
+*
+*  Strict dtd for validation of STO-LMF
+*
+*
+***********************************************************************
+-->    
+
+<!--*********** Core package ***********-->
+
+<!ELEMENT LexicalResource (feat*, GlobalInformation, Lexicon+)>    
+<!ATTLIST LexicalResource
+    dtdVersion CDATA     #FIXED "16"
+    xmlns:dcr  CDATA     #FIXED "http://www.isocat.org/ns/dcr">
+
+<!ELEMENT GlobalInformation (feat*)>
+<!ELEMENT Lexicon (feat*, LexicalEntry+, SubcategorizationFrame*)>
+<!ELEMENT LexicalEntry (feat*, Lemma, SyntacticBehaviour*)>
+<!ATTLIST LexicalEntry
+  id                 ID #IMPLIED>         <!-- evt. GMU_ID?-->
+<!ELEMENT Lemma (feat*, FormRepresentation*)>
+<!ELEMENT FormRepresentation (feat*)>
+
+<!--*********** Package for Syntax ***********-->
+<!ELEMENT SyntacticBehaviour (feat*)>
+<!ATTLIST SyntacticBehaviour
+   id ID #IMPLIED                        
+   subcategorizationFrames IDREFS #IMPLIED>  <!-- = SYNU_Id --> 
+
+<!ELEMENT SubcategorizationFrame (feat*, LexemeProperty?, SyntacticArgument*) >
+<!ATTLIST SubcategorizationFrame
+  id                 ID #IMPLIED>         <!-- = Description_Id -->
+
+<!ELEMENT LexemeProperty (feat*)>
+<!ELEMENT SyntacticArgument (feat*)>
+<!ATTLIST SyntacticArgument
+    id                 ID #IMPLIED>        <!-- evt. Construction_Function_Id -->
+
+
+
+<!--*********** for data category adornment: feat stands for feature ***********-->
+<!ELEMENT feat EMPTY>
+            <!-- att=constant to be taken from the DataCategoryRegistry -->
+            <!-- val=free string or constant to be taken from the DCR-->
+<!ATTLIST feat
+    att (languageCoding|languageIdentifier|
+        id|morphologicalUnitId|writtenForm|officiallyApproved|synuId|example|
+        naming|constructionId|
+        partOfSpeech|selfId|reflexiveVerb|takesParticle|takesAuxiliary|passiveVerb|modal|auxiliary|
+        positionNumber|syntacticFunctionType|optional|syntacticConstituentLabel|syntacticConstituentPhraseId|
+        case|reflexiveVoice|expletive|definiteness|npIndex|        
+        introducer|ppComplementLabel|controlType|coreferenceRelation|clauseType|finite|adjectivalFunction
+    )             #REQUIRED
+    val      CDATA #REQUIRED
+    dcr:valueDatcat CDATA #IMPLIED
+    dcr:datcat CDATA #IMPLIED
+>
+

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE LexicalResource SYSTEM "file:/N:/cst/metanord/STO/STO-LMF-eks/format-dtd-mv/DTD_LMF_REV_16-strict.dtd">
+<LexicalResource dtdVersion="16" xmlns:dcr="http://www.isocat.org/ns/dcr">
+   <!-- STO export to LMF for morphology, January 2013  -->
+    <GlobalInformation>
+       <feat att="languageCoding" dcr:datcat="http://www.isocat.org/datcat/DC-2008" val="ISO 639-1"/>
+       
+    <!--POS tagset and morphological features with references to isocat -->
+       <feat att="adjectivalFunction" dcr:datcat="../DC-5289" val="attributiveFunction" dcr:valueDatcat="../DC-5287"/>
+       <feat att="adjectivalFunction" dcr:datcat="../DC-5289" val="predicativeFunction" dcr:valueDatcat="../DC-5288"/>
+       <feat att="adjectivalFunction" dcr:datcat="../DC-5289" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="adjective" dcr:valueDatcat="../DC-1230"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="commonNoun" dcr:valueDatcat="../DC-1256"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="conjunction" dcr:valueDatcat="../DC-1260"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="demonstrativePronoun" dcr:valueDatcat="../DC-1270"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="deponentVerb" dcr:valueDatcat="../DC-5278"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="existentialPronoun" dcr:valueDatcat="../DC-3012"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="generalAdverb" dcr:valueDatcat="../DC-1435"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="indefinitePronoun" dcr:valueDatcat="../DC-1309"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="infinitiveParticle" dcr:valueDatcat="../DC-1896"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="interjection" dcr:valueDatcat="../DC-1318"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="interrogativeRelativePronoun" dcr:valueDatcat="../DC-3016"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="mainVerb" dcr:valueDatcat="../DC-1400"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="numeral" dcr:valueDatcat="../DC-1334"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="ordinalAdjective" dcr:valueDatcat="../DC-1338"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="personalPronoun" dcr:valueDatcat="../DC-1463"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="possessivePronoun" dcr:valueDatcat="../DC-1359"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="preposition" dcr:valueDatcat="../DC-1366"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="properNoun" dcr:valueDatcat="../DC-1371"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="reciprocalPronoun" dcr:valueDatcat="../DC-1924"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="unclassifiedParticle" dcr:valueDatcat="../DC-1897"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="case" dcr:datcat="../DC-1840" val="genitiveCase" dcr:valueDatcat="../DC-1293"/>
+       <feat att="case" dcr:datcat="../DC-1840" val="nominativeCase" dcr:valueDatcat="../DC-1331"/>
+       <feat att="case" dcr:datcat="../DC-1840" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="decomposition" dcr:datcat="../DC-5281" val="CDATA"/>
+       <feat att="definiteness" dcr:datcat="../DC-1926" val="definite" dcr:valueDatcat="../DC-2004"/>
+       <feat att="definiteness" dcr:datcat="../DC-1926" val="indefinite" dcr:valueDatcat="../DC-2005"/>
+       <feat att="definiteness" dcr:datcat="../DC-1926" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="degree" dcr:datcat="../DC-1419" val="comparative" dcr:valueDatcat="../DC-1421"/>
+       <feat att="degree" dcr:datcat="../DC-1419" val="positive" dcr:valueDatcat="../DC-1420"/>
+       <feat att="degree" dcr:datcat="../DC-1419" val="superlative" dcr:valueDatcat="../DC-1422"/>
+       <feat att="frequency" dcr:datcat="../DC-5615" val="CDATA"/>
+       <feat att="grammaticalGender" dcr:datcat="../DC-1297" val="commonGender" dcr:valueDatcat="../DC-1558"/>
+       <feat att="grammaticalGender" dcr:datcat="../DC-1297" val="neuter" dcr:valueDatcat="../DC-1884"/>
+       <feat att="grammaticalGender" dcr:datcat="../DC-1297" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="grammaticalNumber" dcr:datcat="../DC-1298" val="plural" dcr:valueDatcat="../DC-1354"/>
+       <feat att="grammaticalNumber" dcr:datcat="../DC-1298" val="singular" dcr:valueDatcat="../DC-1387"/>
+       <feat att="grammaticalNumber" dcr:datcat="../DC-1298" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="id" dcr:datcat="../DC-1845" val="CDATA"/>
+       <feat att="independentWord" dcr:datcat="../DC-5285" val="no" dcr:valueDatcat="../DC-1905"/>
+       <feat att="independentWord" dcr:datcat="../DC-5285" val="yes" dcr:valueDatcat="../DC-1904"/>
+       <feat att="inflectionalParadigm" dcr:datcat="../DC-5283" val="CDATA"/>
+       <feat att="joiningElement" dcr:datcat="../DC-5279" val="CDATA"/>
+       <feat att="joiningElementResult" dcr:datcat="../DC-5280" val="CDATA"/>
+       <feat att="morphologicalUnitId" dcr:datcat="../DC-5282" val="CDATA"/>
+       <feat att="officiallyApproved" dcr:datcat="../DC-5284" val="no" dcr:valueDatcat="../DC-1905"/>
+       <feat att="officiallyApproved" dcr:datcat="../DC-5284" val="yes" dcr:valueDatcat="../DC-1904"/>
+       <feat att="originalSource" dcr:datcat="../DC-2534" val="CDATA"/>
+       <feat att="ownerNumber" dcr:datcat="../DC-1417" val="plural" dcr:valueDatcat="../DC-1354"/>
+       <feat att="ownerNumber" dcr:datcat="../DC-1417" val="singular" dcr:valueDatcat="../DC-1387"/>
+       <feat att="person" dcr:datcat="../DC-1328" val="firstPerson" dcr:valueDatcat="../DC-1288"/>
+       <feat att="person" dcr:datcat="../DC-1328" val="secondPerson" dcr:valueDatcat="../DC-1384"/>
+       <feat att="person" dcr:datcat="../DC-1328" val="thirdPerson" dcr:valueDatcat="../DC-1402"/>       
+       <feat att="reflexivity" dcr:datcat="../DC-5286" val="no" dcr:valueDatcat="../DC-1905"/>
+       <feat att="reflexivity" dcr:datcat="../DC-5286" val="yes" dcr:valueDatcat="../DC-1904"/>
+       <feat att="register" dcr:datcat="../DC-1988" val="formalRegister" dcr:valueDatcat="../DC-1992"/>
+       <feat att="spellingVariant" dcr:datcat="../DC-5612" val="CDATA"/>
+       <feat att="tense" dcr:datcat="../DC-1286" val="past" dcr:valueDatcat="../DC-1347"/>
+       <feat att="tense" dcr:datcat="../DC-1286" val="present" dcr:valueDatcat="../DC-1367"/>
+       <feat att="transcategorization" dcr:datcat="../DC-5272" val="transadjectival" dcr:valueDatcat="../DC-5276"/>
+       <feat att="transcategorization" dcr:datcat="../DC-5272" val="transadverbial" dcr:valueDatcat="../DC-5275"/>
+       <feat att="transcategorization" dcr:datcat="../DC-5272" val="transnominal" dcr:valueDatcat="../DC-5277"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="gerundive" dcr:valueDatcat="../DC-2243"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="imperative" dcr:valueDatcat="../DC-1844"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="indicative" dcr:valueDatcat="../DC-1885"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="infinitive" dcr:valueDatcat="../DC-1312"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="participle" dcr:valueDatcat="../DC-1341"/>
+       <feat att="voice" dcr:datcat="../DC-1413" val="activeVoice" dcr:valueDatcat="../DC-1227"/>
+       <feat att="voice" dcr:datcat="../DC-1413" val="passiveVoice" dcr:valueDatcat="../DC-1346"/>
+       <feat att="writtenForm" dcr:datcat="../DC-1836" val="CDATA"/>
+    </GlobalInformation>
+
+
+    <Lexicon>
+       <feat att="languageIdentifier"  dcr:datcat="../DC-279" val="da"/>    
+         
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_Q_1"/> 
+<feat att="morphologicalUnitId" val="Q"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="q"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="q"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="q"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="2.4464"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="q's"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0714"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="q'er"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="q'ers"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="q'et"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="q'ets"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="q'erne"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="q'ernes"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<RelatedForm><feat att="spellingVariant" val="GMU_Q_2"/> <FormRepresentation><feat att="writtenForm" val="Q"/></FormRepresentation></RelatedForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_QUIZMASTER_1"/> 
+<feat att="morphologicalUnitId" val="QUIZMASTER"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="quizmaster"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="quizmaster"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmaster"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".1607"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmasters"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmastere"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmasteres"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmasteren"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0714"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmasterens"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmasterne"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizmasternes"/> <feat att="inflectionalParadigm" val="MFG0015"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_Q_2"/> 
+<feat att="morphologicalUnitId" val="Q"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="Q"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="Q"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="Q"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="2.4464"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="Q's"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0714"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="Q'er"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="Q'ers"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="Q'et"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="Q'ets"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="Q'erne"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="Q'ernes"/> <feat att="inflectionalParadigm" val="MFG0002"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<RelatedForm><feat att="spellingVariant" val="GMU_Q_1"/> <FormRepresentation><feat att="writtenForm" val="q"/></FormRepresentation></RelatedForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="properNoun"/> 
+<feat att="id" val="GMU_QATAR_1"/> 
+<feat att="morphologicalUnitId" val="QATAR"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="Qatar"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="Not analyzed"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="Qatar"/> <feat att="inflectionalParadigm" val="MFG1007"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="1.1071"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="Qatars"/> <feat att="inflectionalParadigm" val="MFG1007"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0179"/></FormRepresentation></WordForm>
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_quiltning_1"/> 
+<feat att="morphologicalUnitId" val="QUILTNING"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="kviltning"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="Not analyzed"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltning"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltnings"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltninger"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltningers"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltningen"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltningens"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltningerne"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="kviltningernes"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<RelatedForm><feat att="spellingVariant" val="GMU_quiltning_2"/> <FormRepresentation><feat att="writtenForm" val="quiltning"/></FormRepresentation></RelatedForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_quiltning_2"/> 
+<feat att="morphologicalUnitId" val="QUILTNING"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="quiltning"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="Not analyzed"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltning"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0357"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltnings"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltninger"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltningers"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltningen"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0357"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltningens"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltningerne"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quiltningernes"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<RelatedForm><feat att="spellingVariant" val="GMU_quiltning_1"/> <FormRepresentation><feat att="writtenForm" val="kviltning"/></FormRepresentation></RelatedForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_quisling_1"/> 
+<feat att="morphologicalUnitId" val="QUISLING"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="quisling"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="quisling"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quisling"/><feat att="inflectionalParadigm" val="MFG0014,MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".2679"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quislings"/><feat att="inflectionalParadigm" val="MFG0014,MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0179"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quislinger"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation><FormRepresentation> <feat att="writtenForm" val="quislinge"/> <feat att="inflectionalParadigm" val="MFG0014"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0357"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quislinges"/> <feat att="inflectionalParadigm" val="MFG0014"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation><FormRepresentation> <feat att="writtenForm" val="quislingers"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quislingen"/><feat att="inflectionalParadigm" val="MFG0014,MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0357"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quislingens"/><feat att="inflectionalParadigm" val="MFG0014,MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quislingerne"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation><FormRepresentation> <feat att="writtenForm" val="quislingene"/> <feat att="inflectionalParadigm" val="MFG0014"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quislingernes"/> <feat att="inflectionalParadigm" val="MFG0016"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation><FormRepresentation> <feat att="writtenForm" val="quislingenes"/> <feat att="inflectionalParadigm" val="MFG0014"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_quiz_1"/> 
+<feat att="morphologicalUnitId" val="QUIZ"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="quiz"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="quiz"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quiz"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="2.0179"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizes"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="no"/> <feat att="frequency" val="0.0"/></FormRepresentation><FormRepresentation> <feat att="writtenForm" val="quiz's"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="no"/> <feat att="frequency" val="0.0"/></FormRepresentation><FormRepresentation> <feat att="writtenForm" val="quiz'"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizzer"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".5179"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizzers"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizzen"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".2679"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizzens"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0179"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quizzerne"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".1786"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quizzernes"/> <feat att="inflectionalParadigm" val="MFG1103"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0179"/></FormRepresentation></WordForm>
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_quiche_1"/> 
+<feat att="morphologicalUnitId" val="QUICHE"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="quiche"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="quiche"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quiche"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".2321"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quiches"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quicher"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0536"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quichers"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quichen"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".0893"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quichens"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quicherne"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quichernes"/> <feat att="inflectionalParadigm" val="MFG0076"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="commonNoun"/> 
+<feat att="id" val="GMU_quickstep_1"/> 
+<feat att="morphologicalUnitId" val="QUICKSTEP"/> 
+<feat att="originalSource" val="DDO"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="quickstep"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="joiningElement" val="nil"/> 
+<feat att="joiningElementResult" val="quickstep"/> 
+</FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quickstep"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val=".125"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quicksteps"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quickstepper"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="indefinite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quicksteppers"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quicksteppen"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quicksteppens"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/>
+<FormRepresentation> <feat att="writtenForm" val="quickstepperne"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="definiteness" val="definite"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/>
+<FormRepresentation> <feat att="writtenForm" val="quicksteppernes"/> <feat att="inflectionalParadigm" val="MFG0084"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" val="0.0"/></FormRepresentation></WordForm>
+</LexicalEntry> 
+</Lexicon> 
+</LexicalResource> 

@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE LexicalResource SYSTEM "file:/N:/cst/metanord/STO/STO-LMF-eks/format-dtd-mv/DTD_LMF_REV_16-strict.dtd">
+<LexicalResource dtdVersion="16" xmlns:dcr="http://www.isocat.org/ns/dcr">
+   <!-- STO export to LMF for morphology, January 2013  -->
+    <GlobalInformation>
+       <feat att="languageCoding" dcr:datcat="http://www.isocat.org/datcat/DC-2008" val="ISO 639-1"/>
+       
+    <!--POS tagset and morphological features with references to isocat -->
+       <feat att="adjectivalFunction" dcr:datcat="../DC-5289" val="attributiveFunction" dcr:valueDatcat="../DC-5287"/>
+       <feat att="adjectivalFunction" dcr:datcat="../DC-5289" val="predicativeFunction" dcr:valueDatcat="../DC-5288"/>
+       <feat att="adjectivalFunction" dcr:datcat="../DC-5289" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="adjective" dcr:valueDatcat="../DC-1230"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="commonNoun" dcr:valueDatcat="../DC-1256"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="conjunction" dcr:valueDatcat="../DC-1260"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="demonstrativePronoun" dcr:valueDatcat="../DC-1270"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="deponentVerb" dcr:valueDatcat="../DC-5278"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="existentialPronoun" dcr:valueDatcat="../DC-3012"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="generalAdverb" dcr:valueDatcat="../DC-1435"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="indefinitePronoun" dcr:valueDatcat="../DC-1309"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="infinitiveParticle" dcr:valueDatcat="../DC-1896"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="interjection" dcr:valueDatcat="../DC-1318"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="interrogativeRelativePronoun" dcr:valueDatcat="../DC-3016"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="mainVerb" dcr:valueDatcat="../DC-1400"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="numeral" dcr:valueDatcat="../DC-1334"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="ordinalAdjective" dcr:valueDatcat="../DC-1338"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="personalPronoun" dcr:valueDatcat="../DC-1463"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="possessivePronoun" dcr:valueDatcat="../DC-1359"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="preposition" dcr:valueDatcat="../DC-1366"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="properNoun" dcr:valueDatcat="../DC-1371"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="reciprocalPronoun" dcr:valueDatcat="../DC-1924"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="unclassifiedParticle" dcr:valueDatcat="../DC-1897"/>
+       <feat att="partOfSpeech" dcr:datcat="../DC-1345" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="case" dcr:datcat="../DC-1840" val="genitiveCase" dcr:valueDatcat="../DC-1293"/>
+       <feat att="case" dcr:datcat="../DC-1840" val="nominativeCase" dcr:valueDatcat="../DC-1331"/>
+       <feat att="case" dcr:datcat="../DC-1840" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="decomposition" dcr:datcat="../DC-5281" val="CDATA"/>
+       <feat att="definiteness" dcr:datcat="../DC-1926" val="definite" dcr:valueDatcat="../DC-2004"/>
+       <feat att="definiteness" dcr:datcat="../DC-1926" val="indefinite" dcr:valueDatcat="../DC-2005"/>
+       <feat att="definiteness" dcr:datcat="../DC-1926" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="degree" dcr:datcat="../DC-1419" val="comparative" dcr:valueDatcat="../DC-1421"/>
+       <feat att="degree" dcr:datcat="../DC-1419" val="positive" dcr:valueDatcat="../DC-1420"/>
+       <feat att="degree" dcr:datcat="../DC-1419" val="superlative" dcr:valueDatcat="../DC-1422"/>
+       <feat att="frequency" dcr:datcat="../DC-5615" val="CDATA"/>
+       <feat att="grammaticalGender" dcr:datcat="../DC-1297" val="commonGender" dcr:valueDatcat="../DC-1558"/>
+       <feat att="grammaticalGender" dcr:datcat="../DC-1297" val="neuter" dcr:valueDatcat="../DC-1884"/>
+       <feat att="grammaticalGender" dcr:datcat="../DC-1297" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="grammaticalNumber" dcr:datcat="../DC-1298" val="plural" dcr:valueDatcat="../DC-1354"/>
+       <feat att="grammaticalNumber" dcr:datcat="../DC-1298" val="singular" dcr:valueDatcat="../DC-1387"/>
+       <feat att="grammaticalNumber" dcr:datcat="../DC-1298" val="unspecified" dcr:valueDatcat="../DC-1908"/>
+       <feat att="id" dcr:datcat="../DC-1845" val="CDATA"/>
+       <feat att="independentWord" dcr:datcat="../DC-5285" val="no" dcr:valueDatcat="../DC-1905"/>
+       <feat att="independentWord" dcr:datcat="../DC-5285" val="yes" dcr:valueDatcat="../DC-1904"/>
+       <feat att="inflectionalParadigm" dcr:datcat="../DC-5283" val="CDATA"/>
+       <feat att="joiningElement" dcr:datcat="../DC-5279" val="CDATA"/>
+       <feat att="joiningElementResult" dcr:datcat="../DC-5280" val="CDATA"/>
+       <feat att="morphologicalUnitId" dcr:datcat="../DC-5282" val="CDATA"/>
+       <feat att="officiallyApproved" dcr:datcat="../DC-5284" val="no" dcr:valueDatcat="../DC-1905"/>
+       <feat att="officiallyApproved" dcr:datcat="../DC-5284" val="yes" dcr:valueDatcat="../DC-1904"/>
+       <feat att="originalSource" dcr:datcat="../DC-2534" val="CDATA"/>
+       <feat att="ownerNumber" dcr:datcat="../DC-1417" val="plural" dcr:valueDatcat="../DC-1354"/>
+       <feat att="ownerNumber" dcr:datcat="../DC-1417" val="singular" dcr:valueDatcat="../DC-1387"/>
+       <feat att="person" dcr:datcat="../DC-1328" val="firstPerson" dcr:valueDatcat="../DC-1288"/>
+       <feat att="person" dcr:datcat="../DC-1328" val="secondPerson" dcr:valueDatcat="../DC-1384"/>
+       <feat att="person" dcr:datcat="../DC-1328" val="thirdPerson" dcr:valueDatcat="../DC-1402"/>       
+       <feat att="reflexivity" dcr:datcat="../DC-5286" val="no" dcr:valueDatcat="../DC-1905"/>
+       <feat att="reflexivity" dcr:datcat="../DC-5286" val="yes" dcr:valueDatcat="../DC-1904"/>
+       <feat att="register" dcr:datcat="../DC-1988" val="formalRegister" dcr:valueDatcat="../DC-1992"/>
+       <feat att="spellingVariant" dcr:datcat="../DC-5612" val="CDATA"/>
+       <feat att="tense" dcr:datcat="../DC-1286" val="past" dcr:valueDatcat="../DC-1347"/>
+       <feat att="tense" dcr:datcat="../DC-1286" val="present" dcr:valueDatcat="../DC-1367"/>
+       <feat att="transcategorization" dcr:datcat="../DC-5272" val="transadjectival" dcr:valueDatcat="../DC-5276"/>
+       <feat att="transcategorization" dcr:datcat="../DC-5272" val="transadverbial" dcr:valueDatcat="../DC-5275"/>
+       <feat att="transcategorization" dcr:datcat="../DC-5272" val="transnominal" dcr:valueDatcat="../DC-5277"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="gerundive" dcr:valueDatcat="../DC-2243"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="imperative" dcr:valueDatcat="../DC-1844"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="indicative" dcr:valueDatcat="../DC-1885"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="infinitive" dcr:valueDatcat="../DC-1312"/>
+       <feat att="verbFormMood" dcr:datcat="../DC-1427" val="participle" dcr:valueDatcat="../DC-1341"/>
+       <feat att="voice" dcr:datcat="../DC-1413" val="activeVoice" dcr:valueDatcat="../DC-1227"/>
+       <feat att="voice" dcr:datcat="../DC-1413" val="passiveVoice" dcr:valueDatcat="../DC-1346"/>
+       <feat att="writtenForm" dcr:datcat="../DC-1836" val="CDATA"/>
+    </GlobalInformation>
+
+
+    <Lexicon>
+       <feat att="languageIdentifier"  dcr:datcat="../DC-279" val="da"/>    
+         
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_DET_1"/> 
+<feat att="morphologicalUnitId" val="DET"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="det"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="det"/><feat att="inflectionalParadigm" val="MFG0767"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="20152.3214"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_DETS_1"/> 
+<feat att="morphologicalUnitId" val="DETS"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="dets"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="dets"/><feat att="inflectionalParadigm" val="MFG0764"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="75.5179"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_DE,2_1"/> 
+<feat att="morphologicalUnitId" val="DE_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="De"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="case" val="unspecified"/><feat att="person" val="secondPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="Dem"/><feat att="inflectionalParadigm" val="MFG0753"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1449.7143"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="case" val="nominativeCase"/><feat att="person" val="secondPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="De"/><feat att="inflectionalParadigm" val="MFG0753"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="11783.9643"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="demonstrativePronoun"/> 
+<feat att="id" val="GMU_BEGGE_1"/> 
+<feat att="morphologicalUnitId" val="BEGGE"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="begge"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="begge"/><feat att="inflectionalParadigm" val="MFG0730"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="280.2143"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="begges"/><feat att="inflectionalParadigm" val="MFG0730"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="2.0179"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_DIN_1"/> 
+<feat att="morphologicalUnitId" val="DIN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="din"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="secondPerson"/><FormRepresentation> <feat att="writtenForm" val="din"/><feat att="inflectionalParadigm" val="MFG0733"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="266.2857"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="secondPerson"/><FormRepresentation> <feat att="writtenForm" val="dit"/><feat att="inflectionalParadigm" val="MFG0733"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="106.5714"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="secondPerson"/><FormRepresentation> <feat att="writtenForm" val="dine"/><feat att="inflectionalParadigm" val="MFG0733"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="89.6607"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_ANDEN,2_1"/> 
+<feat att="morphologicalUnitId" val="ANDEN_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="anden"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="anden"/><feat att="inflectionalParadigm" val="MFG0771"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="808.0536"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="andet"/><feat att="inflectionalParadigm" val="MFG0771"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="752.7143"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="andre"/><feat att="inflectionalParadigm" val="MFG0771"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1356.125"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="andets"/><feat att="inflectionalParadigm" val="MFG0771"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val=".0179"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="andens"/><feat att="inflectionalParadigm" val="MFG0771"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="7.6964"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="andres"/><feat att="inflectionalParadigm" val="MFG0771"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="36.4464"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_DE,1_1"/> 
+<feat att="morphologicalUnitId" val="DE_1"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="de"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="no"/><FormRepresentation> <feat att="writtenForm" val="dem"/><feat att="inflectionalParadigm" val="MFG0731"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1449.7143"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="nominativeCase"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="de"/><feat att="inflectionalParadigm" val="MFG0731"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="11783.9643"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_DU,1_1"/> 
+<feat att="morphologicalUnitId" val="DU_1"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="du"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="person" val="secondPerson"/><feat att="reflexivity" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="dig"/><feat att="inflectionalParadigm" val="MFG0734"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="474.9464"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="nominativeCase"/><feat att="person" val="secondPerson"/><FormRepresentation> <feat att="writtenForm" val="du"/><feat att="inflectionalParadigm" val="MFG0734"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1779.7143"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="demonstrativePronoun"/> 
+<feat att="id" val="GMU_DEN_1"/> 
+<feat att="morphologicalUnitId" val="DEN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="den"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="den"/><feat att="inflectionalParadigm" val="MFG0732"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="12028.3929"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="det"/><feat att="inflectionalParadigm" val="MFG0732"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="20152.3214"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="de"/><feat att="inflectionalParadigm" val="MFG0732"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="11783.9643"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="dets"/><feat att="inflectionalParadigm" val="MFG0732"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="75.5179"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="dens"/><feat att="inflectionalParadigm" val="MFG0732"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="143.8036"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="demonstrativePronoun"/> 
+<feat att="id" val="GMU_DENNE_1"/> 
+<feat att="morphologicalUnitId" val="DENNE"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="denne"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="denne"/><feat att="inflectionalParadigm" val="MFG0754"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1053.9464"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="dette"/><feat att="inflectionalParadigm" val="MFG0754"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="751.75"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="disse"/><feat att="inflectionalParadigm" val="MFG0754"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="570.1964"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="dennes"/><feat att="inflectionalParadigm" val="MFG0754"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="14.0536"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="dettes"/><feat att="inflectionalParadigm" val="MFG0754"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="1.625"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="disses"/><feat att="inflectionalParadigm" val="MFG0754"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="3.7143"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_DENS_1"/> 
+<feat att="morphologicalUnitId" val="DENS"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="dens"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="dens"/><feat att="inflectionalParadigm" val="MFG0764"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="143.8036"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_DERES,1_1"/> 
+<feat att="morphologicalUnitId" val="DERES_1"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="deres"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="plural"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="deres"/><feat att="inflectionalParadigm" val="MFG0768"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="1432.25"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_HANS_1"/> 
+<feat att="morphologicalUnitId" val="HANS"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hans"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="hans"/><feat att="inflectionalParadigm" val="MFG0764"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="1378.5893"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_HENDES_1"/> 
+<feat att="morphologicalUnitId" val="HENDES"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hendes"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="hendes"/><feat att="inflectionalParadigm" val="MFG0764"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="605.875"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="reciprocalPronoun"/> 
+<feat att="id" val="GMU_HINANDEN_1"/> 
+<feat att="morphologicalUnitId" val="HINANDEN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hinanden"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hinanden"/><feat att="inflectionalParadigm" val="MFG0730"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="328.7857"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="hinandens"/><feat att="inflectionalParadigm" val="MFG0730"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="19.3036"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="interrogativeRelativePronoun"/> 
+<feat att="id" val="GMU_HVAD_1"/> 
+<feat att="morphologicalUnitId" val="HVAD"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hvad"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvad"/><feat att="inflectionalParadigm" val="MFG0739"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1518.7857"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="interrogativeRelativePronoun"/> 
+<feat att="id" val="GMU_HVEM_1"/> 
+<feat att="morphologicalUnitId" val="HVEM"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hvem"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvem"/><feat att="inflectionalParadigm" val="MFG0740"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="248.8571"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_HVER_1"/> 
+<feat att="morphologicalUnitId" val="HVER"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hver"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvert"/><feat att="inflectionalParadigm" val="MFG0741"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="337.3571"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hver"/><feat att="inflectionalParadigm" val="MFG0741"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="529.75"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="reciprocalPronoun"/> 
+<feat att="id" val="GMU_HVERANDRE_1"/> 
+<feat att="morphologicalUnitId" val="HVERANDRE"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hverandre"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hverandre"/><feat att="inflectionalParadigm" val="MFG0730"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1.8214"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="hverandres"/><feat att="inflectionalParadigm" val="MFG0730"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val=".0893"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_EN,1_1"/> 
+<feat att="morphologicalUnitId" val="EN_1"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="en"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="et"/><feat att="inflectionalParadigm" val="MFG0735"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="7596.2679"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="en"/><feat att="inflectionalParadigm" val="MFG0735"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="16265.9464"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="ets"/><feat att="inflectionalParadigm" val="MFG0735"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val=".125"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="ens"/><feat att="inflectionalParadigm" val="MFG0735"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="78.6429"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_HUN,2_1"/> 
+<feat att="morphologicalUnitId" val="HUN_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hun"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="no"/><FormRepresentation> <feat att="writtenForm" val="hende"/><feat att="inflectionalParadigm" val="MFG0738"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="675.4464"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="nominativeCase"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="hun"/><feat att="inflectionalParadigm" val="MFG0738"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="3111.7143"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="interrogativeRelativePronoun"/> 
+<feat att="id" val="GMU_HVILKEN_1"/> 
+<feat att="morphologicalUnitId" val="HVILKEN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hvilken"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvilken"/><feat att="inflectionalParadigm" val="MFG0743"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="104.4643"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvilket"/><feat att="inflectionalParadigm" val="MFG0743"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="222.375"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvilke"/><feat att="inflectionalParadigm" val="MFG0743"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="114.625"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="interrogativeRelativePronoun"/> 
+<feat att="id" val="GMU_HVIS,2_1"/> 
+<feat att="morphologicalUnitId" val="HVIS_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hvis"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="hvis"/><feat att="inflectionalParadigm" val="MFG0763"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1733.0357"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="interrogativeRelativePronoun"/> 
+<feat att="id" val="GMU_HVO_1"/> 
+<feat att="morphologicalUnitId" val="HVO"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="hvo"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="hvo"/><feat att="inflectionalParadigm" val="MFG0740"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val=".7857"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_ENHVER_1"/> 
+<feat att="morphologicalUnitId" val="ENHVER"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="enhver"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="enhver"/><feat att="inflectionalParadigm" val="MFG0755"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="151.1964"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="ethvert"/><feat att="inflectionalParadigm" val="MFG0755"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="31.0357"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="enhvers"/><feat att="inflectionalParadigm" val="MFG0755"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val=".2857"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_ALTING,2_1"/> 
+<feat att="morphologicalUnitId" val="ALTING_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="alting"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="alting"/><feat att="inflectionalParadigm" val="MFG0729"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="41.1429"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="altings"/><feat att="inflectionalParadigm" val="MFG0729"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="1.125"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_HAN,2_1"/> 
+<feat att="morphologicalUnitId" val="HAN_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="han"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="no"/><FormRepresentation> <feat att="writtenForm" val="ham"/><feat att="inflectionalParadigm" val="MFG0736"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="1228.875"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="nominativeCase"/><feat att="person" val="thirdPerson"/><FormRepresentation> <feat att="writtenForm" val="han"/><feat att="inflectionalParadigm" val="MFG0736"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="6423.2857"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_INGEN_1"/> 
+<feat att="morphologicalUnitId" val="INGEN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="ingen"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="ingen"/><feat att="inflectionalParadigm" val="MFG0759"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="775.1607"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="intet"/><feat att="inflectionalParadigm" val="MFG0759"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="194.8929"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="ingen"/><feat att="inflectionalParadigm" val="MFG0759"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="775.1607"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="ingens"/><feat att="inflectionalParadigm" val="MFG0759"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val=".3036"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="intets"/><feat att="inflectionalParadigm" val="MFG0759"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="0.0"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="ingens"/><feat att="inflectionalParadigm" val="MFG0759"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val=".3036"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_INGENTING_1"/> 
+<feat att="morphologicalUnitId" val="INGENTING"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="ingenting"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="ingenting"/><feat att="inflectionalParadigm" val="MFG0729"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="53.625"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="ingentings"/><feat att="inflectionalParadigm" val="MFG0729"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="0.0"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_I,3_1"/> 
+<feat att="morphologicalUnitId" val="I_3"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="I"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="person" val="secondPerson"/><feat att="reflexivity" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="jer"/><feat att="inflectionalParadigm" val="MFG0756"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="95.7857"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="nominativeCase"/><feat att="person" val="secondPerson"/><FormRepresentation> <feat att="writtenForm" val="I"/><feat att="inflectionalParadigm" val="MFG0756"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="29264.8036"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_JEG,2_1"/> 
+<feat att="morphologicalUnitId" val="JEG_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="jeg"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="person" val="firstPerson"/><feat att="reflexivity" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="mig"/><feat att="inflectionalParadigm" val="MFG0746"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="1483.5357"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="nominativeCase"/><feat att="person" val="firstPerson"/><FormRepresentation> <feat att="writtenForm" val="jeg"/><feat att="inflectionalParadigm" val="MFG0746"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="6623.2321"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_JERES_1"/> 
+<feat att="morphologicalUnitId" val="JERES"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="jeres"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="plural"/><feat att="person" val="secondPerson"/><FormRepresentation> <feat att="writtenForm" val="jeres"/><feat att="inflectionalParadigm" val="MFG0761"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="55.2857"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_MAN,2_1"/> 
+<feat att="morphologicalUnitId" val="MAN_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="man"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="case" val="nominativeCase"/><FormRepresentation> <feat att="writtenForm" val="man"/><feat att="inflectionalParadigm" val="MFG0747"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="4215.4643"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_MIN_1"/> 
+<feat att="morphologicalUnitId" val="MIN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="min"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="firstPerson"/><FormRepresentation> <feat att="writtenForm" val="min"/><feat att="inflectionalParadigm" val="MFG0748"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="874.4821"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="firstPerson"/><FormRepresentation> <feat att="writtenForm" val="mit"/><feat att="inflectionalParadigm" val="MFG0748"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="297.5"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="firstPerson"/><FormRepresentation> <feat att="writtenForm" val="mine"/><feat att="inflectionalParadigm" val="MFG0748"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="272.3571"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_NOGEN_1"/> 
+<feat att="morphologicalUnitId" val="NOGEN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="nogen"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="nogen"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="567.5714"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="noget"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1640.5"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="nogen"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="567.5714"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="nogle"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="957.9643"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="nogens"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="2.0179"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="nogets"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val=".1786"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="nogles"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1.1071"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="genitiveCase"/><FormRepresentation> <feat att="writtenForm" val="nogens"/><feat att="inflectionalParadigm" val="MFG0760"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="2.0179"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="demonstrativePronoun"/> 
+<feat att="id" val="GMU_SELV,2_1"/> 
+<feat att="morphologicalUnitId" val="SELV_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="selv"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="case" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="selv"/><feat att="inflectionalParadigm" val="MFG0749"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="1870.6964"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_SIN_1"/> 
+<feat att="morphologicalUnitId" val="SIN"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="sin"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="yes"/><FormRepresentation> <feat att="writtenForm" val="sin"/><feat att="inflectionalParadigm" val="MFG0751"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="1707.0357"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="yes"/><FormRepresentation> <feat att="writtenForm" val="sit"/><feat att="inflectionalParadigm" val="MFG0751"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="720.0536"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="singular"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="yes"/><FormRepresentation> <feat att="writtenForm" val="sine"/><feat att="inflectionalParadigm" val="MFG0751"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="629.5357"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_SIG_1"/> 
+<feat att="morphologicalUnitId" val="SIG"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="sig"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="case" val="unspecified"/><feat att="person" val="thirdPerson"/><feat att="reflexivity" val="yes"/><FormRepresentation> <feat att="writtenForm" val="sig"/><feat att="inflectionalParadigm" val="MFG0750"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="4715.0357"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="indefinitePronoun"/> 
+<feat att="id" val="GMU_SOMME_1"/> 
+<feat att="morphologicalUnitId" val="SOMME"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="somme"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="register" val="OBSOLETE"/><FormRepresentation> <feat att="writtenForm" val="somme"/><feat att="inflectionalParadigm" val="MFG0757"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="17.0893"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="personalPronoun"/> 
+<feat att="id" val="GMU_VI,2_1"/> 
+<feat att="morphologicalUnitId" val="VI_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="vi"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="person" val="firstPerson"/><feat att="reflexivity" val="unspecified"/><FormRepresentation> <feat att="writtenForm" val="os"/><feat att="inflectionalParadigm" val="MFG0752"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="914.5179"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalNumber" val="plural"/><feat att="case" val="nominativeCase"/><feat att="person" val="firstPerson"/><FormRepresentation> <feat att="writtenForm" val="vi"/><feat att="inflectionalParadigm" val="MFG0752"/> <feat att="officiallyApproved" val="yes"/> <feat att="frequency" 
+val="4987.0179"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_VOR_1"/> 
+<feat att="morphologicalUnitId" val="VOR"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="vor"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="commonGender"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="plural"/><feat att="person" val="firstPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="vor"/><feat att="inflectionalParadigm" val="MFG0552"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="117.6071"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="neuter"/><feat att="grammaticalNumber" val="singular"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="plural"/><feat att="person" val="firstPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="vort"/><feat att="inflectionalParadigm" val="MFG0552"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="70.8393"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="plural"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="plural"/><feat att="person" val="firstPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="vore"/><feat att="inflectionalParadigm" val="MFG0552"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="161.4464"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_VORES_1"/> 
+<feat att="morphologicalUnitId" val="VORES"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="vores"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="plural"/><feat att="person" val="firstPerson"/><FormRepresentation> <feat att="writtenForm" val="vores"/><feat att="inflectionalParadigm" val="MFG0762"/> <feat att="officiallyApproved" val="yes"/> 
+<feat att="frequency" val="557.6607"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+<LexicalEntry><feat att="partOfSpeech" val="possessivePronoun"/> 
+<feat att="id" val="GMU_DERES,2_1"/> 
+<feat att="morphologicalUnitId" val="DERES_2"/> 
+<feat att="originalSource" val="PAROLE"/> 
+<feat att="independentWord" val="yes"/> 
+<Lemma><FormRepresentation> <feat att="writtenForm" val="Deres"/> <feat att="officiallyApproved" val="yes"/> </FormRepresentation> </Lemma> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="unspecified"/><feat att="person" val="secondPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="Deres"/><feat att="inflectionalParadigm" val="MFG0772"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="0.0"/> </FormRepresentation> </WordForm> 
+<WordForm><feat att="grammaticalGender" val="unspecified"/><feat att="grammaticalNumber" val="unspecified"/><feat att="case" val="unspecified"/><feat att="ownerNumber" val="unspecified"/><feat att="person" val="secondPerson"/><feat att="register" val="formalRegister"/><FormRepresentation> <feat att="writtenForm" val="Deres"/><feat att="inflectionalParadigm" val="MFG0772"/> <feat att="officiallyApproved" 
+val="yes"/> <feat att="frequency" val="0.0"/> </FormRepresentation> </WordForm> 
+</LexicalEntry> 
+</Lexicon> 
+</LexicalResource> 

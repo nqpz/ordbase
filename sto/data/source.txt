@@ -1,0 +1,4 @@
+Overview: https://cst.ku.dk/english/sto_ordbase/
+
+Download: Go to https://repository.clarin.dk/repository/xmlui/discover and
+search for "STO".
