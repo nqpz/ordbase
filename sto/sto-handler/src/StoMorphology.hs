@@ -1,4 +1,4 @@
-module Extsubset where
+module StoMorphology where
 
 import Text.XML.HaXml.XmlContent
 import Text.XML.HaXml.Types
@@ -40,19 +40,19 @@ data Feat = Feat
     , featDcr'valueDatcat :: (Maybe String)
     , featDcr'datcat :: (Maybe String)
     } deriving (Eq,Show)
-data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  | 
-                Feat_att_partOfSpeech  |  Feat_att_originalSource  | 
-                Feat_att_independentWord  |  Feat_att_officiallyApproved  | 
-                Feat_att_frequency  |  Feat_att_languageCoding  | 
-                Feat_att_languageIdentifier  |  Feat_att_adjectivalFunction  | 
-                Feat_att_degree  |  Feat_att_grammaticalGender  | 
-                Feat_att_grammaticalNumber  |  Feat_att_definiteness  | 
-                Feat_att_transcategorization  |  Feat_att_case  | 
-                Feat_att_joiningElement  |  Feat_att_joiningElementResult  | 
+data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  |
+                Feat_att_partOfSpeech  |  Feat_att_originalSource  |
+                Feat_att_independentWord  |  Feat_att_officiallyApproved  |
+                Feat_att_frequency  |  Feat_att_languageCoding  |
+                Feat_att_languageIdentifier  |  Feat_att_adjectivalFunction  |
+                Feat_att_degree  |  Feat_att_grammaticalGender  |
+                Feat_att_grammaticalNumber  |  Feat_att_definiteness  |
+                Feat_att_transcategorization  |  Feat_att_case  |
+                Feat_att_joiningElement  |  Feat_att_joiningElementResult  |
                 Feat_att_decomposition  |  Feat_att_ownerNumber  |  Feat_att_person
-                 |  Feat_att_reflexivity  |  Feat_att_register  | 
-                Feat_att_verbFormMood  |  Feat_att_tense  |  Feat_att_voice  | 
-                Feat_att_writtenForm  |  Feat_att_inflectionalParadigm  | 
+                 |  Feat_att_reflexivity  |  Feat_att_register  |
+                Feat_att_verbFormMood  |  Feat_att_tense  |  Feat_att_voice  |
+                Feat_att_writtenForm  |  Feat_att_inflectionalParadigm  |
                 Feat_att_spellingVariant
               deriving (Eq,Show)
 
@@ -77,7 +77,7 @@ instance XmlAttributes LexicalResource_Attrs where
           { lexicalResourceDtdVersion = defaultA fromAttrToStr "16" "dtdVersion" as
           , lexicalResourceXmlns'dcr = defaultA fromAttrToStr "http://www.isocat.org/ns/dcr" "xmlns:dcr" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ defaultToAttr toAttrFrStr "dtdVersion" (lexicalResourceDtdVersion v)
         , defaultToAttr toAttrFrStr "xmlns:dcr" (lexicalResourceXmlns'dcr v)
         ]
@@ -123,7 +123,7 @@ instance XmlAttributes LexicalEntry_Attrs where
         LexicalEntry_Attrs
           { lexicalEntryId = possibleA fromAttrToStr "id" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ maybeToAttr toAttrFrStr "id" (lexicalEntryId v)
         ]
 
@@ -178,7 +178,7 @@ instance XmlAttributes RelatedForm_Attrs where
         RelatedForm_Attrs
           { relatedFormTargets = possibleA fromAttrToStr "targets" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ maybeToAttr toAttrFrStr "targets" (relatedFormTargets v)
         ]
 
@@ -199,7 +199,7 @@ instance XmlAttributes Feat where
           , featDcr'valueDatcat = possibleA fromAttrToStr "dcr:valueDatcat" as
           , featDcr'datcat = possibleA fromAttrToStr "dcr:datcat" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ toAttrFrTyp "att" (featAtt v)
         , toAttrFrStr "val" (featVal v)
         , maybeToAttr toAttrFrStr "dcr:valueDatcat" (featDcr'valueDatcat v)

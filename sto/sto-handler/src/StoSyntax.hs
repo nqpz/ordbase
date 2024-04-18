@@ -1,4 +1,4 @@
-module Extsubset where
+module StoSyntax where
 
 import Text.XML.HaXml.XmlContent
 import Text.XML.HaXml.Types
@@ -54,22 +54,22 @@ data Feat = Feat
     , featDcr'valueDatcat :: (Maybe String)
     , featDcr'datcat :: (Maybe String)
     } deriving (Eq,Show)
-data Feat_att = Feat_att_languageCoding  | 
-                Feat_att_languageIdentifier  |  Feat_att_id  | 
-                Feat_att_morphologicalUnitId  |  Feat_att_writtenForm  | 
-                Feat_att_officiallyApproved  |  Feat_att_synuId  | 
+data Feat_att = Feat_att_languageCoding  |
+                Feat_att_languageIdentifier  |  Feat_att_id  |
+                Feat_att_morphologicalUnitId  |  Feat_att_writtenForm  |
+                Feat_att_officiallyApproved  |  Feat_att_synuId  |
                 Feat_att_example  |  Feat_att_naming  |  Feat_att_constructionId
-                 |  Feat_att_partOfSpeech  |  Feat_att_selfId  | 
-                Feat_att_reflexiveVerb  |  Feat_att_takesParticle  | 
+                 |  Feat_att_partOfSpeech  |  Feat_att_selfId  |
+                Feat_att_reflexiveVerb  |  Feat_att_takesParticle  |
                 Feat_att_takesAuxiliary  |  Feat_att_passiveVerb  |  Feat_att_modal
-                 |  Feat_att_auxiliary  |  Feat_att_positionNumber  | 
-                Feat_att_syntacticFunctionType  |  Feat_att_optional  | 
-                Feat_att_syntacticConstituentLabel  | 
-                Feat_att_syntacticConstituentPhraseId  |  Feat_att_case  | 
-                Feat_att_reflexiveVoice  |  Feat_att_expletive  | 
+                 |  Feat_att_auxiliary  |  Feat_att_positionNumber  |
+                Feat_att_syntacticFunctionType  |  Feat_att_optional  |
+                Feat_att_syntacticConstituentLabel  |
+                Feat_att_syntacticConstituentPhraseId  |  Feat_att_case  |
+                Feat_att_reflexiveVoice  |  Feat_att_expletive  |
                 Feat_att_definiteness  |  Feat_att_npIndex  |  Feat_att_introducer
-                 |  Feat_att_ppComplementLabel  |  Feat_att_controlType  | 
-                Feat_att_coreferenceRelation  |  Feat_att_clauseType  | 
+                 |  Feat_att_ppComplementLabel  |  Feat_att_controlType  |
+                Feat_att_coreferenceRelation  |  Feat_att_clauseType  |
                 Feat_att_finite  |  Feat_att_adjectivalFunction
               deriving (Eq,Show)
 
@@ -94,7 +94,7 @@ instance XmlAttributes LexicalResource_Attrs where
           { lexicalResourceDtdVersion = defaultA fromAttrToStr "16" "dtdVersion" as
           , lexicalResourceXmlns'dcr = defaultA fromAttrToStr "http://www.isocat.org/ns/dcr" "xmlns:dcr" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ defaultToAttr toAttrFrStr "dtdVersion" (lexicalResourceDtdVersion v)
         , defaultToAttr toAttrFrStr "xmlns:dcr" (lexicalResourceXmlns'dcr v)
         ]
@@ -140,7 +140,7 @@ instance XmlAttributes LexicalEntry_Attrs where
         LexicalEntry_Attrs
           { lexicalEntryId = possibleA fromAttrToStr "id" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ maybeToAttr toAttrFrStr "id" (lexicalEntryId v)
         ]
 
@@ -183,7 +183,7 @@ instance XmlAttributes SyntacticBehaviour_Attrs where
           { syntacticBehaviourId = possibleA fromAttrToStr "id" as
           , syntacticBehaviourSubcategorizationFrames = possibleA fromAttrToStr "subcategorizationFrames" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ maybeToAttr toAttrFrStr "id" (syntacticBehaviourId v)
         , maybeToAttr toAttrFrStr "subcategorizationFrames" (syntacticBehaviourSubcategorizationFrames v)
         ]
@@ -206,7 +206,7 @@ instance XmlAttributes SubcategorizationFrame_Attrs where
         SubcategorizationFrame_Attrs
           { subcategorizationFrameId = possibleA fromAttrToStr "id" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ maybeToAttr toAttrFrStr "id" (subcategorizationFrameId v)
         ]
 
@@ -235,7 +235,7 @@ instance XmlAttributes SyntacticArgument_Attrs where
         SyntacticArgument_Attrs
           { syntacticArgumentId = possibleA fromAttrToStr "id" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ maybeToAttr toAttrFrStr "id" (syntacticArgumentId v)
         ]
 
@@ -256,7 +256,7 @@ instance XmlAttributes Feat where
           , featDcr'valueDatcat = possibleA fromAttrToStr "dcr:valueDatcat" as
           , featDcr'datcat = possibleA fromAttrToStr "dcr:datcat" as
           }
-    toAttrs v = catMaybes 
+    toAttrs v = catMaybes
         [ toAttrFrTyp "att" (featAtt v)
         , toAttrFrStr "val" (featVal v)
         , maybeToAttr toAttrFrStr "dcr:valueDatcat" (featDcr'valueDatcat v)
