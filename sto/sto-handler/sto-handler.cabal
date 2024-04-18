@@ -22,13 +22,17 @@ source-repository head
   location: https://github.com/nqpz/ordbase
 
 library
+  exposed-modules:
+      StoMorphology
+      StoSyntax
   other-modules:
       Paths_sto_handler
   hs-source-dirs:
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      base >=4.7 && <5
+      HaXml
+    , base >=4.7 && <5
   default-language: Haskell2010
 
 executable sto-handler
@@ -39,6 +43,7 @@ executable sto-handler
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      HaXml
+    , base >=4.7 && <5
     , sto-handler
   default-language: Haskell2010
