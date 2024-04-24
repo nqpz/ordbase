@@ -1,45 +1,92 @@
+{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE DeriveLift #-}
+
 module StoMorphology where
 
-import Text.XML.HaXml.XmlContent
+import qualified Text.XML.HaXml.XmlContent as XmlContent
+import Text.XML.HaXml.XmlContent hiding ( List1(..)
+                                        , Defaultable(..)
+                                        , defaultToAttr
+                                        , defaultA)
 import Text.XML.HaXml.Types
 import Text.XML.HaXml.OneOfN
+import Language.Haskell.TH.Syntax
+
+
+-- We need to make List1 and Defaultable implement Lift in order to use them
+-- with Template Haskell, so we hide the implementations from HaXml and roll our
+-- own variations instead.
+
+
+-- | The List1 type represents lists with at least one element.
+--   It is required for DTD content models that use + as a modifier.
+data List1 a = NonEmpty [a]  deriving (Eq, Show, Lift)
+
+------------------------------------------------------------------------
+--  Instances for new content-model types
+------------------------------------------------------------------------
+instance (HTypeable a) => HTypeable (List1 a) where
+    toHType m  = Defined "List1" [hx]
+                         [Constr "NonEmpty" [hx] [List hx] {-Nothing-}]
+               where (NonEmpty x) = m
+                     hx = toHType x
+instance (XmlContent a) => XmlContent (List1 a) where
+    toContents (NonEmpty xs) = concatMap toContents xs
+    parseContents = NonEmpty <$> many1 parseContents
+
+data Defaultable a  = Default a    | NonDefault a    deriving (Eq,Show,Lift)
+
+--deriving instance Lift (List1 a)
+--deriving instance Lift (Defaultable a)
+
+
+defaultableToInternalDefaultable :: Defaultable a -> XmlContent.Defaultable a
+defaultableToInternalDefaultable (Default a) = XmlContent.Default a
+defaultableToInternalDefaultable (NonDefault a) = XmlContent.NonDefault a
+
+internalDefaultableToDefaultable :: XmlContent.Defaultable a -> Defaultable a
+internalDefaultableToDefaultable (XmlContent.Default a) = Default a
+internalDefaultableToDefaultable (XmlContent.NonDefault a) = NonDefault a
+
+defaultToAttr to n d = XmlContent.defaultToAttr to n (defaultableToInternalDefaultable d)
+defaultA from def at as = internalDefaultableToDefaultable (XmlContent.defaultA from def at as)
 
 
 {-Type decls-}
 
 data LexicalResource = LexicalResource LexicalResource_Attrs [Feat]
                                        GlobalInformation (List1 Lexicon)
-                     deriving (Eq,Show)
+                     deriving (Eq,Show,Lift)
 data LexicalResource_Attrs = LexicalResource_Attrs
     { lexicalResourceDtdVersion :: (Defaultable String)
     , lexicalResourceXmlns'dcr :: (Defaultable String)
-    } deriving (Eq,Show)
-newtype GlobalInformation = GlobalInformation [Feat] 		deriving (Eq,Show)
+    } deriving (Eq,Show,Lift)
+newtype GlobalInformation = GlobalInformation [Feat] 		deriving (Eq,Show,Lift)
 data Lexicon = Lexicon [Feat] (List1 LexicalEntry)
-             deriving (Eq,Show)
+             deriving (Eq,Show,Lift)
 data LexicalEntry = LexicalEntry LexicalEntry_Attrs [Feat] Lemma
                                  [WordForm] [RelatedForm]
-                  deriving (Eq,Show)
+                  deriving (Eq,Show,Lift)
 data LexicalEntry_Attrs = LexicalEntry_Attrs
     { lexicalEntryId :: (Maybe String)
-    } deriving (Eq,Show)
+    } deriving (Eq,Show,Lift)
 data Lemma = Lemma [Feat] [FormRepresentation]
-           deriving (Eq,Show)
+           deriving (Eq,Show,Lift)
 data WordForm = WordForm [Feat] [FormRepresentation]
-              deriving (Eq,Show)
-newtype FormRepresentation = FormRepresentation [Feat] 		deriving (Eq,Show)
+              deriving (Eq,Show,Lift)
+newtype FormRepresentation = FormRepresentation [Feat] 		deriving (Eq,Show,Lift)
 data RelatedForm = RelatedForm RelatedForm_Attrs [Feat]
                                [FormRepresentation]
-                 deriving (Eq,Show)
+                 deriving (Eq,Show,Lift)
 data RelatedForm_Attrs = RelatedForm_Attrs
     { relatedFormTargets :: (Maybe String)
-    } deriving (Eq,Show)
+    } deriving (Eq,Show,Lift)
 data Feat = Feat
     { featAtt :: Feat_att
     , featVal :: String
     , featDcr'valueDatcat :: (Maybe String)
     , featDcr'datcat :: (Maybe String)
-    } deriving (Eq,Show)
+    } deriving (Eq,Show,Lift)
 data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  |
                 Feat_att_partOfSpeech  |  Feat_att_originalSource  |
                 Feat_att_independentWord  |  Feat_att_officiallyApproved  |
@@ -54,7 +101,7 @@ data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  |
                 Feat_att_verbFormMood  |  Feat_att_tense  |  Feat_att_voice  |
                 Feat_att_writtenForm  |  Feat_att_inflectionalParadigm  |
                 Feat_att_spellingVariant
-              deriving (Eq,Show)
+              deriving (Eq,Show,Lift)
 
 
 {-Instance decls-}

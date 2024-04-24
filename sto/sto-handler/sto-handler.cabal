@@ -23,6 +23,8 @@ source-repository head
 
 library
   exposed-modules:
+      FileEmbedding
+      MorphEmbed
       StoMorphology
       StoSyntax
   other-modules:
@@ -33,6 +35,7 @@ library
   build-depends:
       HaXml
     , base >=4.7 && <5
+    , template-haskell
   default-language: Haskell2010
 
 executable sto-handler
@@ -46,4 +49,5 @@ executable sto-handler
       HaXml
     , base >=4.7 && <5
     , sto-handler
+    , template-haskell
   default-language: Haskell2010
