@@ -5,7 +5,7 @@ import System.IO (stdout, hFlush)
 -- import Text.XML.HaXml.XmlContent (fReadXml, hPutXml)
 import Text.XML.HaXml.XmlContent (hPutXml)
 
--- import qualified StoMorphology
+import qualified StoMorphology
 import MorphEmbed
 
 -- Example: Parse an XML file and re-format it to standard out.
@@ -16,5 +16,5 @@ main = do
   --   case args of
   --     [morphologyXmlFilePath] -> fReadXml morphologyXmlFilePath :: IO StoMorphology.LexicalResource
   --     _ -> error "missing an argument"
-  hPutXml stdout False morphA -- contents
+  hPutXml stdout False (StoMorphology.Lexicon [] morphA) -- contents
   hFlush stdout
