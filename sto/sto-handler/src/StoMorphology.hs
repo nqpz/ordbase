@@ -17,28 +17,13 @@ import Language.Haskell.TH.Syntax
 -- with Template Haskell, so we hide the implementations from HaXml and roll our
 -- own variations instead.
 
-
 -- | The List1 type represents lists with at least one element.
 --   It is required for DTD content models that use + as a modifier.
-data List1 a = NonEmpty [a]  deriving (Eq, Show, Lift)
+type List1 a = [a]
 
-------------------------------------------------------------------------
---  Instances for new content-model types
-------------------------------------------------------------------------
-instance (HTypeable a) => HTypeable (List1 a) where
-    toHType m  = Defined "List1" [hx]
-                         [Constr "NonEmpty" [hx] [List hx] {-Nothing-}]
-               where (NonEmpty x) = m
-                     hx = toHType x
-instance (XmlContent a) => XmlContent (List1 a) where
-    toContents (NonEmpty xs) = concatMap toContents xs
-    parseContents = NonEmpty <$> many1 parseContents
-
-data Defaultable a  = Default a    | NonDefault a    deriving (Eq,Show,Lift)
-
---deriving instance Lift (List1 a)
---deriving instance Lift (Defaultable a)
-
+data Defaultable a = Default a
+                   | NonDefault a
+                   deriving (Eq,Show,Lift)
 
 defaultableToInternalDefaultable :: Defaultable a -> XmlContent.Defaultable a
 defaultableToInternalDefaultable (Default a) = XmlContent.Default a
