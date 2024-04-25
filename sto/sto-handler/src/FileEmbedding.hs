@@ -1,6 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module FileEmbedding (embedFile) where
+module FileEmbedding (embedFiles) where
 
 import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
@@ -12,8 +12,8 @@ extractLexicalEntries :: StoMorphology.LexicalResource -> [StoMorphology.Lexical
 extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
   concatMap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons
 
-embedFile :: FilePath -> Q Exp
-embedFile path = do
-  contents <- runIO (fReadXml path :: IO StoMorphology.LexicalResource)
-  addDependentFile path
-  [| extractLexicalEntries contents |]
+embedFiles :: [FilePath] -> Q Exp
+embedFiles paths = do
+  contents <- mapM (\path -> runIO (fReadXml path :: IO StoMorphology.LexicalResource)) paths
+  mapM_ addDependentFile paths
+  [| concatMap extractLexicalEntries contents |]

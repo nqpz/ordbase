@@ -16,5 +16,5 @@ main = do
   --   case args of
   --     [morphologyXmlFilePath] -> fReadXml morphologyXmlFilePath :: IO StoMorphology.LexicalResource
   --     _ -> error "missing an argument"
-  hPutXml stdout False (StoMorphology.Lexicon [] morphA) -- contents
+  hPutXml stdout False (StoMorphology.Lexicon [] morphAB) -- contents
   hFlush stdout
