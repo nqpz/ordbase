@@ -13,8 +13,12 @@ description:         Please see the README on GitHub at <https://github.com/nqpz
 
 dependencies:
 - base >= 4.7 && < 5
+- containers
 - HaXml
+- bytestring
 - template-haskell
+- th-utilities
+- store
 
 ghc-options:
 - -Wall

@@ -1,5 +1,8 @@
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE DeriveLift #-}
+{-# LANGUAGE FlexibleInstances #-}
 
 module StoMorphology where
 
@@ -11,7 +14,8 @@ import Text.XML.HaXml.XmlContent hiding ( List1(..)
 import Text.XML.HaXml.Types
 import Text.XML.HaXml.OneOfN
 import Language.Haskell.TH.Syntax
-
+import TH.Derive
+import Data.Store
 
 -- We need to make List1 and Defaultable implement Lift in order to use them
 -- with Template Haskell, so we hide the implementations from HaXml and roll our
@@ -23,7 +27,8 @@ type List1 a = [a]
 
 data Defaultable a = Default a
                    | NonDefault a
-                   deriving (Eq,Show,Lift)
+                   deriving (Eq,Ord,Show,Lift)
+$($(derive [d|instance Store a => Deriving (Store (Defaultable a))|]))
 
 defaultableToInternalDefaultable :: Defaultable a -> XmlContent.Defaultable a
 defaultableToInternalDefaultable (Default a) = XmlContent.Default a
@@ -41,37 +46,41 @@ defaultA from def at as = internalDefaultableToDefaultable (XmlContent.defaultA 
 
 data LexicalResource = LexicalResource LexicalResource_Attrs [Feat]
                                        GlobalInformation (List1 Lexicon)
-                     deriving (Eq,Show,Lift)
+                     deriving (Eq,Ord,Show,Lift)
 data LexicalResource_Attrs = LexicalResource_Attrs
     { lexicalResourceDtdVersion :: (Defaultable String)
     , lexicalResourceXmlns'dcr :: (Defaultable String)
-    } deriving (Eq,Show,Lift)
-newtype GlobalInformation = GlobalInformation [Feat] 		deriving (Eq,Show,Lift)
+    } deriving (Eq,Ord,Show,Lift)
+newtype GlobalInformation = GlobalInformation [Feat] 		deriving (Eq,Ord,Show,Lift)
 data Lexicon = Lexicon [Feat] (List1 LexicalEntry)
-             deriving (Eq,Show,Lift)
+             deriving (Eq,Ord,Show,Lift)
 data LexicalEntry = LexicalEntry LexicalEntry_Attrs [Feat] Lemma
                                  [WordForm] [RelatedForm]
-                  deriving (Eq,Show,Lift)
+                  deriving (Eq,Ord,Show,Lift)
 data LexicalEntry_Attrs = LexicalEntry_Attrs
     { lexicalEntryId :: (Maybe String)
-    } deriving (Eq,Show,Lift)
+    } deriving (Eq,Ord,Show,Lift)
 data Lemma = Lemma [Feat] [FormRepresentation]
-           deriving (Eq,Show,Lift)
+           deriving (Eq,Ord,Show,Lift)
 data WordForm = WordForm [Feat] [FormRepresentation]
-              deriving (Eq,Show,Lift)
-newtype FormRepresentation = FormRepresentation [Feat] 		deriving (Eq,Show,Lift)
+              deriving (Eq,Ord,Show,Lift)
+newtype FormRepresentation = FormRepresentation [Feat] 		deriving (Eq,Ord,Show,Lift)
+
 data RelatedForm = RelatedForm RelatedForm_Attrs [Feat]
                                [FormRepresentation]
-                 deriving (Eq,Show,Lift)
+                 deriving (Eq,Ord,Show,Lift)
+
 data RelatedForm_Attrs = RelatedForm_Attrs
     { relatedFormTargets :: (Maybe String)
-    } deriving (Eq,Show,Lift)
+    } deriving (Eq,Ord,Show,Lift)
+
 data Feat = Feat
     { featAtt :: Feat_att
     , featVal :: String
     , featDcr'valueDatcat :: (Maybe String)
     , featDcr'datcat :: (Maybe String)
-    } deriving (Eq,Show,Lift)
+    } deriving (Eq,Ord,Show,Lift)
+
 data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  |
                 Feat_att_partOfSpeech  |  Feat_att_originalSource  |
                 Feat_att_independentWord  |  Feat_att_officiallyApproved  |
@@ -86,8 +95,21 @@ data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  |
                 Feat_att_verbFormMood  |  Feat_att_tense  |  Feat_att_voice  |
                 Feat_att_writtenForm  |  Feat_att_inflectionalParadigm  |
                 Feat_att_spellingVariant
-              deriving (Eq,Show,Lift)
+              deriving (Eq,Ord,Show,Lift)
 
+$($(derive [d|instance Deriving (Store Feat_att)|]))
+$($(derive [d|instance Deriving (Store Feat)|]))
+$($(derive [d|instance Deriving (Store RelatedForm_Attrs)|]))
+$($(derive [d|instance Deriving (Store FormRepresentation)|]))
+$($(derive [d|instance Deriving (Store RelatedForm)|]))
+$($(derive [d|instance Deriving (Store WordForm)|]))
+$($(derive [d|instance Deriving (Store Lemma)|]))
+$($(derive [d|instance Deriving (Store LexicalEntry_Attrs)|]))
+$($(derive [d|instance Deriving (Store LexicalEntry)|]))
+$($(derive [d|instance Deriving (Store Lexicon)|]))
+$($(derive [d|instance Deriving (Store GlobalInformation)|]))
+$($(derive [d|instance Deriving (Store LexicalResource_Attrs)|]))
+$($(derive [d|instance Deriving (Store LexicalResource)|]))
 
 {-Instance decls-}
 

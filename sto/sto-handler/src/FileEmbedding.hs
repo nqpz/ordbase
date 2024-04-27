@@ -5,6 +5,7 @@ module FileEmbedding (embedFiles) where
 import Language.Haskell.TH
 import Language.Haskell.TH.Syntax
 import Text.XML.HaXml.XmlContent (fReadXml)
+import Data.Store (encode)
 
 import qualified StoMorphology
 
@@ -14,6 +15,8 @@ extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
 
 embedFiles :: [FilePath] -> Q Exp
 embedFiles paths = do
-  contents <- mapM (\path -> runIO (fReadXml path :: IO StoMorphology.LexicalResource)) paths
   mapM_ addDependentFile paths
-  [| concatMap extractLexicalEntries contents |]
+  contents <- flip mapM paths $ \path -> do
+    xml <- runIO (fReadXml path :: IO StoMorphology.LexicalResource)
+    return $ extractLexicalEntries xml
+  [| encode (concat contents) |]
