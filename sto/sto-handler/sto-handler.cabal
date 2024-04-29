@@ -23,6 +23,7 @@ source-repository head
 
 library
   exposed-modules:
+      DynamicArray
       FileEmbedding
       MorphEmbed
       StoMorphology
@@ -34,9 +35,11 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       HaXml
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
+    , mtl
     , store
     , template-haskell
     , th-utilities
@@ -51,9 +54,11 @@ executable sto-handler
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       HaXml
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
+    , mtl
     , sto-handler
     , store
     , template-haskell
