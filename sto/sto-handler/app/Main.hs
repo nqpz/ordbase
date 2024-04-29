@@ -15,5 +15,6 @@ main :: IO ()
 main = do
   morphologyXmlFilePaths <- getArgs
   contents <- storeFiles morphologyXmlFilePaths
-  hPutXml stdout False (StoMorphology.Lexicon (ArrI.listArray (1, 0) []) (decodeEx contents))
+  let xml = StoMorphology.Lexicon (ArrI.listArray (1, 0) []) (decodeEx contents)
+  hPutXml stdout False xml
   hFlush stdout
