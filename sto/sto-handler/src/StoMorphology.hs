@@ -2,7 +2,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE StandaloneDeriving #-}
-{-# LANGUAGE DeriveLift #-}
 {-# LANGUAGE FlexibleInstances #-}
 
 module StoMorphology where
@@ -16,9 +15,6 @@ import Text.XML.HaXml.XmlContent hiding ( List1(..)
 import Text.XML.HaXml.Types (QName(..))
 
 import qualified DynamicArray
-import Control.Monad (liftM)
-import Control.Monad.ST (ST, stToIO)
-import System.IO.Unsafe (unsafePerformIO)
 import qualified Data.Array.IArray as ArrI
 import Language.Haskell.TH.Syntax
 import TH.Derive
@@ -27,8 +23,8 @@ import Data.Store
 
 -- | 'many p' parses a list of elements with individual parser p.
 --   Cannot fail, since an empty list is a valid return value.
-many :: Parser t a -> Parser t [a]
-many = manyAcc []
+-- many :: Parser t a -> Parser t [a]
+-- many = manyAcc []
 
 -- manyAcc :: [a] -> Parser t a -> Parser t [a]
 -- manyAcc rs p = (do
@@ -64,7 +60,7 @@ type List1 a = [a]
 
 data Defaultable a = Default a
                    | NonDefault a
-                   deriving (Eq,Ord,Show,Lift)
+                   deriving (Eq,Ord,Show)
 $($(derive [d|instance Store a => Deriving (Store (Defaultable a))|]))
 
 defaultableToInternalDefaultable :: Defaultable a -> XmlContent.Defaultable a
@@ -151,7 +147,7 @@ $($(derive [d|instance Deriving (Store LexicalResource)|]))
 {-Instance decls-}
 
 instance HTypeable LexicalResource where
-    toHType x = Defined "LexicalResource" [] []
+    toHType _x = Defined "LexicalResource" [] []
 instance XmlContent LexicalResource where
     toContents (LexicalResource as a b c) =
         [CElem (Elem (N "LexicalResource") (toAttrs as) (concatMap toContents a
@@ -174,7 +170,7 @@ instance XmlAttributes LexicalResource_Attrs where
         ]
 
 instance HTypeable GlobalInformation where
-    toHType x = Defined "GlobalInformation" [] []
+    toHType _x = Defined "GlobalInformation" [] []
 instance XmlContent GlobalInformation where
     toContents (GlobalInformation a) =
         [CElem (Elem (N "GlobalInformation") [] (concatMap toContents a)) ()]
@@ -185,7 +181,7 @@ instance XmlContent GlobalInformation where
         } `adjustErr` ("in <GlobalInformation>, "++)
 
 instance HTypeable Lexicon where
-    toHType x = Defined "Lexicon" [] []
+    toHType _x = Defined "Lexicon" [] []
 instance XmlContent Lexicon where
     toContents (Lexicon a b) =
         [CElem (Elem (N "Lexicon") [] (concatMap toContents a ++
@@ -197,7 +193,7 @@ instance XmlContent Lexicon where
         } `adjustErr` ("in <Lexicon>, "++)
 
 instance HTypeable LexicalEntry where
-    toHType x = Defined "LexicalEntry" [] []
+    toHType _x = Defined "LexicalEntry" [] []
 instance XmlContent LexicalEntry where
     toContents (LexicalEntry as a b c d) =
         [CElem (Elem (N "LexicalEntry") (toAttrs as) (concatMap toContents a
@@ -219,7 +215,7 @@ instance XmlAttributes LexicalEntry_Attrs where
         ]
 
 instance HTypeable Lemma where
-    toHType x = Defined "Lemma" [] []
+    toHType _x = Defined "Lemma" [] []
 instance XmlContent Lemma where
     toContents (Lemma a b) =
         [CElem (Elem (N "Lemma") [] (concatMap toContents a ++
@@ -231,7 +227,7 @@ instance XmlContent Lemma where
         } `adjustErr` ("in <Lemma>, "++)
 
 instance HTypeable WordForm where
-    toHType x = Defined "WordForm" [] []
+    toHType _x = Defined "WordForm" [] []
 instance XmlContent WordForm where
     toContents (WordForm a b) =
         [CElem (Elem (N "WordForm") [] (concatMap toContents a ++
@@ -243,7 +239,7 @@ instance XmlContent WordForm where
         } `adjustErr` ("in <WordForm>, "++)
 
 instance HTypeable FormRepresentation where
-    toHType x = Defined "FormRepresentation" [] []
+    toHType _x = Defined "FormRepresentation" [] []
 instance XmlContent FormRepresentation where
     toContents (FormRepresentation a) =
         [CElem (Elem (N "FormRepresentation") [] (concatMap toContents a)) ()]
@@ -254,7 +250,7 @@ instance XmlContent FormRepresentation where
         } `adjustErr` ("in <FormRepresentation>, "++)
 
 instance HTypeable RelatedForm where
-    toHType x = Defined "RelatedForm" [] []
+    toHType _x = Defined "RelatedForm" [] []
 instance XmlContent RelatedForm where
     toContents (RelatedForm as a b) =
         [CElem (Elem (N "RelatedForm") (toAttrs as) (concatMap toContents a
@@ -274,7 +270,7 @@ instance XmlAttributes RelatedForm_Attrs where
         ]
 
 instance HTypeable Feat where
-    toHType x = Defined "feat" [] []
+    toHType _x = Defined "feat" [] []
 instance XmlContent Feat where
     toContents as =
         [CElem (Elem (N "feat") (toAttrs as) []) ()]

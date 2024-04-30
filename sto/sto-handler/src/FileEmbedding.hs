@@ -13,7 +13,6 @@ import qualified Data.Array.IArray as ArrI
 import qualified Data.ByteString as BS
 import Data.Store (encode)
 import qualified DynamicArray
-import Control.Monad.ST (runST)
 
 import qualified StoMorphology
 
