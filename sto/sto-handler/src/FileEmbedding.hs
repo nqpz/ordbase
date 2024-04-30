@@ -19,7 +19,13 @@ import qualified StoMorphology
 
 extractLexicalEntries :: StoMorphology.LexicalResource -> ArrI.Array Int StoMorphology.LexicalEntry
 extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
-  (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons) ArrI.! 1 -- FIXME
+  arraysConcat (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
+
+arraysConcat :: ArrI.Array Int (ArrI.Array Int StoMorphology.LexicalEntry)
+             -> ArrI.Array Int StoMorphology.LexicalEntry
+arraysConcat arrays
+  | ArrI.bounds arrays == (1, 1) = arrays ArrI.! 1
+  | otherwise = error "unexpected amount"
 
 arrayConcat :: [ArrI.Array Int StoMorphology.LexicalEntry]
             -> ArrI.Array Int StoMorphology.LexicalEntry
