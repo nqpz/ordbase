@@ -39,6 +39,7 @@ library
     , base >=4.7 && <5
     , bytestring
     , containers
+    , lzma
     , mtl
     , store
     , template-haskell
@@ -58,6 +59,7 @@ executable sto-handler
     , base >=4.7 && <5
     , bytestring
     , containers
+    , lzma
     , mtl
     , sto-handler
     , store

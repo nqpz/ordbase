@@ -18,6 +18,7 @@ dependencies:
 - array
 - HaXml
 - bytestring
+- lzma
 - template-haskell
 - th-utilities
 - store
