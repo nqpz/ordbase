@@ -1,4 +1,4 @@
-{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE RankNTypes #-}
 module DynamicArray
   ( M
   , runM
@@ -52,19 +52,19 @@ add e = do
   lift $ ArrM.writeArray (arrayInternal array') i e
   put array' { arrayNextIndex = i + 1 }
 
-toImmutable :: forall s e. M s e (ArrI.Array Int e)
+toImmutable :: M s e (ArrI.Array Int e)
 toImmutable = do
   array <- get
-  arrayImmutable <- lift $ ArrM.freeze (arrayInternal array)
-  pure
-    $ ArrI.genArray (1, arrayNextIndex array - 1)
-    (\i -> (arrayImmutable :: ArrI.Array Int e) ArrI.! i)
+  arrayImmutable <- freeze (arrayInternal array)
+  pure $ ArrI.genArray (1, arrayNextIndex array - 1) (arrayImmutable ArrI.!)
+  where freeze :: ArrST.STArray s Int e -> M s e (ArrI.Array Int e)
+        freeze = lift . ArrM.freeze
 
 runM :: M s e r -> ST s r
 runM m = evalStateT m undefined
 
-runM' :: M s e () -> ST s (ArrI.Array Int e)
-runM' m = evalStateT (m >> toImmutable) undefined
+runM' :: (forall s. M s e ()) -> ArrI.Array Int e
+runM' m = runST (evalStateT (m >> toImmutable) undefined)
 
 test :: M s Float ()
 test = do
@@ -79,4 +79,4 @@ test = do
   add 8.0
 
 test' :: ArrI.Array Int Float
-test' = runST $ runM' test
+test' = runM' test

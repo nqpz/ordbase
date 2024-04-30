@@ -1,3 +1,4 @@
+{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE StandaloneDeriving #-}
@@ -43,11 +44,9 @@ manyAcc rs p = do
     Just r -> manyAcc (r : rs) p
 
 many' :: Parser t a -> Parser t (ArrI.Array Int a)
-many' p = do
-  st <- manyAcc' (DynamicArray.create 10) p
-  pure $ unsafePerformIO $ stToIO st
+many' = manyAcc' (DynamicArray.create 10)
 
-manyAcc' :: DynamicArray.M s a () -> Parser t a -> Parser t (ST s (ArrI.Array Int a))
+manyAcc' :: (forall s. DynamicArray.M s a ()) -> Parser t a -> Parser t (ArrI.Array Int a)
 manyAcc' rs p = do
   rm <- (Just <$> p) `onFail` return Nothing
   case rm of

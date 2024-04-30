@@ -23,7 +23,7 @@ extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
 
 arrayConcat :: [ArrI.Array Int StoMorphology.LexicalEntry]
             -> ArrI.Array Int StoMorphology.LexicalEntry
-arrayConcat arrays = runST $ DynamicArray.runM' $ do
+arrayConcat arrays = DynamicArray.runM' $ do
   DynamicArray.create $ sum $ map (snd . ArrI.bounds) arrays
   mapM_ (mapM_ DynamicArray.add . ArrI.elems) arrays
 
