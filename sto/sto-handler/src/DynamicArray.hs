@@ -13,17 +13,16 @@ import Control.Monad.ST (ST, runST)
 import qualified Data.Array.ST as ArrST
 import qualified Data.Array.MArray as ArrM
 import qualified Data.Array.IArray as ArrI
-import Data.Maybe (fromJust)
 
-data Array s e = Array { arrayInternal :: ArrST.STArray s Int (Maybe e)
+data Array s e = Array { arrayInternal :: ArrST.STArray s Int e
                        , arrayNextIndex :: Int
                        , arrayCapacity :: Int
                        }
 
 type M s e r = StateT (Array s e) (ST s) r
 
-newStArray :: Int -> ST s (ArrST.STArray s Int (Maybe e))
-newStArray capacity = ArrM.newGenArray (1, capacity) (const (pure Nothing))
+newStArray :: Int -> ST s (ArrST.STArray s Int e)
+newStArray capacity = ArrM.newGenArray (1, capacity) (const (pure undefined))
 
 create :: Int -> M s e ()
 create capacity = do
@@ -50,7 +49,7 @@ add e = do
         pure array { arrayInternal = stArray
                    , arrayCapacity = capacity'
                    })
-  lift $ ArrM.writeArray (arrayInternal array') i (Just e)
+  lift $ ArrM.writeArray (arrayInternal array') i e
   put array' { arrayNextIndex = i + 1 }
 
 toImmutable :: forall s e. M s e (ArrI.Array Int e)
@@ -59,7 +58,7 @@ toImmutable = do
   arrayImmutable <- lift $ ArrM.freeze (arrayInternal array)
   pure
     $ ArrI.genArray (1, arrayNextIndex array - 1)
-    (\i -> fromJust ((arrayImmutable :: ArrI.Array Int (Maybe e)) ArrI.! i))
+    (\i -> (arrayImmutable :: ArrI.Array Int e) ArrI.! i)
 
 runM :: M s e r -> ST s r
 runM m = evalStateT m undefined
