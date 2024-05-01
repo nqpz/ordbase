@@ -9,7 +9,7 @@ import qualified Data.Array.IArray as ArrI
 
 import qualified StoMorphology
 import StoFiles (morphXmlPaths)
-import FileEmbedding (morphsToLexiconString)
+import FileEmbedding (morphsToString)
 
 testFilename :: FilePath
 testFilename = "morphs.lzma"
@@ -21,7 +21,7 @@ storeAndCompress = do
   paths <- morphXmlPaths
   mapM_ putStrLn paths
   putStrLn "make bytes"
-  raw <- morphsToLexiconString paths
+  raw <- morphsToString paths
   putStrLn "compress"
   let compressed = Lzma.compress $ BS.fromStrict raw
   putStrLn "write"

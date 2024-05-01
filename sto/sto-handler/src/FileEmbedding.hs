@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 
 module FileEmbedding
-  ( morphsToLexiconString
+  ( morphsToString
   , embedMorphs
   ) where
 
@@ -13,8 +13,8 @@ import ArrayUtils
 
 import qualified StoMorphology
 
-morphsToLexiconString :: [FilePath] -> IO ByteString
-morphsToLexiconString morphPaths = do
+morphsToString :: [FilePath] -> IO ByteString
+morphsToString morphPaths = do
   contents <- flip mapM morphPaths $ \path -> do
     xml <- fReadXml path :: IO StoMorphology.LexicalResource
     return $ StoMorphology.extractLexicalEntries xml
