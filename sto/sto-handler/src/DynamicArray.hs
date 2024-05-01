@@ -10,7 +10,6 @@ module DynamicArray
 
 import Control.Monad.State
 import Control.Monad.ST (ST, runST)
-import qualified Data.Array.ST as ArrST
 import qualified Data.Array.MArray as ArrM
 import qualified Data.Array.IArray as ArrI
 import Types
@@ -66,18 +65,3 @@ runM m = evalStateT m undefined
 
 runM' :: (forall s. M s e ()) -> ImmutableArray e
 runM' m = runST (evalStateT (m >> toImmutable) undefined)
-
-test :: M s Float ()
-test = do
-  create 3
-  add 1.0
-  add 2.0
-  add 3.3
-  add 4.0
-  add 5.0
-  add 6.0
-  add 7.0
-  add 8.0
-
-test' :: ImmutableArray Float
-test' = runM' test
