@@ -297,6 +297,7 @@ instance XmlAttrType Feat_att where
             translate "inflectionalParadigm" = Just Feat_att_inflectionalParadigm
             translate "spellingVariant" = Just Feat_att_spellingVariant
             translate _ = Nothing
+    fromAttrToTyp _ _ = Nothing
     toAttrFrTyp n Feat_att_id = Just (N n, str2attr "id")
     toAttrFrTyp n Feat_att_morphologicalUnitId = Just (N n, str2attr "morphologicalUnitId")
     toAttrFrTyp n Feat_att_partOfSpeech = Just (N n, str2attr "partOfSpeech")
