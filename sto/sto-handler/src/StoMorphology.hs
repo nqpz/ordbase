@@ -4,15 +4,35 @@
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module StoMorphology where
+module StoMorphology
+  ( LexicalResource(..)
+  , LexicalResource_Attrs(..)
+  , GlobalInformation(..)
+  , Lexicon(..)
+  , LexicalEntry(..)
+  , LexicalEntry_Attrs(..)
+  , Lemma(..)
+  , WordForm(..)
+  , FormRepresentation(..)
+  , RelatedForm(..)
+  , RelatedForm_Attrs(..)
+  , Feat(..)
+  , Feat_att(..)
+  , extractLexicalEntries) where
 
 import Text.XML.HaXml.XmlContent hiding (many)
 import Text.XML.HaXml.Types (QName(..))
-
-import qualified DynamicArray
 import TH.Derive
 import Data.Store
+
 import Types
+import ArrayUtils
+import qualified DynamicArray
+
+extractLexicalEntries :: StoMorphology.LexicalResource -> ImmutableArray StoMorphology.LexicalEntry
+extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
+  ensureSingleton (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
+
 
 many :: Parser t a -> Parser t (ImmutableArray a)
 many = many' (DynamicArray.create 10)

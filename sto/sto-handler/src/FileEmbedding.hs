@@ -18,10 +18,6 @@ import ArrayUtils
 
 import qualified StoMorphology
 
-extractLexicalEntries :: StoMorphology.LexicalResource -> ImmutableArray StoMorphology.LexicalEntry
-extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
-  ensureSingleton (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
-
 -- embedFiles :: [FilePath] -> Q Exp
 -- embedFiles paths = do
 --   mapM_ addDependentFile paths
@@ -34,5 +30,5 @@ toLexiconString :: [FilePath] -> IO BS.ByteString
 toLexiconString paths = do
   contents <- flip mapM paths $ \path -> do
     xml <- fReadXml path :: IO StoMorphology.LexicalResource
-    return $ extractLexicalEntries xml
+    return $ StoMorphology.extractLexicalEntries xml
   return $ encode (arrayConcat contents)
