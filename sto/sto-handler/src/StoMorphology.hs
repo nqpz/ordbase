@@ -28,56 +28,81 @@ many = many' (DynamicArray.create 10)
 
 data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Feat)
                                        GlobalInformation (ImmutableArray Lexicon)
-                     deriving (Eq,Show)
-data LexicalResource_Attrs = LexicalResource_Attrs
-    { lexicalResourceDtdVersion :: (Defaultable String)
-    , lexicalResourceXmlns'dcr :: (Defaultable String)
-    } deriving (Eq,Show)
-newtype GlobalInformation = GlobalInformation (ImmutableArray Feat) 		deriving (Eq,Ord,Show)
+  deriving (Eq, Show)
+
+data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable String
+                                                   , lexicalResourceXmlns'dcr :: Defaultable String
+                                                   }
+  deriving (Eq, Show)
+
+newtype GlobalInformation = GlobalInformation (ImmutableArray Feat)
+  deriving (Eq, Ord, Show)
+
 data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray LexicalEntry)
-             deriving (Eq,Ord,Show)
+  deriving (Eq, Ord, Show)
+
 data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
                                  (ImmutableArray WordForm) (ImmutableArray RelatedForm)
-                  deriving (Eq,Ord,Show)
-data LexicalEntry_Attrs = LexicalEntry_Attrs
-    { lexicalEntryId :: (Maybe String)
-    } deriving (Eq,Ord,Show)
+  deriving (Eq, Ord, Show)
+
+data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe String
+                                             }
+  deriving (Eq, Ord, Show)
+
 data Lemma = Lemma (ImmutableArray Feat) (ImmutableArray FormRepresentation)
-           deriving (Eq,Ord,Show)
+  deriving (Eq, Ord, Show)
+
 data WordForm = WordForm (ImmutableArray Feat) (ImmutableArray FormRepresentation)
-              deriving (Eq,Ord,Show)
-newtype FormRepresentation = FormRepresentation (ImmutableArray Feat) 		deriving (Eq,Ord,Show)
+  deriving (Eq, Ord, Show)
+
+newtype FormRepresentation = FormRepresentation (ImmutableArray Feat)
+  deriving (Eq, Ord, Show)
 
 data RelatedForm = RelatedForm RelatedForm_Attrs (ImmutableArray Feat)
                                (ImmutableArray FormRepresentation)
-                 deriving (Eq,Ord,Show)
+  deriving (Eq, Ord, Show)
 
-data RelatedForm_Attrs = RelatedForm_Attrs
-    { relatedFormTargets :: (Maybe String)
-    } deriving (Eq,Ord,Show)
+data RelatedForm_Attrs = RelatedForm_Attrs { relatedFormTargets :: Maybe String
+                                           }
+  deriving (Eq, Ord, Show)
 
-data Feat = Feat
-    { featAtt :: Feat_att
-    , featVal :: String
-    , featDcr'valueDatcat :: (Maybe String)
-    , featDcr'datcat :: (Maybe String)
-    } deriving (Eq,Ord,Show)
+data Feat = Feat { featAtt :: Feat_att
+                 , featVal :: String
+                 , featDcr'valueDatcat :: Maybe String
+                 , featDcr'datcat :: Maybe String
+                 }
+  deriving (Eq, Ord, Show)
 
-data Feat_att = Feat_att_id  |  Feat_att_morphologicalUnitId  |
-                Feat_att_partOfSpeech  |  Feat_att_originalSource  |
-                Feat_att_independentWord  |  Feat_att_officiallyApproved  |
-                Feat_att_frequency  |  Feat_att_languageCoding  |
-                Feat_att_languageIdentifier  |  Feat_att_adjectivalFunction  |
-                Feat_att_degree  |  Feat_att_grammaticalGender  |
-                Feat_att_grammaticalNumber  |  Feat_att_definiteness  |
-                Feat_att_transcategorization  |  Feat_att_case  |
-                Feat_att_joiningElement  |  Feat_att_joiningElementResult  |
-                Feat_att_decomposition  |  Feat_att_ownerNumber  |  Feat_att_person
-                 |  Feat_att_reflexivity  |  Feat_att_register  |
-                Feat_att_verbFormMood  |  Feat_att_tense  |  Feat_att_voice  |
-                Feat_att_writtenForm  |  Feat_att_inflectionalParadigm  |
-                Feat_att_spellingVariant
-              deriving (Eq,Ord,Show)
+data Feat_att = Feat_att_id
+              | Feat_att_morphologicalUnitId
+              | Feat_att_partOfSpeech
+              | Feat_att_originalSource
+              | Feat_att_independentWord
+              | Feat_att_officiallyApproved
+              | Feat_att_frequency
+              | Feat_att_languageCoding
+              | Feat_att_languageIdentifier
+              | Feat_att_adjectivalFunction
+              | Feat_att_degree
+              | Feat_att_grammaticalGender
+              | Feat_att_grammaticalNumber
+              | Feat_att_definiteness
+              | Feat_att_transcategorization
+              | Feat_att_case
+              | Feat_att_joiningElement
+              | Feat_att_joiningElementResult
+              | Feat_att_decomposition
+              | Feat_att_ownerNumber
+              | Feat_att_person
+              | Feat_att_reflexivity
+              | Feat_att_register
+              | Feat_att_verbFormMood
+              | Feat_att_tense
+              | Feat_att_voice
+              | Feat_att_writtenForm
+              | Feat_att_inflectionalParadigm
+              | Feat_att_spellingVariant
+  deriving (Eq, Ord, Show)
 
 $($(derive [d|instance Deriving (Store Feat_att)|]))
 $($(derive [d|instance Deriving (Store Feat)|]))
