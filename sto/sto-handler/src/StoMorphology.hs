@@ -27,6 +27,11 @@ import Types
 import ArrayUtils
 import qualified DynamicArray
 
+-- Really this means that there must be at least one element in the XML, but the
+-- XML files we have trivially fulfil this invariant, so we don't need to check
+-- it.
+type ImmutableArray1 e = ImmutableArray e
+
 extractLexicalEntries :: StoMorphology.LexicalResource -> ImmutableArray StoMorphology.LexicalEntry
 extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
   ensureSingleton (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
@@ -45,7 +50,7 @@ many = many' (DynamicArray.create 10)
 {-Type decls-}
 
 data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Feat)
-                                       GlobalInformation (ImmutableArray Lexicon)
+                                       GlobalInformation (ImmutableArray1 Lexicon)
   deriving (Eq, Show)
 
 data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable String
@@ -56,7 +61,7 @@ data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :
 newtype GlobalInformation = GlobalInformation (ImmutableArray Feat)
   deriving (Eq, Ord, Show)
 
-data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray LexicalEntry)
+data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray1 LexicalEntry)
   deriving (Eq, Ord, Show)
 
 data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
