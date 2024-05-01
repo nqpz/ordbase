@@ -47,42 +47,42 @@ data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :
   deriving (Eq, Show)
 
 newtype GlobalInformation = GlobalInformation (ImmutableArray Feat)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray1 LexicalEntry)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
                                  (ImmutableArray WordForm) (ImmutableArray RelatedForm)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe String
                                              }
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data Lemma = Lemma (ImmutableArray Feat) (ImmutableArray FormRepresentation)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data WordForm = WordForm (ImmutableArray Feat) (ImmutableArray FormRepresentation)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 newtype FormRepresentation = FormRepresentation (ImmutableArray Feat)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data RelatedForm = RelatedForm RelatedForm_Attrs (ImmutableArray Feat)
                                (ImmutableArray FormRepresentation)
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data RelatedForm_Attrs = RelatedForm_Attrs { relatedFormTargets :: Maybe String
                                            }
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data Feat = Feat { featAtt :: Feat_att
                  , featVal :: String
                  , featDcr'valueDatcat :: Maybe String
                  , featDcr'datcat :: Maybe String
                  }
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 data Feat_att = Feat_att_id
               | Feat_att_morphologicalUnitId
@@ -113,7 +113,7 @@ data Feat_att = Feat_att_id
               | Feat_att_writtenForm
               | Feat_att_inflectionalParadigm
               | Feat_att_spellingVariant
-  deriving (Eq, Ord, Show)
+  deriving (Eq, Show)
 
 $($(derive [d|instance Deriving (Store Feat_att)|]))
 $($(derive [d|instance Deriving (Store Feat)|]))
