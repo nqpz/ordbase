@@ -1,12 +1,7 @@
-{-# LANGUAGE TemplateHaskell #-}
-
-module MorphEmbed (
-  -- morphs
+module MorphFiles
+  ( morphXmlPaths
   ) where
 
-import Data.ByteString
-import qualified StoMorphology
--- import FileEmbedding (embedFiles)
 import qualified System.FilePath.Glob as Glob
 
 morphDir :: FilePath

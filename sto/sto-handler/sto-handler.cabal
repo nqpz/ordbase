@@ -26,7 +26,7 @@ library
       ArrayUtils
       DynamicArray
       FileEmbedding
-      MorphEmbed
+      MorphFiles
       StoMorphology
       StoSyntax
       Types
