@@ -1,4 +1,4 @@
-module MorphFiles
+module StoFiles
   ( morphXmlPaths
   ) where
 

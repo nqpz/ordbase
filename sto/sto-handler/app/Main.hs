@@ -9,14 +9,14 @@ import qualified Data.ByteString.Lazy as BS
 import qualified Codec.Compression.Lzma as Lzma
 
 import qualified StoMorphology
-import FileEmbedding (toLexiconString)
+import FileEmbedding (morphsToLexiconString)
 -- import MorphEmbed (morphs)
 
 -- Example: Parse an XML file and re-format it to standard out.
 main :: IO ()
 main = do
   morphologyXmlFilePaths <- getArgs
-  contents <- toLexiconString morphologyXmlFilePaths
+  contents <- morphsToLexiconString morphologyXmlFilePaths
   BS.writeFile "morphs.lzma" (Lzma.compress (BS.fromStrict contents))
   -- contents <- BS.readFile "morphxmls.store"
   -- let xml = StoMorphology.Lexicon (ArrI.listArray (1, 0) []) (decodeEx contents)
