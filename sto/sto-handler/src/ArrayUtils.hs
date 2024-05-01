@@ -1,4 +1,7 @@
-module ArrayUtils (ensureSingleton, arrayConcat) where
+module ArrayUtils
+  ( ensureSingleton
+  , arrayConcat
+  ) where
 
 import qualified Data.Array.IArray as ArrI
 import qualified DynamicArray

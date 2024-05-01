@@ -18,7 +18,8 @@ module StoMorphology
   , RelatedForm_Attrs(..)
   , Feat(..)
   , Feat_att(..)
-  , extractLexicalEntries) where
+  , extractLexicalEntries
+  ) where
 
 import Text.XML.HaXml.XmlContent hiding (many)
 import Text.XML.HaXml.Types (QName(..))

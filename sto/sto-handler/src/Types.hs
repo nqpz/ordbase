@@ -1,4 +1,7 @@
-module Types where
+module Types
+  ( ImmutableArray
+  , MutableArray
+  ) where
 
 import qualified Data.Array.IArray as ArrI
 import qualified Data.Array.ST as ArrST
