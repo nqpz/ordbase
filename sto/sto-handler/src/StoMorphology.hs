@@ -6,16 +6,10 @@
 
 module StoMorphology where
 
-import qualified Text.XML.HaXml.XmlContent as XmlContent
-import Text.XML.HaXml.XmlContent hiding ( Defaultable(..)
-                                        , defaultToAttr
-                                        , defaultA
-                                        , many)
+import Text.XML.HaXml.XmlContent hiding (many)
 import Text.XML.HaXml.Types (QName(..))
 
 import qualified DynamicArray
-import qualified Data.Array.IArray as ArrI
-import Language.Haskell.TH.Syntax
 import TH.Derive
 import Data.Store
 import Types
@@ -30,36 +24,15 @@ many = many' (DynamicArray.create 10)
             Just r -> many' (rs >> DynamicArray.add r) p
 
 
--- We need to make List1 and Defaultable implement Lift in order to use them
--- with Template Haskell, so we hide the implementations from HaXml and roll our
--- own variations instead.
-
-data Defaultable a = Default a
-                   | NonDefault a
-                   deriving (Eq,Ord,Show)
-$($(derive [d|instance Store a => Deriving (Store (Defaultable a))|]))
-
-defaultableToInternalDefaultable :: Defaultable a -> XmlContent.Defaultable a
-defaultableToInternalDefaultable (Default a) = XmlContent.Default a
-defaultableToInternalDefaultable (NonDefault a) = XmlContent.NonDefault a
-
-internalDefaultableToDefaultable :: XmlContent.Defaultable a -> Defaultable a
-internalDefaultableToDefaultable (XmlContent.Default a) = Default a
-internalDefaultableToDefaultable (XmlContent.NonDefault a) = NonDefault a
-
-defaultToAttr to n d = XmlContent.defaultToAttr to n (defaultableToInternalDefaultable d)
-defaultA from def at as = internalDefaultableToDefaultable (XmlContent.defaultA from def at as)
-
-
 {-Type decls-}
 
 data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Feat)
                                        GlobalInformation (ImmutableArray Lexicon)
-                     deriving (Eq,Ord,Show)
+                     deriving (Eq,Show)
 data LexicalResource_Attrs = LexicalResource_Attrs
     { lexicalResourceDtdVersion :: (Defaultable String)
     , lexicalResourceXmlns'dcr :: (Defaultable String)
-    } deriving (Eq,Ord,Show)
+    } deriving (Eq,Show)
 newtype GlobalInformation = GlobalInformation (ImmutableArray Feat) 		deriving (Eq,Ord,Show)
 data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray LexicalEntry)
              deriving (Eq,Ord,Show)
@@ -115,10 +88,6 @@ $($(derive [d|instance Deriving (Store WordForm)|]))
 $($(derive [d|instance Deriving (Store Lemma)|]))
 $($(derive [d|instance Deriving (Store LexicalEntry_Attrs)|]))
 $($(derive [d|instance Deriving (Store LexicalEntry)|]))
-$($(derive [d|instance Deriving (Store Lexicon)|]))
-$($(derive [d|instance Deriving (Store GlobalInformation)|]))
-$($(derive [d|instance Deriving (Store LexicalResource_Attrs)|]))
-$($(derive [d|instance Deriving (Store LexicalResource)|]))
 
 {-Instance decls-}
 
