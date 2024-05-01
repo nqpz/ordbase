@@ -15,21 +15,32 @@ testFilename :: FilePath
 testFilename = "morphs.lzma"
 
 -- Example: Parse an XML file and re-format it to standard out.
-compress :: IO ()
-compress = do
-  raw <- morphsToLexiconString =<< morphXmlPaths
+storeAndCompress :: IO ()
+storeAndCompress = do
+  putStrLn "get paths"
+  paths <- morphXmlPaths
+  mapM_ putStrLn paths
+  putStrLn "make bytes"
+  raw <- morphsToLexiconString paths
+  putStrLn "compress"
   let compressed = Lzma.compress $ BS.fromStrict raw
+  putStrLn "write"
   BS.writeFile testFilename compressed
 
-decompress :: IO ()
-decompress = do
+decompressAndUnstoreAndPrint :: IO ()
+decompressAndUnstoreAndPrint = do
+  putStrLn "read"
   compressed <- BS.readFile testFilename
-  let raw = decodeEx $ BS.toStrict compressed
-  let xml = StoMorphology.Lexicon (ArrI.listArray (1, 0) []) raw
+  putStrLn "decompress"
+  let raw = Lzma.decompress compressed
+  putStrLn "build xml"
+  let lexicalEntries = decodeEx $ BS.toStrict raw
+      xml = StoMorphology.Lexicon (ArrI.listArray (1, 0) []) lexicalEntries
+  putStrLn "write xml"
   hPutXml stdout False xml
   hFlush stdout
 
 main :: IO ()
 main = do
-  compress
-  decompress
+  storeAndCompress
+  decompressAndUnstoreAndPrint
