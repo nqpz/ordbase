@@ -15,9 +15,9 @@ xmlPattern :: Glob.Pattern
 xmlPattern = Glob.compile "*.xml"
 
 morphXmlPaths :: IO [FilePath]
-morphXmlPaths = pure [morphDir ++ "/STO_LMF_morphology_noun_q_jan2013.xml"] -- for testing
--- morphXmlPaths = Glob.globDir1 xmlPattern morphDir
+morphXmlPaths = Glob.globDir1 xmlPattern morphDir
+-- morphXmlPaths = pure [morphDir ++ "/STO_LMF_morphology_noun_q_jan2013.xml"] -- for testing
 
 syntaxXmlPaths :: IO [FilePath]
-syntaxXmlPaths = pure [syntaxDir ++ "/STO_LMF_syntax_adj_jan2013.xml"] -- for testing
--- syntaxXmlPaths = Glob.globDir1 xmlPattern syntaxDir
+syntaxXmlPaths = Glob.globDir1 xmlPattern syntaxDir
+-- syntaxXmlPaths = pure [syntaxDir ++ "/STO_LMF_syntax_adj_jan2013.xml"] -- for testing
