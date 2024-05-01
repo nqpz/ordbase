@@ -61,7 +61,17 @@ testBasics = do
   morphsDecompressAndUnstoreAndPrint
   syntaxTest
 
+testEmbeddedData :: IO ()
+testEmbeddedData = do
+  hPutXml stdout False $ StoMorphology.Lexicon emptyArray EmbeddedData.morphologyLexicalEntries
+  hFlush stdout
+
+  hPutXml stdout False $ StoSyntax.Lexicon emptyArray (EmbeddedData.syntaxLexicalEntries) (EmbeddedData.syntaxSubcategorizationFrames)
+  hFlush stdout
+
 main :: IO ()
 main = do
   putStrLn "basics"
   testBasics
+  putStrLn "embedded data"
+  testEmbeddedData
