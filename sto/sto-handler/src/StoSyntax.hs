@@ -28,8 +28,8 @@ data LexicalResource = LexicalResource LexicalResource_Attrs [Feat]
                                        GlobalInformation (List1 Lexicon)
   deriving (Eq, Show)
 
-data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: (Defaultable String)
-                                                   , lexicalResourceXmlns'dcr :: (Defaultable String)
+data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable String
+                                                   , lexicalResourceXmlns'dcr :: Defaultable String
                                                    }
   deriving (Eq, Show)
 
@@ -44,7 +44,7 @@ data LexicalEntry = LexicalEntry LexicalEntry_Attrs [Feat] Lemma
                                  [SyntacticBehaviour]
   deriving (Eq, Show)
 
-data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: (Maybe String)
+data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe String
                                              }
   deriving (Eq, Show)
 
@@ -58,8 +58,8 @@ data SyntacticBehaviour = SyntacticBehaviour SyntacticBehaviour_Attrs
                                              [Feat]
   deriving (Eq, Show)
 
-data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId :: (Maybe String)
-                                                         , syntacticBehaviourSubcategorizationFrames :: (Maybe String)
+data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId :: Maybe String
+                                                         , syntacticBehaviourSubcategorizationFrames :: Maybe String
                                                          }
   deriving (Eq, Show)
 
@@ -68,7 +68,7 @@ data SubcategorizationFrame = SubcategorizationFrame SubcategorizationFrame_Attr
                                                      [SyntacticArgument]
   deriving (Eq, Show)
 
-data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs { subcategorizationFrameId :: (Maybe String)
+data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs { subcategorizationFrameId :: Maybe String
                                                                  }
   deriving (Eq, Show)
 
@@ -79,14 +79,14 @@ data SyntacticArgument = SyntacticArgument SyntacticArgument_Attrs
                                            [Feat]
   deriving (Eq, Show)
 
-data SyntacticArgument_Attrs = SyntacticArgument_Attrs { syntacticArgumentId :: (Maybe String)
+data SyntacticArgument_Attrs = SyntacticArgument_Attrs { syntacticArgumentId :: Maybe String
                                                        }
   deriving (Eq, Show)
 
 data Feat = Feat { featAtt :: Feat_att
                  , featVal :: String
-                 , featDcr'valueDatcat :: (Maybe String)
-                 , featDcr'datcat :: (Maybe String)
+                 , featDcr'valueDatcat :: Maybe String
+                 , featDcr'datcat :: Maybe String
                  }
   deriving (Eq, Show)
 
