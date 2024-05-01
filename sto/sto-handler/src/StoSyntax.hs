@@ -1,83 +1,137 @@
-module StoSyntax where
+module StoSyntax
+  ( LexicalResource(..)
+  , LexicalResource_Attrs(..)
+  , GlobalInformation(..)
+  , Lexicon(..)
+  , LexicalEntry(..)
+  , LexicalEntry_Attrs(..)
+  , Lemma(..)
+  , FormRepresentation(..)
+  , SyntacticBehaviour(..)
+  , SyntacticBehaviour_Attrs(..)
+  , SubcategorizationFrame(..)
+  , SubcategorizationFrame_Attrs(..)
+  , LexemeProperty(..)
+  , SyntacticArgument(..)
+  , SyntacticArgument_Attrs(..)
+  , Feat(..)
+  , Feat_att(..)
+  ) where
 
 import Text.XML.HaXml.XmlContent
 import Text.XML.HaXml.Types
-import Text.XML.HaXml.OneOfN
 
 
 {-Type decls-}
 
 data LexicalResource = LexicalResource LexicalResource_Attrs [Feat]
                                        GlobalInformation (List1 Lexicon)
-                     deriving (Eq,Show)
-data LexicalResource_Attrs = LexicalResource_Attrs
-    { lexicalResourceDtdVersion :: (Defaultable String)
-    , lexicalResourceXmlns'dcr :: (Defaultable String)
-    } deriving (Eq,Show)
-newtype GlobalInformation = GlobalInformation [Feat] 		deriving (Eq,Show)
+  deriving (Eq, Show)
+
+data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: (Defaultable String)
+                                                   , lexicalResourceXmlns'dcr :: (Defaultable String)
+                                                   }
+  deriving (Eq, Show)
+
+newtype GlobalInformation = GlobalInformation [Feat]
+  deriving (Eq, Show)
+
 data Lexicon = Lexicon [Feat] (List1 LexicalEntry)
                        [SubcategorizationFrame]
-             deriving (Eq,Show)
+  deriving (Eq, Show)
+
 data LexicalEntry = LexicalEntry LexicalEntry_Attrs [Feat] Lemma
                                  [SyntacticBehaviour]
-                  deriving (Eq,Show)
-data LexicalEntry_Attrs = LexicalEntry_Attrs
-    { lexicalEntryId :: (Maybe String)
-    } deriving (Eq,Show)
+  deriving (Eq, Show)
+
+data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: (Maybe String)
+                                             }
+  deriving (Eq, Show)
+
 data Lemma = Lemma [Feat] [FormRepresentation]
-           deriving (Eq,Show)
-newtype FormRepresentation = FormRepresentation [Feat] 		deriving (Eq,Show)
+  deriving (Eq, Show)
+
+newtype FormRepresentation = FormRepresentation [Feat]
+  deriving (Eq, Show)
+
 data SyntacticBehaviour = SyntacticBehaviour SyntacticBehaviour_Attrs
                                              [Feat]
-                        deriving (Eq,Show)
-data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs
-    { syntacticBehaviourId :: (Maybe String)
-    , syntacticBehaviourSubcategorizationFrames :: (Maybe String)
-    } deriving (Eq,Show)
+  deriving (Eq, Show)
+
+data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId :: (Maybe String)
+                                                         , syntacticBehaviourSubcategorizationFrames :: (Maybe String)
+                                                         }
+  deriving (Eq, Show)
+
 data SubcategorizationFrame = SubcategorizationFrame SubcategorizationFrame_Attrs
                                                      [Feat] (Maybe LexemeProperty)
                                                      [SyntacticArgument]
-                            deriving (Eq,Show)
-data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs
-    { subcategorizationFrameId :: (Maybe String)
-    } deriving (Eq,Show)
-newtype LexemeProperty = LexemeProperty [Feat] 		deriving (Eq,Show)
+  deriving (Eq, Show)
+
+data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs { subcategorizationFrameId :: (Maybe String)
+                                                                 }
+  deriving (Eq, Show)
+
+newtype LexemeProperty = LexemeProperty [Feat]
+  deriving (Eq, Show)
+
 data SyntacticArgument = SyntacticArgument SyntacticArgument_Attrs
                                            [Feat]
-                       deriving (Eq,Show)
-data SyntacticArgument_Attrs = SyntacticArgument_Attrs
-    { syntacticArgumentId :: (Maybe String)
-    } deriving (Eq,Show)
-data Feat = Feat
-    { featAtt :: Feat_att
-    , featVal :: String
-    , featDcr'valueDatcat :: (Maybe String)
-    , featDcr'datcat :: (Maybe String)
-    } deriving (Eq,Show)
-data Feat_att = Feat_att_languageCoding  |
-                Feat_att_languageIdentifier  |  Feat_att_id  |
-                Feat_att_morphologicalUnitId  |  Feat_att_writtenForm  |
-                Feat_att_officiallyApproved  |  Feat_att_synuId  |
-                Feat_att_example  |  Feat_att_naming  |  Feat_att_constructionId
-                 |  Feat_att_partOfSpeech  |  Feat_att_selfId  |
-                Feat_att_reflexiveVerb  |  Feat_att_takesParticle  |
-                Feat_att_takesAuxiliary  |  Feat_att_passiveVerb  |  Feat_att_modal
-                 |  Feat_att_auxiliary  |  Feat_att_positionNumber  |
-                Feat_att_syntacticFunctionType  |  Feat_att_optional  |
-                Feat_att_syntacticConstituentLabel  |
-                Feat_att_syntacticConstituentPhraseId  |  Feat_att_case  |
-                Feat_att_reflexiveVoice  |  Feat_att_expletive  |
-                Feat_att_definiteness  |  Feat_att_npIndex  |  Feat_att_introducer
-                 |  Feat_att_ppComplementLabel  |  Feat_att_controlType  |
-                Feat_att_coreferenceRelation  |  Feat_att_clauseType  |
-                Feat_att_finite  |  Feat_att_adjectivalFunction
-              deriving (Eq,Show)
+  deriving (Eq, Show)
+
+data SyntacticArgument_Attrs = SyntacticArgument_Attrs { syntacticArgumentId :: (Maybe String)
+                                                       }
+  deriving (Eq, Show)
+
+data Feat = Feat { featAtt :: Feat_att
+                 , featVal :: String
+                 , featDcr'valueDatcat :: (Maybe String)
+                 , featDcr'datcat :: (Maybe String)
+                 }
+  deriving (Eq, Show)
+
+data Feat_att = Feat_att_languageCoding
+              | Feat_att_languageIdentifier
+              | Feat_att_id
+              | Feat_att_morphologicalUnitId
+              | Feat_att_writtenForm
+              | Feat_att_officiallyApproved
+              | Feat_att_synuId
+              | Feat_att_example
+              | Feat_att_naming
+              | Feat_att_constructionId
+              | Feat_att_partOfSpeech
+              | Feat_att_selfId
+              | Feat_att_reflexiveVerb
+              | Feat_att_takesParticle
+              | Feat_att_takesAuxiliary
+              | Feat_att_passiveVerb
+              | Feat_att_modal
+              | Feat_att_auxiliary
+              | Feat_att_positionNumber
+              | Feat_att_syntacticFunctionType
+              | Feat_att_optional
+              | Feat_att_syntacticConstituentLabel
+              | Feat_att_syntacticConstituentPhraseId
+              | Feat_att_case
+              | Feat_att_reflexiveVoice
+              | Feat_att_expletive
+              | Feat_att_definiteness
+              | Feat_att_npIndex
+              | Feat_att_introducer
+              | Feat_att_ppComplementLabel
+              | Feat_att_controlType
+              | Feat_att_coreferenceRelation
+              | Feat_att_clauseType
+              | Feat_att_finite
+              | Feat_att_adjectivalFunction
+  deriving (Eq, Show)
 
 
 {-Instance decls-}
 
 instance HTypeable LexicalResource where
-    toHType x = Defined "LexicalResource" [] []
+    toHType _x = Defined "LexicalResource" [] []
 instance XmlContent LexicalResource where
     toContents (LexicalResource as a b c) =
         [CElem (Elem (N "LexicalResource") (toAttrs as) (concatMap toContents a
@@ -100,7 +154,7 @@ instance XmlAttributes LexicalResource_Attrs where
         ]
 
 instance HTypeable GlobalInformation where
-    toHType x = Defined "GlobalInformation" [] []
+    toHType _x = Defined "GlobalInformation" [] []
 instance XmlContent GlobalInformation where
     toContents (GlobalInformation a) =
         [CElem (Elem (N "GlobalInformation") [] (concatMap toContents a)) ()]
@@ -111,7 +165,7 @@ instance XmlContent GlobalInformation where
         } `adjustErr` ("in <GlobalInformation>, "++)
 
 instance HTypeable Lexicon where
-    toHType x = Defined "Lexicon" [] []
+    toHType _x = Defined "Lexicon" [] []
 instance XmlContent Lexicon where
     toContents (Lexicon a b c) =
         [CElem (Elem (N "Lexicon") [] (concatMap toContents a ++
@@ -123,7 +177,7 @@ instance XmlContent Lexicon where
         } `adjustErr` ("in <Lexicon>, "++)
 
 instance HTypeable LexicalEntry where
-    toHType x = Defined "LexicalEntry" [] []
+    toHType _x = Defined "LexicalEntry" [] []
 instance XmlContent LexicalEntry where
     toContents (LexicalEntry as a b c) =
         [CElem (Elem (N "LexicalEntry") (toAttrs as) (concatMap toContents a
@@ -145,7 +199,7 @@ instance XmlAttributes LexicalEntry_Attrs where
         ]
 
 instance HTypeable Lemma where
-    toHType x = Defined "Lemma" [] []
+    toHType _x = Defined "Lemma" [] []
 instance XmlContent Lemma where
     toContents (Lemma a b) =
         [CElem (Elem (N "Lemma") [] (concatMap toContents a ++
@@ -157,7 +211,7 @@ instance XmlContent Lemma where
         } `adjustErr` ("in <Lemma>, "++)
 
 instance HTypeable FormRepresentation where
-    toHType x = Defined "FormRepresentation" [] []
+    toHType _x = Defined "FormRepresentation" [] []
 instance XmlContent FormRepresentation where
     toContents (FormRepresentation a) =
         [CElem (Elem (N "FormRepresentation") [] (concatMap toContents a)) ()]
@@ -168,7 +222,7 @@ instance XmlContent FormRepresentation where
         } `adjustErr` ("in <FormRepresentation>, "++)
 
 instance HTypeable SyntacticBehaviour where
-    toHType x = Defined "SyntacticBehaviour" [] []
+    toHType _x = Defined "SyntacticBehaviour" [] []
 instance XmlContent SyntacticBehaviour where
     toContents (SyntacticBehaviour as a) =
         [CElem (Elem (N "SyntacticBehaviour") (toAttrs as) (concatMap toContents a)) ()]
@@ -189,7 +243,7 @@ instance XmlAttributes SyntacticBehaviour_Attrs where
         ]
 
 instance HTypeable SubcategorizationFrame where
-    toHType x = Defined "SubcategorizationFrame" [] []
+    toHType _x = Defined "SubcategorizationFrame" [] []
 instance XmlContent SubcategorizationFrame where
     toContents (SubcategorizationFrame as a b c) =
         [CElem (Elem (N "SubcategorizationFrame") (toAttrs as) (concatMap toContents a
@@ -211,7 +265,7 @@ instance XmlAttributes SubcategorizationFrame_Attrs where
         ]
 
 instance HTypeable LexemeProperty where
-    toHType x = Defined "LexemeProperty" [] []
+    toHType _x = Defined "LexemeProperty" [] []
 instance XmlContent LexemeProperty where
     toContents (LexemeProperty a) =
         [CElem (Elem (N "LexemeProperty") [] (concatMap toContents a)) ()]
@@ -221,7 +275,7 @@ instance XmlContent LexemeProperty where
         } `adjustErr` ("in <LexemeProperty>, "++)
 
 instance HTypeable SyntacticArgument where
-    toHType x = Defined "SyntacticArgument" [] []
+    toHType _x = Defined "SyntacticArgument" [] []
 instance XmlContent SyntacticArgument where
     toContents (SyntacticArgument as a) =
         [CElem (Elem (N "SyntacticArgument") (toAttrs as) (concatMap toContents a)) ()]
@@ -240,7 +294,7 @@ instance XmlAttributes SyntacticArgument_Attrs where
         ]
 
 instance HTypeable Feat where
-    toHType x = Defined "feat" [] []
+    toHType _x = Defined "feat" [] []
 instance XmlContent Feat where
     toContents as =
         [CElem (Elem (N "feat") (toAttrs as) []) ()]
@@ -303,6 +357,7 @@ instance XmlAttrType Feat_att where
             translate "finite" = Just Feat_att_finite
             translate "adjectivalFunction" = Just Feat_att_adjectivalFunction
             translate _ = Nothing
+    fromAttrToTyp _ _ = Nothing
     toAttrFrTyp n Feat_att_languageCoding = Just (N n, str2attr "languageCoding")
     toAttrFrTyp n Feat_att_languageIdentifier = Just (N n, str2attr "languageIdentifier")
     toAttrFrTyp n Feat_att_id = Just (N n, str2attr "id")
