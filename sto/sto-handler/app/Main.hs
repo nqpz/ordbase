@@ -13,6 +13,7 @@ import qualified StoSyntax
 -- import StoFiles (morphXmlPaths, syntaxXmlPaths)
 -- import FileEmbedding (morphsToString, syntaxsToStrings)
 import qualified EmbeddedData
+import qualified DataAnalysis
 
 emptyArray :: ImmutableArray e
 emptyArray = ArrI.listArray (1, 0) []
@@ -69,9 +70,15 @@ testEmbeddedData = do
   hPutXml stdout False $ StoSyntax.Lexicon emptyArray (EmbeddedData.syntaxLexicalEntries) (EmbeddedData.syntaxSubcategorizationFrames)
   hFlush stdout
 
-main :: IO ()
-main = do
+test :: IO ()
+test = do
   -- putStrLn "basics"
   -- testBasics
   putStrLn "embedded data"
   testEmbeddedData
+
+main :: IO ()
+main = do
+  putStrLn (show (DataAnalysis.analyze EmbeddedData.morphologyLexicalEntries) ++ " morphology lexical entries")
+  putStrLn (show (DataAnalysis.analyze EmbeddedData.syntaxLexicalEntries) ++ " syntax lexical entries")
+  putStrLn (show (DataAnalysis.analyze EmbeddedData.syntaxSubcategorizationFrames) ++ " syntax subcategorization frames")

@@ -27,6 +27,7 @@ library
       DynamicArray
       FileEmbedding
       StoFiles
+      DataAnalysis
       EmbeddedData
       StoMorphology
       StoSyntax
