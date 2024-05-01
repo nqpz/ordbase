@@ -1,3 +1,5 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module StoSyntax
   ( LexicalResource(..)
   , LexicalResource_Attrs(..)
@@ -16,16 +18,31 @@ module StoSyntax
   , SyntacticArgument_Attrs(..)
   , Feat(..)
   , Feat_att(..)
+  , extractLexicalEntries
+  , extractSubcategorizationFrames
   ) where
 
-import Text.XML.HaXml.XmlContent
-import Text.XML.HaXml.Types
+import Text.XML.HaXml.XmlContent hiding (many)
+import Text.XML.HaXml.Types (QName(..))
+import TH.Derive
+import Data.Store
+
+import Types
+import ArrayUtils
+
+extractLexicalEntries :: StoSyntax.LexicalResource -> ImmutableArray StoSyntax.LexicalEntry
+extractLexicalEntries (StoSyntax.LexicalResource _ _ _ lexicons) =
+  ensureSingleton (fmap (\(StoSyntax.Lexicon _ entries _) -> entries) lexicons)
+
+extractSubcategorizationFrames :: StoSyntax.LexicalResource -> ImmutableArray StoSyntax.SubcategorizationFrame
+extractSubcategorizationFrames (StoSyntax.LexicalResource _ _ _ lexicons) =
+  ensureSingleton (fmap (\(StoSyntax.Lexicon _ _ frames) -> frames) lexicons)
 
 
 {-Type decls-}
 
-data LexicalResource = LexicalResource LexicalResource_Attrs [Feat]
-                                       GlobalInformation (List1 Lexicon)
+data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Feat)
+                                       GlobalInformation (ImmutableArray1 Lexicon)
   deriving (Eq, Show)
 
 data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable String
@@ -33,29 +50,29 @@ data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :
                                                    }
   deriving (Eq, Show)
 
-newtype GlobalInformation = GlobalInformation [Feat]
+newtype GlobalInformation = GlobalInformation (ImmutableArray Feat)
   deriving (Eq, Show)
 
-data Lexicon = Lexicon [Feat] (List1 LexicalEntry)
-                       [SubcategorizationFrame]
+data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray1 LexicalEntry)
+                       (ImmutableArray SubcategorizationFrame)
   deriving (Eq, Show)
 
-data LexicalEntry = LexicalEntry LexicalEntry_Attrs [Feat] Lemma
-                                 [SyntacticBehaviour]
+data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
+                                 (ImmutableArray SyntacticBehaviour)
   deriving (Eq, Show)
 
 data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe String
                                              }
   deriving (Eq, Show)
 
-data Lemma = Lemma [Feat] [FormRepresentation]
+data Lemma = Lemma (ImmutableArray Feat) (ImmutableArray FormRepresentation)
   deriving (Eq, Show)
 
-newtype FormRepresentation = FormRepresentation [Feat]
+newtype FormRepresentation = FormRepresentation (ImmutableArray Feat)
   deriving (Eq, Show)
 
 data SyntacticBehaviour = SyntacticBehaviour SyntacticBehaviour_Attrs
-                                             [Feat]
+                                             (ImmutableArray Feat)
   deriving (Eq, Show)
 
 data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId :: Maybe String
@@ -64,19 +81,19 @@ data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId 
   deriving (Eq, Show)
 
 data SubcategorizationFrame = SubcategorizationFrame SubcategorizationFrame_Attrs
-                                                     [Feat] (Maybe LexemeProperty)
-                                                     [SyntacticArgument]
+                                                     (ImmutableArray Feat) (Maybe LexemeProperty)
+                                                     (ImmutableArray SyntacticArgument)
   deriving (Eq, Show)
 
 data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs { subcategorizationFrameId :: Maybe String
                                                                  }
   deriving (Eq, Show)
 
-newtype LexemeProperty = LexemeProperty [Feat]
+newtype LexemeProperty = LexemeProperty (ImmutableArray Feat)
   deriving (Eq, Show)
 
 data SyntacticArgument = SyntacticArgument SyntacticArgument_Attrs
-                                           [Feat]
+                                           (ImmutableArray Feat)
   deriving (Eq, Show)
 
 data SyntacticArgument_Attrs = SyntacticArgument_Attrs { syntacticArgumentId :: Maybe String
@@ -127,6 +144,20 @@ data Feat_att = Feat_att_languageCoding
               | Feat_att_adjectivalFunction
   deriving (Eq, Show)
 
+$($(derive [d|instance Deriving (Store Feat_att)|]))
+$($(derive [d|instance Deriving (Store Feat)|]))
+$($(derive [d|instance Deriving (Store FormRepresentation)|]))
+$($(derive [d|instance Deriving (Store SyntacticBehaviour_Attrs)|]))
+$($(derive [d|instance Deriving (Store SyntacticBehaviour)|]))
+$($(derive [d|instance Deriving (Store SyntacticArgument_Attrs)|]))
+$($(derive [d|instance Deriving (Store SyntacticArgument)|]))
+$($(derive [d|instance Deriving (Store LexemeProperty)|]))
+$($(derive [d|instance Deriving (Store SubcategorizationFrame_Attrs)|]))
+$($(derive [d|instance Deriving (Store SubcategorizationFrame)|]))
+$($(derive [d|instance Deriving (Store Lemma)|]))
+$($(derive [d|instance Deriving (Store LexicalEntry_Attrs)|]))
+$($(derive [d|instance Deriving (Store LexicalEntry)|]))
+
 
 {-Instance decls-}
 
@@ -135,12 +166,12 @@ instance HTypeable LexicalResource where
 instance XmlContent LexicalResource where
     toContents (LexicalResource as a b c) =
         [CElem (Elem (N "LexicalResource") (toAttrs as) (concatMap toContents a
-                                                         ++ toContents b ++ toContents c)) ()]
+                                                         ++ toContents b ++ concatMap toContents c)) ()]
     parseContents = do
         { e@(Elem _ as _) <- element ["LexicalResource"]
         ; interior e $ return (LexicalResource (fromAttrs as))
                        `apply` many parseContents `apply` parseContents
-                       `apply` parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <LexicalResource>, "++)
 instance XmlAttributes LexicalResource_Attrs where
     fromAttrs as =
@@ -169,11 +200,11 @@ instance HTypeable Lexicon where
 instance XmlContent Lexicon where
     toContents (Lexicon a b c) =
         [CElem (Elem (N "Lexicon") [] (concatMap toContents a ++
-                                       toContents b ++ concatMap toContents c)) ()]
+                                       concatMap toContents b ++ concatMap toContents c)) ()]
     parseContents = do
         { e@(Elem _ [] _) <- element ["Lexicon"]
         ; interior e $ return (Lexicon) `apply` many parseContents
-                       `apply` parseContents `apply` many parseContents
+                       `apply` many parseContents `apply` many parseContents
         } `adjustErr` ("in <Lexicon>, "++)
 
 instance HTypeable LexicalEntry where
