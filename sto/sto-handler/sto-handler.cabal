@@ -25,6 +25,7 @@ library
   exposed-modules:
       ArrayUtils
       DynamicArray
+      EmbeddedData
       FileEmbedding
       StoFiles
       StoMorphology

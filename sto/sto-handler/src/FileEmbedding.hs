@@ -23,9 +23,10 @@ morphsToString morphPaths = do
     pure $ StoMorphology.extractLexicalEntries xml
   pure $ encode $ arrayConcat contents
 
-embedMorphs :: [FilePath] -> Q Exp
-embedMorphs morphPaths = [| runIO (morphsToLexiconString morphPaths) |]
-
+embedMorphs :: IO [FilePath] -> Q Exp
+embedMorphs paths = runIO $ do
+  s <- morphsToString =<< paths
+  [| s |]
 
 syntaxsToStrings :: [FilePath] -> IO (ByteString, ByteString)
 syntaxsToStrings syntaxPaths = do
@@ -36,5 +37,7 @@ syntaxsToStrings syntaxPaths = do
   pure (encode (arrayConcat lexicalEntries),
         encode (arrayConcat subCategorizationFrames))
 
-embedSyntaxs :: [FilePath] -> Q Exp
-embedSyntaxs syntaxPaths = [| runIO (syntaxsToStrings syntaxPaths) |]
+embedSyntaxs :: IO [FilePath] -> Q Exp
+embedSyntaxs paths = runIO $ do
+  s <- syntaxsToStrings =<< paths
+  [| s |]
