@@ -23,18 +23,21 @@ source-repository head
 
 library
   exposed-modules:
+      ArrayUtils
       DynamicArray
       FileEmbedding
       MorphEmbed
       StoMorphology
       StoSyntax
+      Types
   other-modules:
       Paths_sto_handler
   hs-source-dirs:
       src
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
-      HaXml
+      Glob
+    , HaXml
     , array
     , base >=4.7 && <5
     , bytestring
@@ -54,7 +57,8 @@ executable sto-handler
       app
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N -O2
   build-depends:
-      HaXml
+      Glob
+    , HaXml
     , array
     , base >=4.7 && <5
     , bytestring

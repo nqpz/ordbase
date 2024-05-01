@@ -7,8 +7,7 @@
 module StoMorphology where
 
 import qualified Text.XML.HaXml.XmlContent as XmlContent
-import Text.XML.HaXml.XmlContent hiding ( List1(..)
-                                        , Defaultable(..)
+import Text.XML.HaXml.XmlContent hiding ( Defaultable(..)
                                         , defaultToAttr
                                         , defaultA
                                         , many)
@@ -19,44 +18,21 @@ import qualified Data.Array.IArray as ArrI
 import Language.Haskell.TH.Syntax
 import TH.Derive
 import Data.Store
+import Types
 
-
--- | 'many p' parses a list of elements with individual parser p.
---   Cannot fail, since an empty list is a valid return value.
--- many :: Parser t a -> Parser t [a]
--- many = manyAcc []
-
--- manyAcc :: [a] -> Parser t a -> Parser t [a]
--- manyAcc rs p = (do
---                    r <- p
---                    manyAcc (r : rs) p)
---                `onFail` return rs
-
-manyAcc :: [a] -> Parser t a -> Parser t [a]
-manyAcc rs p = do
-  rm <- (Just <$> p) `onFail` return Nothing
-  case rm of
-    Nothing -> return rs
-    Just r -> manyAcc (r : rs) p
-
-many' :: Parser t a -> Parser t (ArrI.Array Int a)
-many' = manyAcc' (DynamicArray.create 10)
-
-manyAcc' :: (forall s. DynamicArray.M s a ()) -> Parser t a -> Parser t (ArrI.Array Int a)
-manyAcc' rs p = do
-  rm <- (Just <$> p) `onFail` return Nothing
-  case rm of
-    Nothing -> pure $ DynamicArray.runM' rs
-    Just r -> manyAcc' (rs >> DynamicArray.add r) p
+many :: Parser t a -> Parser t (ImmutableArray a)
+many = many' (DynamicArray.create 10)
+  where many' :: (forall s. DynamicArray.M s a ()) -> Parser t a -> Parser t (ImmutableArray a)
+        many' rs p = do
+          rm <- (Just <$> p) `onFail` return Nothing
+          case rm of
+            Nothing -> pure $ DynamicArray.runM' rs
+            Just r -> many' (rs >> DynamicArray.add r) p
 
 
 -- We need to make List1 and Defaultable implement Lift in order to use them
 -- with Template Haskell, so we hide the implementations from HaXml and roll our
 -- own variations instead.
-
--- | The List1 type represents lists with at least one element.
---   It is required for DTD content models that use + as a modifier.
-type List1 a = [a]
 
 data Defaultable a = Default a
                    | NonDefault a
@@ -77,30 +53,30 @@ defaultA from def at as = internalDefaultableToDefaultable (XmlContent.defaultA 
 
 {-Type decls-}
 
-data LexicalResource = LexicalResource LexicalResource_Attrs (ArrI.Array Int Feat)
-                                       GlobalInformation (ArrI.Array Int Lexicon)
+data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Feat)
+                                       GlobalInformation (ImmutableArray Lexicon)
                      deriving (Eq,Ord,Show)
 data LexicalResource_Attrs = LexicalResource_Attrs
     { lexicalResourceDtdVersion :: (Defaultable String)
     , lexicalResourceXmlns'dcr :: (Defaultable String)
     } deriving (Eq,Ord,Show)
-newtype GlobalInformation = GlobalInformation (ArrI.Array Int Feat) 		deriving (Eq,Ord,Show)
-data Lexicon = Lexicon (ArrI.Array Int Feat) (ArrI.Array Int LexicalEntry)
+newtype GlobalInformation = GlobalInformation (ImmutableArray Feat) 		deriving (Eq,Ord,Show)
+data Lexicon = Lexicon (ImmutableArray Feat) (ImmutableArray LexicalEntry)
              deriving (Eq,Ord,Show)
-data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ArrI.Array Int Feat) Lemma
-                                 (ArrI.Array Int WordForm) (ArrI.Array Int RelatedForm)
+data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
+                                 (ImmutableArray WordForm) (ImmutableArray RelatedForm)
                   deriving (Eq,Ord,Show)
 data LexicalEntry_Attrs = LexicalEntry_Attrs
     { lexicalEntryId :: (Maybe String)
     } deriving (Eq,Ord,Show)
-data Lemma = Lemma (ArrI.Array Int Feat) (ArrI.Array Int FormRepresentation)
+data Lemma = Lemma (ImmutableArray Feat) (ImmutableArray FormRepresentation)
            deriving (Eq,Ord,Show)
-data WordForm = WordForm (ArrI.Array Int Feat) (ArrI.Array Int FormRepresentation)
+data WordForm = WordForm (ImmutableArray Feat) (ImmutableArray FormRepresentation)
               deriving (Eq,Ord,Show)
-newtype FormRepresentation = FormRepresentation (ArrI.Array Int Feat) 		deriving (Eq,Ord,Show)
+newtype FormRepresentation = FormRepresentation (ImmutableArray Feat) 		deriving (Eq,Ord,Show)
 
-data RelatedForm = RelatedForm RelatedForm_Attrs (ArrI.Array Int Feat)
-                               (ArrI.Array Int FormRepresentation)
+data RelatedForm = RelatedForm RelatedForm_Attrs (ImmutableArray Feat)
+                               (ImmutableArray FormRepresentation)
                  deriving (Eq,Ord,Show)
 
 data RelatedForm_Attrs = RelatedForm_Attrs
@@ -155,8 +131,8 @@ instance XmlContent LexicalResource where
     parseContents = do
         { e@(Elem _ as _) <- element ["LexicalResource"]
         ; interior e $ return (LexicalResource (fromAttrs as))
-                       `apply` many' parseContents `apply` parseContents
-                       `apply` many' parseContents
+                       `apply` many parseContents `apply` parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <LexicalResource>, "++)
 instance XmlAttributes LexicalResource_Attrs where
     fromAttrs as =
@@ -177,7 +153,7 @@ instance XmlContent GlobalInformation where
     parseContents = do
         { e@(Elem _ [] _) <- element ["GlobalInformation"]
         ; interior e $ return (GlobalInformation)
-                       `apply` many' parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <GlobalInformation>, "++)
 
 instance HTypeable Lexicon where
@@ -188,8 +164,8 @@ instance XmlContent Lexicon where
                                        concatMap toContents b)) ()]
     parseContents = do
         { e@(Elem _ [] _) <- element ["Lexicon"]
-        ; interior e $ return (Lexicon) `apply` many' parseContents
-                       `apply` many' parseContents
+        ; interior e $ return (Lexicon) `apply` many parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <Lexicon>, "++)
 
 instance HTypeable LexicalEntry where
@@ -202,8 +178,8 @@ instance XmlContent LexicalEntry where
     parseContents = do
         { e@(Elem _ as _) <- element ["LexicalEntry"]
         ; interior e $ return (LexicalEntry (fromAttrs as))
-                       `apply` many' parseContents `apply` parseContents
-                       `apply` many' parseContents `apply` many' parseContents
+                       `apply` many parseContents `apply` parseContents
+                       `apply` many parseContents `apply` many parseContents
         } `adjustErr` ("in <LexicalEntry>, "++)
 instance XmlAttributes LexicalEntry_Attrs where
     fromAttrs as =
@@ -222,8 +198,8 @@ instance XmlContent Lemma where
                                      concatMap toContents b)) ()]
     parseContents = do
         { e@(Elem _ [] _) <- element ["Lemma"]
-        ; interior e $ return (Lemma) `apply` many' parseContents
-                       `apply` many' parseContents
+        ; interior e $ return (Lemma) `apply` many parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <Lemma>, "++)
 
 instance HTypeable WordForm where
@@ -234,8 +210,8 @@ instance XmlContent WordForm where
                                         concatMap toContents b)) ()]
     parseContents = do
         { e@(Elem _ [] _) <- element ["WordForm"]
-        ; interior e $ return (WordForm) `apply` many' parseContents
-                       `apply` many' parseContents
+        ; interior e $ return (WordForm) `apply` many parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <WordForm>, "++)
 
 instance HTypeable FormRepresentation where
@@ -246,7 +222,7 @@ instance XmlContent FormRepresentation where
     parseContents = do
         { e@(Elem _ [] _) <- element ["FormRepresentation"]
         ; interior e $ return (FormRepresentation)
-                       `apply` many' parseContents
+                       `apply` many parseContents
         } `adjustErr` ("in <FormRepresentation>, "++)
 
 instance HTypeable RelatedForm where
@@ -258,7 +234,7 @@ instance XmlContent RelatedForm where
     parseContents = do
         { e@(Elem _ as _) <- element ["RelatedForm"]
         ; interior e $ return (RelatedForm (fromAttrs as))
-                       `apply` many' parseContents `apply` many' parseContents
+                       `apply` many parseContents `apply` many parseContents
         } `adjustErr` ("in <RelatedForm>, "++)
 instance XmlAttributes RelatedForm_Attrs where
     fromAttrs as =

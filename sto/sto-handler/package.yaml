@@ -19,6 +19,7 @@ dependencies:
 - HaXml
 - bytestring
 - lzma
+- Glob
 - template-haskell
 - th-utilities
 - store

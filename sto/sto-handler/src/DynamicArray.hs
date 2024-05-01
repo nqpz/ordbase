@@ -13,24 +13,25 @@ import Control.Monad.ST (ST, runST)
 import qualified Data.Array.ST as ArrST
 import qualified Data.Array.MArray as ArrM
 import qualified Data.Array.IArray as ArrI
+import Types
 
-data Array s e = Array { arrayInternal :: ArrST.STArray s Int e
-                       , arrayNextIndex :: Int
-                       , arrayCapacity :: Int
-                       }
+data DynamicArray s e = DynamicArray { arrayInternal :: MutableArray s e
+                                     , arrayNextIndex :: Int
+                                     , arrayCapacity :: Int
+                                     }
 
-type M s e r = StateT (Array s e) (ST s) r
+type M s e r = StateT (DynamicArray s e) (ST s) r
 
-newStArray :: Int -> ST s (ArrST.STArray s Int e)
+newStArray :: Int -> ST s (MutableArray s e)
 newStArray capacity = ArrM.newGenArray (1, capacity) (const (pure undefined))
 
 create :: Int -> M s e ()
 create capacity = do
   stArray <- lift $ newStArray capacity
-  put $ Array { arrayInternal = stArray
-              , arrayNextIndex = 1
-              , arrayCapacity = capacity
-              }
+  put $ DynamicArray { arrayInternal = stArray
+                     , arrayNextIndex = 1
+                     , arrayCapacity = capacity
+                     }
 
 add :: e -> M s e ()
 add e = do
@@ -52,18 +53,18 @@ add e = do
   lift $ ArrM.writeArray (arrayInternal array') i e
   put array' { arrayNextIndex = i + 1 }
 
-toImmutable :: M s e (ArrI.Array Int e)
+toImmutable :: M s e (ImmutableArray e)
 toImmutable = do
   array <- get
-  arrayImmutable <- freeze (arrayInternal array)
+  arrayImmutable <- freeze $ arrayInternal array
   pure $ ArrI.genArray (1, arrayNextIndex array - 1) (arrayImmutable ArrI.!)
-  where freeze :: ArrST.STArray s Int e -> M s e (ArrI.Array Int e)
+  where freeze :: MutableArray s e -> M s e (ImmutableArray e)
         freeze = lift . ArrM.freeze
 
 runM :: M s e r -> ST s r
 runM m = evalStateT m undefined
 
-runM' :: (forall s. M s e ()) -> ArrI.Array Int e
+runM' :: (forall s. M s e ()) -> ImmutableArray e
 runM' m = runST (evalStateT (m >> toImmutable) undefined)
 
 test :: M s Float ()
@@ -78,5 +79,5 @@ test = do
   add 7.0
   add 8.0
 
-test' :: ArrI.Array Int Float
+test' :: ImmutableArray Float
 test' = runM' test
