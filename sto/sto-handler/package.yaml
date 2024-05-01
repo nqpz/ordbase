@@ -36,7 +36,9 @@ ghc-options:
 - -Wredundant-constraints
 
 library:
-  source-dirs: src
+  source-dirs:
+    - gen
+    - src
 
 executables:
   sto-handler:
