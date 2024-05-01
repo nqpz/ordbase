@@ -1,4 +1,3 @@
-{-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module StoMorphology
@@ -25,7 +24,6 @@ import Data.Store
 
 import Types
 import ArrayUtils
-import qualified DynamicArray
 
 -- Really this means that there must be at least one element in the XML, but the
 -- XML files we have trivially fulfil this invariant, so we don't need to check
@@ -35,16 +33,6 @@ type ImmutableArray1 e = ImmutableArray e
 extractLexicalEntries :: StoMorphology.LexicalResource -> ImmutableArray StoMorphology.LexicalEntry
 extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
   ensureSingleton (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
-
-
-many :: Parser t a -> Parser t (ImmutableArray a)
-many = many' (DynamicArray.create 10)
-  where many' :: (forall s. DynamicArray.M s a ()) -> Parser t a -> Parser t (ImmutableArray a)
-        many' rs p = do
-          rm <- (Just <$> p) `onFail` return Nothing
-          case rm of
-            Nothing -> pure $ DynamicArray.runM' rs
-            Just r -> many' (rs >> DynamicArray.add r) p
 
 
 {-Type decls-}
