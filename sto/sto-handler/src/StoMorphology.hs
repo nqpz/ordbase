@@ -25,11 +25,6 @@ import Data.Store
 import Types
 import ArrayUtils
 
--- Really this means that there must be at least one element in the XML, but the
--- XML files we have trivially fulfil this invariant, so we don't need to check
--- it.
-type ImmutableArray1 e = ImmutableArray e
-
 extractLexicalEntries :: StoMorphology.LexicalResource -> ImmutableArray StoMorphology.LexicalEntry
 extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
   ensureSingleton (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
