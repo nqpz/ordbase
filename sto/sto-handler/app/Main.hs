@@ -7,16 +7,21 @@ import qualified Data.ByteString.Lazy as BS
 import qualified Codec.Compression.Lzma as Lzma
 import qualified Data.Array.IArray as ArrI
 
+import Types
 import qualified StoMorphology
-import StoFiles (morphXmlPaths)
-import FileEmbedding (morphsToString)
+import qualified StoSyntax
+import StoFiles (morphXmlPaths, syntaxXmlPaths)
+import FileEmbedding (morphsToString, syntaxsToStrings)
 
-testFilename :: FilePath
-testFilename = "morphs.lzma"
+emptyArray :: ImmutableArray e
+emptyArray = ArrI.listArray (1, 0) []
+
+morphsTestFilename :: FilePath
+morphsTestFilename = "morphs.lzma"
 
 -- Example: Parse an XML file and re-format it to standard out.
-storeAndCompress :: IO ()
-storeAndCompress = do
+morphsStoreAndCompress :: IO ()
+morphsStoreAndCompress = do
   putStrLn "get paths"
   paths <- morphXmlPaths
   mapM_ putStrLn paths
@@ -25,22 +30,38 @@ storeAndCompress = do
   putStrLn "compress"
   let compressed = Lzma.compress $ BS.fromStrict raw
   putStrLn "write"
-  BS.writeFile testFilename compressed
+  BS.writeFile morphsTestFilename compressed
 
-decompressAndUnstoreAndPrint :: IO ()
-decompressAndUnstoreAndPrint = do
+morphsDecompressAndUnstoreAndPrint :: IO ()
+morphsDecompressAndUnstoreAndPrint = do
   putStrLn "read"
-  compressed <- BS.readFile testFilename
+  compressed <- BS.readFile morphsTestFilename
   putStrLn "decompress"
   let raw = Lzma.decompress compressed
   putStrLn "build xml"
   let lexicalEntries = decodeEx $ BS.toStrict raw
-      xml = StoMorphology.Lexicon (ArrI.listArray (1, 0) []) lexicalEntries
+      xml = StoMorphology.Lexicon emptyArray lexicalEntries
   putStrLn "write xml"
+  hPutXml stdout False xml
+  hFlush stdout
+
+syntaxTest :: IO ()
+syntaxTest = do
+  paths <- syntaxXmlPaths
+  mapM_ putStrLn paths
+  (lexsRaw, framesRaw) <- syntaxsToStrings paths
+  let (lexsCompressed, framesCompressed) = (Lzma.compress $ BS.fromStrict lexsRaw,
+                                            Lzma.compress $ BS.fromStrict framesRaw)
+      (lexsDecompressed, framesDecompressed) = (Lzma.decompress lexsCompressed,
+                                                Lzma.decompress framesCompressed)
+      (lexs, frames) = (decodeEx $ BS.toStrict lexsDecompressed,
+                        decodeEx $ BS.toStrict framesDecompressed)
+      xml = StoSyntax.Lexicon emptyArray lexs frames
   hPutXml stdout False xml
   hFlush stdout
 
 main :: IO ()
 main = do
-  storeAndCompress
-  decompressAndUnstoreAndPrint
+  morphsStoreAndCompress
+  morphsDecompressAndUnstoreAndPrint
+  syntaxTest
