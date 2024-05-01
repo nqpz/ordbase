@@ -30,13 +30,13 @@ import Data.Store
 import Types
 import ArrayUtils
 
-extractLexicalEntries :: StoSyntax.LexicalResource -> ImmutableArray StoSyntax.LexicalEntry
-extractLexicalEntries (StoSyntax.LexicalResource _ _ _ lexicons) =
-  ensureSingleton (fmap (\(StoSyntax.Lexicon _ entries _) -> entries) lexicons)
+extractLexicalEntries :: LexicalResource -> ImmutableArray LexicalEntry
+extractLexicalEntries (LexicalResource _ _ _ lexicons) =
+  ensureSingleton (fmap (\(Lexicon _ entries _) -> entries) lexicons)
 
-extractSubcategorizationFrames :: StoSyntax.LexicalResource -> ImmutableArray StoSyntax.SubcategorizationFrame
-extractSubcategorizationFrames (StoSyntax.LexicalResource _ _ _ lexicons) =
-  ensureSingleton (fmap (\(StoSyntax.Lexicon _ _ frames) -> frames) lexicons)
+extractSubcategorizationFrames :: LexicalResource -> ImmutableArray SubcategorizationFrame
+extractSubcategorizationFrames (LexicalResource _ _ _ lexicons) =
+  ensureSingleton (fmap (\(Lexicon _ _ frames) -> frames) lexicons)
 
 
 {-Type decls-}

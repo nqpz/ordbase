@@ -25,9 +25,9 @@ import Data.Store
 import Types
 import ArrayUtils
 
-extractLexicalEntries :: StoMorphology.LexicalResource -> ImmutableArray StoMorphology.LexicalEntry
-extractLexicalEntries (StoMorphology.LexicalResource _ _ _ lexicons) =
-  ensureSingleton (fmap (\(StoMorphology.Lexicon _ entries) -> entries) lexicons)
+extractLexicalEntries :: LexicalResource -> ImmutableArray LexicalEntry
+extractLexicalEntries (LexicalResource _ _ _ lexicons) =
+  ensureSingleton (fmap (\(Lexicon _ entries) -> entries) lexicons)
 
 
 {-Type decls-}
