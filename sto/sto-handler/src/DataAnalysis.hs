@@ -1,7 +1,7 @@
 module DataAnalysis
   ( putMorphData
   , putSyntaxData
-  , analyze
+  , analyzeLength
   ) where
 
 import System.IO (stdout, hFlush)
@@ -28,5 +28,5 @@ putSyntaxData entries frames = do
   hPutXml stdout False $ StoSyntax.Lexicon emptyArray entries frames
   hFlush stdout
 
-analyze :: ImmutableArray e -> Int
-analyze entries = snd $ ArrI.bounds entries
+analyzeLength :: ImmutableArray e -> Int
+analyzeLength entries = snd $ ArrI.bounds entries
