@@ -1,3 +1,4 @@
+{-# LANGUAGE StrictData #-}
 {-# LANGUAGE RankNTypes #-}
 module DynamicArray
   ( M
