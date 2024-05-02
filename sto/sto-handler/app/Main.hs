@@ -6,9 +6,12 @@ import qualified DataAnalysis as DA
 
 putLengths :: IO ()
 putLengths = do
-  putStrLn (show (DA.analyzeLength ED.morphologyLexicalEntries) ++ " morphology lexical entries")
-  putStrLn (show (DA.analyzeLength ED.syntaxLexicalEntries) ++ " syntax lexical entries")
-  putStrLn (show (DA.analyzeLength ED.syntaxSubcategorizationFrames) ++ " syntax subcategorization frames")
+  putStrLn (show (DA.analyzeLength ED.morphologyLexicalEntries)
+            ++ " morphology lexical entries")
+  putStrLn (show (DA.analyzeLength ED.syntaxLexicalEntries)
+            ++ " syntax lexical entries")
+  putStrLn (show (DA.analyzeLength ED.syntaxSubcategorizationFrames)
+            ++ " syntax subcategorization frames")
 
 putData :: IO ()
 putData = do
