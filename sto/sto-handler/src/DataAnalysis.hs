@@ -8,7 +8,6 @@ module DataAnalysis
 import System.IO (stdout, hFlush)
 import Text.XML.HaXml.XmlContent (hPutXml)
 import qualified Data.Array.IArray as ArrI
-import Data.Maybe (fromJust)
 import Data.Foldable (foldl')
 import Control.Applicative ((<|>))
 import Control.Monad (guard)
@@ -36,11 +35,16 @@ putSyntaxData entries frames = do
 analyzeLength :: ImmutableArray e -> Int
 analyzeLength = snd . ArrI.bounds
 
+fixId :: Maybe String -> String
+fixId Nothing = error "ID must always be present"
+fixId (Just ('G' : 'M' : 'U' : '_' : mainPart)) = mainPart
+fixId (Just _) = error "Assumed all ids start with GMU_"
+
 generateWords :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateWords = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
         handleEntry (StoMorphology.LexicalEntry _attrs feats _lemma wordForms _relatedForms) = do
-          let wordId = fromJust $ getFeat StoMorphology.Feat_att_id feats
+          let wordId = fixId $ getFeat StoMorphology.Feat_att_id feats
           putStrLn wordId
 
         getFeat :: StoMorphology.Feat_att -> ImmutableArray StoMorphology.Feat -> Maybe String
