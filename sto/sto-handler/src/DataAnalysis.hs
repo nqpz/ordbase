@@ -35,9 +35,12 @@ putSyntaxData entries frames = do
 analyzeLength :: ImmutableArray e -> Int
 analyzeLength = snd . ArrI.bounds
 
+escape :: Char -> Char -> String -> String
+escape source target = map (\c -> if c == source then target else c)
+
 fixId :: Maybe String -> String
 fixId Nothing = error "ID must always be present"
-fixId (Just ('G' : 'M' : 'U' : '_' : mainPart)) = mainPart
+fixId (Just ('G' : 'M' : 'U' : '_' : mainPart)) = escape ',' '/' mainPart
 fixId (Just _) = error "Assumed all ids start with GMU_"
 
 generateWords :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
