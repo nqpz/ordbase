@@ -29,4 +29,4 @@ putSyntaxData entries frames = do
   hFlush stdout
 
 analyzeLength :: ImmutableArray e -> Int
-analyzeLength entries = snd $ ArrI.bounds entries
+analyzeLength = snd . ArrI.bounds
