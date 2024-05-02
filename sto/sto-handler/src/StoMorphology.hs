@@ -22,9 +22,12 @@ import Text.XML.HaXml.XmlContent hiding (many)
 import Text.XML.HaXml.Types (QName(..))
 import TH.Derive
 import Data.Store
+import Data.Text (Text)
+import qualified Data.Text as T
 
 import Types
 import ArrayUtils
+import StoUtils
 
 extractLexicalEntries :: LexicalResource -> ImmutableArray LexicalEntry
 extractLexicalEntries (LexicalResource _ _ _ lexicons) =
@@ -37,8 +40,8 @@ data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Fea
                                        GlobalInformation (ImmutableArray1 Lexicon)
   deriving (Eq, Show)
 
-data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable String
-                                                   , lexicalResourceXmlns'dcr :: Defaultable String
+data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable Text
+                                                   , lexicalResourceXmlns'dcr :: Defaultable Text
                                                    }
   deriving (Eq, Show)
 
@@ -52,7 +55,7 @@ data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
                                  (ImmutableArray WordForm) (ImmutableArray RelatedForm)
   deriving (Eq, Show)
 
-data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe String
+data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe Text
                                              }
   deriving (Eq, Show)
 
@@ -69,14 +72,14 @@ data RelatedForm = RelatedForm RelatedForm_Attrs (ImmutableArray Feat)
                                (ImmutableArray FormRepresentation)
   deriving (Eq, Show)
 
-data RelatedForm_Attrs = RelatedForm_Attrs { relatedFormTargets :: Maybe String
+data RelatedForm_Attrs = RelatedForm_Attrs { relatedFormTargets :: Maybe Text
                                            }
   deriving (Eq, Show)
 
 data Feat = Feat { featAtt :: Feat_att
-                 , featVal :: String
-                 , featDcr'valueDatcat :: Maybe String
-                 , featDcr'datcat :: Maybe String
+                 , featVal :: Text
+                 , featDcr'valueDatcat :: Maybe Text
+                 , featDcr'datcat :: Maybe Text
                  }
   deriving (Eq, Show)
 
@@ -138,12 +141,12 @@ instance XmlContent LexicalResource where
 instance XmlAttributes LexicalResource_Attrs where
     fromAttrs as =
         LexicalResource_Attrs
-          { lexicalResourceDtdVersion = defaultA fromAttrToStr "16" "dtdVersion" as
-          , lexicalResourceXmlns'dcr = defaultA fromAttrToStr "http://www.isocat.org/ns/dcr" "xmlns:dcr" as
+          { lexicalResourceDtdVersion = defaultableText $ defaultA fromAttrToStr "16" "dtdVersion" as
+          , lexicalResourceXmlns'dcr = defaultableText $ defaultA fromAttrToStr "http://www.isocat.org/ns/dcr" "xmlns:dcr" as
           }
     toAttrs v = catMaybes
-        [ defaultToAttr toAttrFrStr "dtdVersion" (lexicalResourceDtdVersion v)
-        , defaultToAttr toAttrFrStr "xmlns:dcr" (lexicalResourceXmlns'dcr v)
+        [ defaultToAttr toAttrFrStr "dtdVersion" (defaultableString $ lexicalResourceDtdVersion v)
+        , defaultToAttr toAttrFrStr "xmlns:dcr" (defaultableString $ lexicalResourceXmlns'dcr v)
         ]
 
 instance HTypeable GlobalInformation where
@@ -185,10 +188,10 @@ instance XmlContent LexicalEntry where
 instance XmlAttributes LexicalEntry_Attrs where
     fromAttrs as =
         LexicalEntry_Attrs
-          { lexicalEntryId = possibleA fromAttrToStr "id" as
+          { lexicalEntryId = T.pack <$> possibleA fromAttrToStr "id" as
           }
     toAttrs v = catMaybes
-        [ maybeToAttr toAttrFrStr "id" (lexicalEntryId v)
+        [ maybeToAttr toAttrFrStr "id" (T.unpack <$> lexicalEntryId v)
         ]
 
 instance HTypeable Lemma where
@@ -240,10 +243,10 @@ instance XmlContent RelatedForm where
 instance XmlAttributes RelatedForm_Attrs where
     fromAttrs as =
         RelatedForm_Attrs
-          { relatedFormTargets = possibleA fromAttrToStr "targets" as
+          { relatedFormTargets = T.pack <$> possibleA fromAttrToStr "targets" as
           }
     toAttrs v = catMaybes
-        [ maybeToAttr toAttrFrStr "targets" (relatedFormTargets v)
+        [ maybeToAttr toAttrFrStr "targets" (T.unpack <$> relatedFormTargets v)
         ]
 
 instance HTypeable Feat where
@@ -259,15 +262,15 @@ instance XmlAttributes Feat where
     fromAttrs as =
         Feat
           { featAtt = definiteA fromAttrToTyp "feat" "att" as
-          , featVal = definiteA fromAttrToStr "feat" "val" as
-          , featDcr'valueDatcat = possibleA fromAttrToStr "dcr:valueDatcat" as
-          , featDcr'datcat = possibleA fromAttrToStr "dcr:datcat" as
+          , featVal = T.pack $ definiteA fromAttrToStr "feat" "val" as
+          , featDcr'valueDatcat = T.pack <$> possibleA fromAttrToStr "dcr:valueDatcat" as
+          , featDcr'datcat = T.pack <$> possibleA fromAttrToStr "dcr:datcat" as
           }
     toAttrs v = catMaybes
         [ toAttrFrTyp "att" (featAtt v)
-        , toAttrFrStr "val" (featVal v)
-        , maybeToAttr toAttrFrStr "dcr:valueDatcat" (featDcr'valueDatcat v)
-        , maybeToAttr toAttrFrStr "dcr:datcat" (featDcr'datcat v)
+        , toAttrFrStr "val" (T.unpack $ featVal v)
+        , maybeToAttr toAttrFrStr "dcr:valueDatcat" (T.unpack <$> featDcr'valueDatcat v)
+        , maybeToAttr toAttrFrStr "dcr:datcat" (T.unpack <$> featDcr'datcat v)
         ]
 
 instance XmlAttrType Feat_att where

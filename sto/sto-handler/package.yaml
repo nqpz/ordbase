@@ -17,6 +17,7 @@ dependencies:
 - mtl
 - array
 - HaXml
+- text
 - bytestring
 - lzma
 - Glob

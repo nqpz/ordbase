@@ -27,9 +27,12 @@ import Text.XML.HaXml.XmlContent hiding (many)
 import Text.XML.HaXml.Types (QName(..))
 import TH.Derive
 import Data.Store
+import Data.Text (Text)
+import qualified Data.Text as T
 
 import Types
 import ArrayUtils
+import StoUtils
 
 extractLexicalEntries :: LexicalResource -> ImmutableArray LexicalEntry
 extractLexicalEntries (LexicalResource _ _ _ lexicons) =
@@ -46,8 +49,8 @@ data LexicalResource = LexicalResource LexicalResource_Attrs (ImmutableArray Fea
                                        GlobalInformation (ImmutableArray1 Lexicon)
   deriving (Eq, Show)
 
-data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable String
-                                                   , lexicalResourceXmlns'dcr :: Defaultable String
+data LexicalResource_Attrs = LexicalResource_Attrs { lexicalResourceDtdVersion :: Defaultable Text
+                                                   , lexicalResourceXmlns'dcr :: Defaultable Text
                                                    }
   deriving (Eq, Show)
 
@@ -62,7 +65,7 @@ data LexicalEntry = LexicalEntry LexicalEntry_Attrs (ImmutableArray Feat) Lemma
                                  (ImmutableArray SyntacticBehaviour)
   deriving (Eq, Show)
 
-data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe String
+data LexicalEntry_Attrs = LexicalEntry_Attrs { lexicalEntryId :: Maybe Text
                                              }
   deriving (Eq, Show)
 
@@ -76,8 +79,8 @@ data SyntacticBehaviour = SyntacticBehaviour SyntacticBehaviour_Attrs
                                              (ImmutableArray Feat)
   deriving (Eq, Show)
 
-data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId :: Maybe String
-                                                         , syntacticBehaviourSubcategorizationFrames :: Maybe String
+data SyntacticBehaviour_Attrs = SyntacticBehaviour_Attrs { syntacticBehaviourId :: Maybe Text
+                                                         , syntacticBehaviourSubcategorizationFrames :: Maybe Text
                                                          }
   deriving (Eq, Show)
 
@@ -86,7 +89,7 @@ data SubcategorizationFrame = SubcategorizationFrame SubcategorizationFrame_Attr
                                                      (ImmutableArray SyntacticArgument)
   deriving (Eq, Show)
 
-data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs { subcategorizationFrameId :: Maybe String
+data SubcategorizationFrame_Attrs = SubcategorizationFrame_Attrs { subcategorizationFrameId :: Maybe Text
                                                                  }
   deriving (Eq, Show)
 
@@ -97,14 +100,14 @@ data SyntacticArgument = SyntacticArgument SyntacticArgument_Attrs
                                            (ImmutableArray Feat)
   deriving (Eq, Show)
 
-data SyntacticArgument_Attrs = SyntacticArgument_Attrs { syntacticArgumentId :: Maybe String
+data SyntacticArgument_Attrs = SyntacticArgument_Attrs { syntacticArgumentId :: Maybe Text
                                                        }
   deriving (Eq, Show)
 
 data Feat = Feat { featAtt :: Feat_att
-                 , featVal :: String
-                 , featDcr'valueDatcat :: Maybe String
-                 , featDcr'datcat :: Maybe String
+                 , featVal :: Text
+                 , featDcr'valueDatcat :: Maybe Text
+                 , featDcr'datcat :: Maybe Text
                  }
   deriving (Eq, Show)
 
@@ -177,12 +180,12 @@ instance XmlContent LexicalResource where
 instance XmlAttributes LexicalResource_Attrs where
     fromAttrs as =
         LexicalResource_Attrs
-          { lexicalResourceDtdVersion = defaultA fromAttrToStr "16" "dtdVersion" as
-          , lexicalResourceXmlns'dcr = defaultA fromAttrToStr "http://www.isocat.org/ns/dcr" "xmlns:dcr" as
+          { lexicalResourceDtdVersion = defaultableText $ defaultA fromAttrToStr "16" "dtdVersion" as
+          , lexicalResourceXmlns'dcr = defaultableText $ defaultA fromAttrToStr "http://www.isocat.org/ns/dcr" "xmlns:dcr" as
           }
     toAttrs v = catMaybes
-        [ defaultToAttr toAttrFrStr "dtdVersion" (lexicalResourceDtdVersion v)
-        , defaultToAttr toAttrFrStr "xmlns:dcr" (lexicalResourceXmlns'dcr v)
+        [ defaultToAttr toAttrFrStr "dtdVersion" (defaultableString $ lexicalResourceDtdVersion v)
+        , defaultToAttr toAttrFrStr "xmlns:dcr" (defaultableString $ lexicalResourceXmlns'dcr v)
         ]
 
 instance HTypeable GlobalInformation where
@@ -224,10 +227,10 @@ instance XmlContent LexicalEntry where
 instance XmlAttributes LexicalEntry_Attrs where
     fromAttrs as =
         LexicalEntry_Attrs
-          { lexicalEntryId = possibleA fromAttrToStr "id" as
+          { lexicalEntryId = T.pack <$> possibleA fromAttrToStr "id" as
           }
     toAttrs v = catMaybes
-        [ maybeToAttr toAttrFrStr "id" (lexicalEntryId v)
+        [ maybeToAttr toAttrFrStr "id" (T.unpack <$> lexicalEntryId v)
         ]
 
 instance HTypeable Lemma where
@@ -266,12 +269,12 @@ instance XmlContent SyntacticBehaviour where
 instance XmlAttributes SyntacticBehaviour_Attrs where
     fromAttrs as =
         SyntacticBehaviour_Attrs
-          { syntacticBehaviourId = possibleA fromAttrToStr "id" as
-          , syntacticBehaviourSubcategorizationFrames = possibleA fromAttrToStr "subcategorizationFrames" as
+          { syntacticBehaviourId = T.pack <$> possibleA fromAttrToStr "id" as
+          , syntacticBehaviourSubcategorizationFrames = T.pack <$> possibleA fromAttrToStr "subcategorizationFrames" as
           }
     toAttrs v = catMaybes
-        [ maybeToAttr toAttrFrStr "id" (syntacticBehaviourId v)
-        , maybeToAttr toAttrFrStr "subcategorizationFrames" (syntacticBehaviourSubcategorizationFrames v)
+        [ maybeToAttr toAttrFrStr "id" (T.unpack <$> syntacticBehaviourId v)
+        , maybeToAttr toAttrFrStr "subcategorizationFrames" (T.unpack <$> syntacticBehaviourSubcategorizationFrames v)
         ]
 
 instance HTypeable SubcategorizationFrame where
@@ -290,10 +293,10 @@ instance XmlContent SubcategorizationFrame where
 instance XmlAttributes SubcategorizationFrame_Attrs where
     fromAttrs as =
         SubcategorizationFrame_Attrs
-          { subcategorizationFrameId = possibleA fromAttrToStr "id" as
+          { subcategorizationFrameId = T.pack <$> possibleA fromAttrToStr "id" as
           }
     toAttrs v = catMaybes
-        [ maybeToAttr toAttrFrStr "id" (subcategorizationFrameId v)
+        [ maybeToAttr toAttrFrStr "id" (T.unpack <$> subcategorizationFrameId v)
         ]
 
 instance HTypeable LexemeProperty where
@@ -319,10 +322,10 @@ instance XmlContent SyntacticArgument where
 instance XmlAttributes SyntacticArgument_Attrs where
     fromAttrs as =
         SyntacticArgument_Attrs
-          { syntacticArgumentId = possibleA fromAttrToStr "id" as
+          { syntacticArgumentId = T.pack <$> possibleA fromAttrToStr "id" as
           }
     toAttrs v = catMaybes
-        [ maybeToAttr toAttrFrStr "id" (syntacticArgumentId v)
+        [ maybeToAttr toAttrFrStr "id" (T.unpack <$> syntacticArgumentId v)
         ]
 
 instance HTypeable Feat where
@@ -338,15 +341,15 @@ instance XmlAttributes Feat where
     fromAttrs as =
         Feat
           { featAtt = definiteA fromAttrToTyp "feat" "att" as
-          , featVal = definiteA fromAttrToStr "feat" "val" as
-          , featDcr'valueDatcat = possibleA fromAttrToStr "dcr:valueDatcat" as
-          , featDcr'datcat = possibleA fromAttrToStr "dcr:datcat" as
+          , featVal = T.pack $ definiteA fromAttrToStr "feat" "val" as
+          , featDcr'valueDatcat = T.pack <$> possibleA fromAttrToStr "dcr:valueDatcat" as
+          , featDcr'datcat = T.pack <$> possibleA fromAttrToStr "dcr:datcat" as
           }
     toAttrs v = catMaybes
         [ toAttrFrTyp "att" (featAtt v)
-        , toAttrFrStr "val" (featVal v)
-        , maybeToAttr toAttrFrStr "dcr:valueDatcat" (featDcr'valueDatcat v)
-        , maybeToAttr toAttrFrStr "dcr:datcat" (featDcr'datcat v)
+        , toAttrFrStr "val" (T.unpack $ featVal v)
+        , maybeToAttr toAttrFrStr "dcr:valueDatcat" (T.unpack <$> featDcr'valueDatcat v)
+        , maybeToAttr toAttrFrStr "dcr:datcat" (T.unpack <$> featDcr'datcat v)
         ]
 
 instance XmlAttrType Feat_att where
