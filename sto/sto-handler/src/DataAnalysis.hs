@@ -120,8 +120,8 @@ generateProlog' = mapM_ handleEntry
               in if val /= "OBSOLETE"
                  then fact "attribute"
                         [ showAtt $ StoMorphology.featAtt feat
-                        , wordId
                         , camelCaseToSnakeCase val
+                        , wordId
                         , T.concat [ "\""
                                    , getFeat reprFeats StoMorphology.Feat_att_writtenForm
                                    , "\""
