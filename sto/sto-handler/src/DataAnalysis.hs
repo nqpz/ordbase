@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module DataAnalysis
   ( putMorphData
   , putSyntaxData
@@ -43,35 +45,44 @@ analyzeLength = snd . ArrI.bounds
 escape :: Char -> Char -> String -> String
 escape source target = map (\c -> if c == source then target else c)
 
-fixId :: Maybe String -> String
-fixId Nothing = error "ID must always be present"
-fixId (Just ('G' : 'M' : 'U' : '_' : mainPart)) = map toLower $ escape ',' '/' mainPart
-fixId (Just _) = error "Assumed all ids start with GMU_"
+fixId :: Text -> Text
+fixId = T.pack . clean . T.unpack
+  where clean ('G' : 'M' : 'U' : '_' : mainPart) = map toLower $ escape ',' '/' mainPart
+        clean _ = error "Assumed all ids start with GMU_"
+
+showAtt :: StoMorphology.Feat_att -> Text
+showAtt = T.pack . clean . show
+  where clean ('F' : 'e' : 'a' : 't' : '_' : 'a' : 't' : 't' : '_' : mainPart) = mainPart
+        clean _ = error "Assumed all attributes to start with Feat_att_"
 
 generateWords :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateWords = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
-        handleEntry (StoMorphology.LexicalEntry _attrs feats _lemma wordForms _relatedForms) = do
-          let wordId = fixId (T.unpack <$> getFeat StoMorphology.Feat_att_id feats)
-          putStrLn wordId
-          T.putStrLn $ fromJust $ getFeat StoMorphology.Feat_att_partOfSpeech feats
-          putStrLn "-----"
+        handleEntry (StoMorphology.LexicalEntry _attrs lexFeats _lemma wordForms _relatedForms) = do
+          let wordId = fixId $ getLexFeat StoMorphology.Feat_att_id
+          T.putStrLn wordId
+          T.putStrLn $ getLexFeat StoMorphology.Feat_att_partOfSpeech
+          T.putStrLn "-----"
           mapM_ handleWordForm wordForms
-          putStrLn "========================================"
-          putStrLn ""
+          T.putStrLn "========================================"
+          T.putStrLn ""
+          where getLexFeat = getFeat' lexFeats
 
         handleWordForm :: StoMorphology.WordForm -> IO ()
         handleWordForm (StoMorphology.WordForm mainFeats formRepresentations) = do
           forM_ mainFeats $ \feat -> do
-            putStr (show $ StoMorphology.featAtt feat)
-            putStr " = "
+            T.putStr $ showAtt $ StoMorphology.featAtt feat
+            T.putStr " = "
             T.putStrLn $ StoMorphology.featVal feat
           forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
-            T.putStrLn $ fromJust $ getFeat StoMorphology.Feat_att_writtenForm reprFeats
-          putStrLn "----------------------------------------"
+            T.putStrLn $ fromJust $ getFeat reprFeats StoMorphology.Feat_att_writtenForm
+          T.putStrLn "----------------------------------------"
 
-        getFeat :: StoMorphology.Feat_att -> ImmutableArray StoMorphology.Feat -> Maybe Text
-        getFeat att = foldl' (\prev feat -> prev <|> do
-                                 guard $ StoMorphology.featAtt feat == att
-                                 pure $ StoMorphology.featVal feat)
-                      Nothing
+        getFeat :: ImmutableArray StoMorphology.Feat
+                -> StoMorphology.Feat_att -> Maybe Text
+        getFeat feats att = foldl' (\prev feat -> prev <|> do
+                                       guard $ StoMorphology.featAtt feat == att
+                                       pure $ StoMorphology.featVal feat)
+                            Nothing feats
+
+        getFeat' feats = fromJust . getFeat feats
