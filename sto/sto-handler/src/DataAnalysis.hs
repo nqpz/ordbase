@@ -20,8 +20,6 @@ import Data.Text (Text)
 import Data.Char (toLower, isUpper, isNumber)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
-import Control.Monad.State (State, modify, execState)
-import qualified Data.Set as S
 
 import Types
 import qualified StoMorphology
@@ -89,26 +87,17 @@ fact _ [] = error "expected at least one component"
 
 generateProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateProlog entries = do
-  generatePrologSuppressors entries
+  generatePrologSuppressors
   T.putStrLn ""
   generateProlog' entries
 
-generatePrologSuppressors :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
-generatePrologSuppressors entries =
-  let predSet = execState (mapM handleEntry entries) S.empty
-  in forM_  (S.insert ("word", 2) $ S.map (, 3 :: Int) predSet) $ \(p, n) -> do
-    T.putStr ":- discontiguous "
-    T.putStr p
-    T.putStr "/"
-    putStr $ show n
-    T.putStrLn "."
-
-  where handleEntry :: StoMorphology.LexicalEntry -> State (S.Set Text) ()
-        handleEntry (StoMorphology.LexicalEntry _attrs _lexFeats _lemma wordForms _relatedForms) = mapM_ handleWordForm wordForms
-
-        handleWordForm :: StoMorphology.WordForm -> State (S.Set Text) ()
-        handleWordForm (StoMorphology.WordForm formFeats _formRepresentations) =
-          mapM_ (modify . S.insert . showAtt . StoMorphology.featAtt) formFeats
+generatePrologSuppressors :: IO ()
+generatePrologSuppressors = forM_  [("word", 2:: Int), ("attribute", 4)] $ \(p, n) -> do
+  T.putStr ":- discontiguous "
+  T.putStr p
+  T.putStr "/"
+  putStr $ show n
+  T.putStrLn "."
 
 generateProlog' :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateProlog' = mapM_ handleEntry
@@ -129,8 +118,9 @@ generateProlog' = mapM_ handleEntry
             forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
               let val = StoMorphology.featVal feat
               in if val /= "OBSOLETE"
-                 then fact (showAtt $ StoMorphology.featAtt feat)
-                        [ wordId
+                 then fact "attribute"
+                        [ showAtt $ StoMorphology.featAtt feat
+                        , wordId
                         , camelCaseToSnakeCase val
                         , T.concat [ "\""
                                    , getFeat reprFeats StoMorphology.Feat_att_writtenForm
