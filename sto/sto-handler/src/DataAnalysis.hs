@@ -15,7 +15,7 @@ import Control.Applicative ((<|>))
 import Control.Monad (guard, forM_)
 import Data.Maybe (fromJust)
 import Data.Text (Text)
-import Data.Char (toLower)
+import Data.Char (toLower, isUpper)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 
@@ -55,6 +55,11 @@ showAtt = T.pack . clean . show
   where clean ('F' : 'e' : 'a' : 't' : '_' : 'a' : 't' : 't' : '_' : mainPart) = mainPart
         clean _ = error "Assumed all attributes to start with Feat_att_"
 
+camelCaseToSnakeCase :: Text -> Text
+camelCaseToSnakeCase = T.concatMap (T.pack . fix)
+  where fix c | isUpper c = ['_', toLower c]
+              | otherwise = [c]
+
 generateWords :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateWords = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
@@ -71,9 +76,9 @@ generateWords = mapM_ handleEntry
         handleWordForm :: StoMorphology.WordForm -> IO ()
         handleWordForm (StoMorphology.WordForm mainFeats formRepresentations) = do
           forM_ mainFeats $ \feat -> do
-            T.putStr $ showAtt $ StoMorphology.featAtt feat
+            T.putStr $ camelCaseToSnakeCase $ showAtt $ StoMorphology.featAtt feat
             T.putStr " = "
-            T.putStrLn $ StoMorphology.featVal feat
+            T.putStrLn $ camelCaseToSnakeCase $ StoMorphology.featVal feat
           forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
             T.putStrLn $ fromJust $ getFeat reprFeats StoMorphology.Feat_att_writtenForm
           T.putStrLn "----------------------------------------"
