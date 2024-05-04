@@ -22,7 +22,7 @@ main :: IO ()
 main = do
   args <- getArgs
   case args of
-    ["generateWords"] -> DA.generateWords ED.morphologyLexicalEntries
+    ["generateProlog"] -> DA.generateProlog ED.morphologyLexicalEntries
     ["lengths"] -> putLengths
     ["data"] -> putData
     _ -> error "unknown argument"

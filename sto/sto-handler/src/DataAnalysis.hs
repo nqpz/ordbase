@@ -4,7 +4,7 @@ module DataAnalysis
   ( putMorphData
   , putSyntaxData
   , analyzeLength
-  , generateWords
+  , generateProlog
   ) where
 
 import System.IO (stdout, hFlush)
@@ -60,34 +60,46 @@ camelCaseToSnakeCase = T.concatMap (T.pack . fix)
   where fix c | isUpper c = ['_', toLower c]
               | otherwise = [c]
 
-generateWords :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
-generateWords = mapM_ handleEntry
+fact :: Text -> [Text] -> IO ()
+fact name (p0 : ps) = do
+  T.putStr name
+  T.putStr "("
+  T.putStr p0
+  forM_ ps $ \p -> do
+    T.putStr ", "
+    T.putStr p
+  T.putStrLn ")."
+fact _ [] = error "expected at least one component"
+
+generateProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
+generateProlog = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
         handleEntry (StoMorphology.LexicalEntry _attrs lexFeats _lemma wordForms _relatedForms) = do
           let wordId = fixId $ getLexFeat StoMorphology.Feat_att_id
-          T.putStrLn wordId
-          T.putStrLn $ getLexFeat StoMorphology.Feat_att_partOfSpeech
-          T.putStrLn "-----"
-          mapM_ handleWordForm wordForms
-          T.putStrLn "========================================"
+          fact "word"
+            [ wordId
+            , camelCaseToSnakeCase $ getLexFeat StoMorphology.Feat_att_partOfSpeech
+            ]
+          forM_ wordForms $ handleWordForm wordId
           T.putStrLn ""
-          where getLexFeat = getFeat' lexFeats
+          where getLexFeat = getFeat lexFeats
 
-        handleWordForm :: StoMorphology.WordForm -> IO ()
-        handleWordForm (StoMorphology.WordForm mainFeats formRepresentations) = do
-          forM_ mainFeats $ \feat -> do
-            T.putStr $ camelCaseToSnakeCase $ showAtt $ StoMorphology.featAtt feat
-            T.putStr " = "
-            T.putStrLn $ camelCaseToSnakeCase $ StoMorphology.featVal feat
-          forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
-            T.putStrLn $ fromJust $ getFeat reprFeats StoMorphology.Feat_att_writtenForm
-          T.putStrLn "----------------------------------------"
+        handleWordForm :: Text -> StoMorphology.WordForm -> IO ()
+        handleWordForm wordId (StoMorphology.WordForm mainFeats formRepresentations) = do
+          forM_ mainFeats $ \feat ->
+            forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
+              fact (camelCaseToSnakeCase $ showAtt $ StoMorphology.featAtt feat)
+                [ wordId
+                , camelCaseToSnakeCase $ StoMorphology.featVal feat
+                , getFeat reprFeats StoMorphology.Feat_att_writtenForm
+                ]
+          T.putStrLn ""
 
-        getFeat :: ImmutableArray StoMorphology.Feat
+        getFeat feats = fromJust . getFeat' feats
+
+        getFeat' :: ImmutableArray StoMorphology.Feat
                 -> StoMorphology.Feat_att -> Maybe Text
-        getFeat feats att = foldl' (\prev feat -> prev <|> do
-                                       guard $ StoMorphology.featAtt feat == att
-                                       pure $ StoMorphology.featVal feat)
-                            Nothing feats
-
-        getFeat' feats = fromJust . getFeat feats
+        getFeat' feats att = foldl' (\prev feat -> prev <|> do
+                                        guard $ StoMorphology.featAtt feat == att
+                                        pure $ StoMorphology.featVal feat)
+                             Nothing feats
