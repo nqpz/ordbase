@@ -1,3 +1,4 @@
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TupleSections #-}
 {-# LANGUAGE OverloadedStrings #-}
 
@@ -16,7 +17,7 @@ import Control.Applicative ((<|>))
 import Control.Monad (guard, forM_)
 import Data.Maybe (fromJust)
 import Data.Text (Text)
-import Data.Char (toLower, isUpper)
+import Data.Char (toLower, isUpper, isNumber)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import Control.Monad.State (State, modify, execState)
@@ -45,12 +46,24 @@ putSyntaxData entries frames = do
 analyzeLength :: ImmutableArray e -> Int
 analyzeLength = snd . ArrI.bounds
 
-escape :: Char -> Char -> String -> String
-escape source target = map (\c -> if c == source then target else c)
+escape :: String -> String
+escape = \case
+  (c : cs) -> (++ concatMap clean cs) $ case c of
+    _ | isNumber c -> "number_" ++ [c]
+    _ -> [c]
+  s -> concatMap clean s
+  where clean ' ' = "_" -- should be safe even though _ also occurs on its own, but only at the end
+        clean '-' = "_dash_"
+        clean '\'' = "_apostrophe_"
+        clean ',' = "_comma_"
+        clean '[' = "_start_bracket_"
+        clean ']' = "_end_bracket_"
+        clean '¿' = "" -- how did this get in there?
+        clean c = [c]
 
 fixId :: Text -> Text
-fixId = T.pack . clean . T.unpack
-  where clean ('G' : 'M' : 'U' : '_' : mainPart) = map toLower $ escape ',' '/' mainPart
+fixId = clean . T.unpack
+  where clean ('G' : 'M' : 'U' : '_' : mainPart) = T.pack $ map toLower $ escape mainPart
         clean _ = error "Assumed all ids start with GMU_"
 
 camelCaseToSnakeCase :: Text -> Text
@@ -114,11 +127,17 @@ generateProlog' = mapM_ handleEntry
         handleWordForm wordId (StoMorphology.WordForm formFeats formRepresentations) = do
           forM_ formFeats $ \feat ->
             forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
-              fact (showAtt $ StoMorphology.featAtt feat)
-                [ wordId
-                , camelCaseToSnakeCase $ StoMorphology.featVal feat
-                , getFeat reprFeats StoMorphology.Feat_att_writtenForm
-                ]
+              let val = StoMorphology.featVal feat
+              in if val /= "OBSOLETE"
+                 then fact (showAtt $ StoMorphology.featAtt feat)
+                        [ wordId
+                        , camelCaseToSnakeCase val
+                        , T.concat [ "\""
+                                   , getFeat reprFeats StoMorphology.Feat_att_writtenForm
+                                   , "\""
+                                   ]
+                        ]
+                 else pure ()
           T.putStrLn ""
 
         getFeat feats = fromJust . getFeat' feats
