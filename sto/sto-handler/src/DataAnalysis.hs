@@ -1,3 +1,4 @@
+{-# LANGUAGE TupleSections #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module DataAnalysis
@@ -18,6 +19,8 @@ import Data.Text (Text)
 import Data.Char (toLower, isUpper)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
+import Control.Monad.State (State, modify, execState)
+import qualified Data.Set as S
 
 import Types
 import qualified StoMorphology
@@ -50,15 +53,15 @@ fixId = T.pack . clean . T.unpack
   where clean ('G' : 'M' : 'U' : '_' : mainPart) = map toLower $ escape ',' '/' mainPart
         clean _ = error "Assumed all ids start with GMU_"
 
-showAtt :: StoMorphology.Feat_att -> Text
-showAtt = T.pack . clean . show
-  where clean ('F' : 'e' : 'a' : 't' : '_' : 'a' : 't' : 't' : '_' : mainPart) = mainPart
-        clean _ = error "Assumed all attributes to start with Feat_att_"
-
 camelCaseToSnakeCase :: Text -> Text
 camelCaseToSnakeCase = T.concatMap (T.pack . fix)
   where fix c | isUpper c = ['_', toLower c]
               | otherwise = [c]
+
+showAtt :: StoMorphology.Feat_att -> Text
+showAtt = clean . show
+  where clean ('F' : 'e' : 'a' : 't' : '_' : 'a' : 't' : 't' : '_' : mainPart) = camelCaseToSnakeCase $ T.pack mainPart
+        clean _ = error "Assumed all attributes to start with Feat_att_"
 
 fact :: Text -> [Text] -> IO ()
 fact name (p0 : ps) = do
@@ -72,7 +75,30 @@ fact name (p0 : ps) = do
 fact _ [] = error "expected at least one component"
 
 generateProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
-generateProlog = mapM_ handleEntry
+generateProlog entries = do
+  generatePrologSuppressors entries
+  T.putStrLn ""
+  generateProlog' entries
+
+generatePrologSuppressors :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
+generatePrologSuppressors entries =
+  let predSet = execState (mapM handleEntry entries) S.empty
+  in forM_  (S.insert ("word", 2) $ S.map (, 3 :: Int) predSet) $ \(p, n) -> do
+    T.putStr ":- discontiguous "
+    T.putStr p
+    T.putStr "/"
+    putStr $ show n
+    T.putStrLn "."
+
+  where handleEntry :: StoMorphology.LexicalEntry -> State (S.Set Text) ()
+        handleEntry (StoMorphology.LexicalEntry _attrs _lexFeats _lemma wordForms _relatedForms) = mapM_ handleWordForm wordForms
+
+        handleWordForm :: StoMorphology.WordForm -> State (S.Set Text) ()
+        handleWordForm (StoMorphology.WordForm formFeats _formRepresentations) =
+          mapM_ (modify . S.insert . showAtt . StoMorphology.featAtt) formFeats
+
+generateProlog' :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
+generateProlog' = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
         handleEntry (StoMorphology.LexicalEntry _attrs lexFeats _lemma wordForms _relatedForms) = do
           let wordId = fixId $ getLexFeat StoMorphology.Feat_att_id
@@ -85,10 +111,10 @@ generateProlog = mapM_ handleEntry
           where getLexFeat = getFeat lexFeats
 
         handleWordForm :: Text -> StoMorphology.WordForm -> IO ()
-        handleWordForm wordId (StoMorphology.WordForm mainFeats formRepresentations) = do
-          forM_ mainFeats $ \feat ->
+        handleWordForm wordId (StoMorphology.WordForm formFeats formRepresentations) = do
+          forM_ formFeats $ \feat ->
             forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
-              fact (camelCaseToSnakeCase $ showAtt $ StoMorphology.featAtt feat)
+              fact (showAtt $ StoMorphology.featAtt feat)
                 [ wordId
                 , camelCaseToSnakeCase $ StoMorphology.featVal feat
                 , getFeat reprFeats StoMorphology.Feat_att_writtenForm
