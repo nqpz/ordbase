@@ -6,7 +6,7 @@ module DataAnalysis
   ( putMorphData
   , putSyntaxData
   , analyzeLength
-  , generateProlog
+  , generateMorphologyProlog
   ) where
 
 import System.IO (stdout, hFlush)
@@ -85,15 +85,15 @@ fact name (p0 : ps) = do
   T.putStrLn ")."
 fact _ [] = error "expected at least one component"
 
-generateProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
-generateProlog entries = do
-  generatePrologSuppressors
+generateMorphologyProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
+generateMorphologyProlog entries = do
+  generateMorphologyPrologSuppressors
   generateHelpers
   T.putStrLn ""
-  generateProlog' entries
+  generateMorphologyProlog' entries
 
-generatePrologSuppressors :: IO ()
-generatePrologSuppressors = forM_  [("type", 2:: Int), ("att", 4)] $ \(p, n) -> do
+generateMorphologyPrologSuppressors :: IO ()
+generateMorphologyPrologSuppressors = forM_  [("type", 2:: Int), ("att", 4)] $ \(p, n) -> do
   T.putStr ":- discontiguous "
   T.putStr p
   T.putStr "/"
@@ -154,8 +154,8 @@ generateHelpers = do
                    ]
     ]
 
-generateProlog' :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
-generateProlog' = mapM_ handleEntry
+generateMorphologyProlog' :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
+generateMorphologyProlog' = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
         handleEntry (StoMorphology.LexicalEntry _attrs lexFeats _lemma wordForms _relatedForms) = do
           let wordId = fixId $ getLexFeat StoMorphology.Feat_att_id
