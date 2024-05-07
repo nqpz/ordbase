@@ -88,23 +88,78 @@ fact _ [] = error "expected at least one component"
 generateProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateProlog entries = do
   generatePrologSuppressors
+  generateHelpers
   T.putStrLn ""
   generateProlog' entries
 
 generatePrologSuppressors :: IO ()
-generatePrologSuppressors = forM_  [("word", 2:: Int), ("attribute", 4)] $ \(p, n) -> do
+generatePrologSuppressors = forM_  [("type", 2:: Int), ("att", 4)] $ \(p, n) -> do
   T.putStr ":- discontiguous "
   T.putStr p
   T.putStr "/"
   putStr $ show n
   T.putStrLn "."
 
+data Exp = Group Text [Exp]
+         | Var Text
+
+printExp :: Exp -> IO ()
+printExp = \case
+  Group name args -> do
+    T.putStr name
+    case args of
+      arg0 : args' -> do
+        T.putStr "("
+        printExp arg0
+        forM_ args' $ \arg -> do
+          T.putStr ", "
+          printExp arg
+        T.putStr ")"
+      [] -> pure ()
+  Var v ->
+    T.putStr v
+
+printCode :: Text -> [Exp] -> [Exp] -> IO ()
+printCode name args subs = do
+  printExp (Group name args)
+  case subs of
+    sub0 : subs' -> do
+      T.putStrLn " :-"
+      printExp sub0
+      forM_ subs' $ \sub -> do
+        T.putStrLn ","
+        printExp sub
+    [] ->
+      pure ()
+  T.putStrLn "."
+  T.putStrLn ""
+
+generateHelpers :: IO ()
+generateHelpers = do
+  printCode
+    "word_id_and_type"
+    [ Var "Word", Group "word" [ Var "WordId", Var "Type" ] ]
+    [ Group "att" $ map Var ["_", "_", "WordId", "Word"]
+    , Group "type" $ map Var [ "WordId", "Type" ]
+    ]
+  printCode
+    "word_ids_and_types"
+    [ Var "Word", Var "WordIdsAndTypes" ]
+    [ Group "findall" [ Var "WordIdAndType"
+                      , Group "word_id_and_type" $ map Var [ "Word", "WordIdAndType" ]
+                      , Var "List"
+                      ]
+    , Group "sort" [ Var "List"
+                   , Var "WordIdsAndTypes"
+                   ]
+    ]
+
 generateProlog' :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateProlog' = mapM_ handleEntry
   where handleEntry :: StoMorphology.LexicalEntry -> IO ()
         handleEntry (StoMorphology.LexicalEntry _attrs lexFeats _lemma wordForms _relatedForms) = do
           let wordId = fixId $ getLexFeat StoMorphology.Feat_att_id
-          fact "word"
+          fact "type"
             [ wordId
             , camelCaseToSnakeCase $ getLexFeat StoMorphology.Feat_att_partOfSpeech
             ]
