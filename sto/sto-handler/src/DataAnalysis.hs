@@ -51,9 +51,9 @@ escape = \case
     _ -> [c]
   s -> concatMap clean s
   where clean ' ' = "_" -- should be safe even though _ also occurs on its own, but only at the end
+        clean ',' = "_" -- probably safe
         clean '-' = "_dash_"
         clean '\'' = "_apostrophe_"
-        clean ',' = "_comma_"
         clean '[' = "_start_bracket_"
         clean ']' = "_end_bracket_"
         clean '¿' = "" -- how did this get in there?
