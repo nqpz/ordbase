@@ -23,6 +23,7 @@ main = do
   args <- getArgs
   case args of
     ["generateMorphologyProlog"] -> DA.generateMorphologyProlog ED.morphologyLexicalEntries
+    ["generateSyntaxProlog"] -> DA.generateSyntaxProlog ED.syntaxLexicalEntries ED.syntaxSubcategorizationFrames
     ["lengths"] -> putLengths
     ["data"] -> putData
     _ -> error "unknown argument"

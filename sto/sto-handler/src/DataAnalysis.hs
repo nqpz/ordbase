@@ -7,6 +7,7 @@ module DataAnalysis
   , putSyntaxData
   , analyzeLength
   , generateMorphologyProlog
+  , generateSyntaxProlog
   ) where
 
 import System.IO (stdout, hFlush)
@@ -193,3 +194,8 @@ generateMorphologyProlog' = mapM_ handleEntry
                                         guard $ StoMorphology.featAtt feat == att
                                         pure $ StoMorphology.featVal feat)
                              Nothing feats
+
+generateSyntaxProlog :: ImmutableArray StoSyntax.LexicalEntry
+                     -> ImmutableArray StoSyntax.SubcategorizationFrame
+                     -> IO ()
+generateSyntaxProlog entries frames = undefined
