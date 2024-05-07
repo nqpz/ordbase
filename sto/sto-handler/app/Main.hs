@@ -3,6 +3,8 @@ module Main (main) where
 import System.Environment (getArgs)
 import qualified EmbeddedData as ED
 import qualified DataAnalysis as DA
+import qualified PrologGenerator.Morphology as PGM
+import qualified PrologGenerator.Syntax as PGS
 
 putLengths :: IO ()
 putLengths = do
@@ -22,8 +24,8 @@ main :: IO ()
 main = do
   args <- getArgs
   case args of
-    ["generateMorphologyProlog"] -> DA.generateMorphologyProlog ED.morphologyLexicalEntries
-    ["generateSyntaxProlog"] -> DA.generateSyntaxProlog ED.syntaxLexicalEntries ED.syntaxSubcategorizationFrames
+    ["generateMorphologyProlog"] -> PGM.generateProlog ED.morphologyLexicalEntries
+    ["generateSyntaxProlog"] -> PGS.generateProlog ED.syntaxLexicalEntries ED.syntaxSubcategorizationFrames
     ["lengths"] -> putLengths
     ["data"] -> putData
     _ -> error "unknown argument"

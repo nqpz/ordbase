@@ -29,6 +29,9 @@ library
       StoFiles
       DataAnalysis
       EmbeddedData
+      PrologGenerator
+      PrologGenerator.Morphology
+      PrologGenerator.Syntax
       StoMorphology
       StoSyntax
       StoUtils
