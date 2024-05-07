@@ -118,7 +118,7 @@ generateProlog' = mapM_ handleEntry
             forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
               let val = StoMorphology.featVal feat
               in if val /= "OBSOLETE"
-                 then fact "attribute"
+                 then fact "att"
                         [ showAtt $ StoMorphology.featAtt feat
                         , camelCaseToSnakeCase val
                         , wordId
