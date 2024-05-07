@@ -42,15 +42,7 @@ camelCaseToSnakeCase = T.concatMap (T.pack . fix)
               | otherwise = [c]
 
 fact :: Text -> [Text] -> IO ()
-fact name (p0 : ps) = do
-  T.putStr name
-  T.putStr "("
-  T.putStr p0
-  forM_ ps $ \p -> do
-    T.putStr ", "
-    T.putStr p
-  T.putStrLn ")."
-fact _ [] = error "expected at least one component"
+fact name ps = printCode name (map Var ps) []
 
 data Exp = Group Text [Exp]
          | Var Text
@@ -84,4 +76,3 @@ printCode name args subs = do
     [] ->
       pure ()
   T.putStrLn "."
-  T.putStrLn ""
