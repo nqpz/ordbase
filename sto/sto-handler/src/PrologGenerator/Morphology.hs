@@ -89,7 +89,7 @@ generateProlog' = mapM_ handleEntry
         getFeat feats = fromJust . getFeat' feats
 
         getFeat' :: ImmutableArray StoMorphology.Feat
-                -> StoMorphology.Feat_att -> Maybe Text
+                 -> StoMorphology.Feat_att -> Maybe Text
         getFeat' feats att = foldl' (\prev feat -> prev <|> do
                                         guard $ StoMorphology.featAtt feat == att
                                         pure $ StoMorphology.featVal feat)
