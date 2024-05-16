@@ -66,11 +66,17 @@ generateFrames = mapM_ handleFrame
                                           $ groupArguments
                                           $ map makeArgument
                                           $ ArrI.elems syntacticArguments
-                     in do
-                       T.putStrLn frame
-                       print partOfSpeech
-                       mapM_ (\group -> mapM_ print group >> T.putStrLn "") argumentGroups
-                       T.putStrLn ""
+                     in case partOfSpeech of
+                       Nothing -> pure () -- "not yet analysed" according to the XML, ignore
+                       Just "noun" -> pure () -- todo
+                       Just "adjective" -> pure () -- todo
+                       Just "verb" -> pure () -- todo
+                       _ -> error "unexpected part of speech"
+                     -- in do
+                     --   T.putStrLn frame
+                     --   print partOfSpeech
+                     --   mapM_ (\group -> mapM_ print group >> T.putStrLn "") argumentGroups
+                     --   T.putStrLn ""
 
         makeArgument :: StoSyntax.SyntacticArgument -> ArgumentWithIndex
         makeArgument (StoSyntax.SyntacticArgument _attrs feats) =
