@@ -30,6 +30,7 @@ generatePrologSuppressors = forM_  [("type", 2:: Int), ("att", 4)] $ \(p, n) -> 
   putStr $ show n
   T.putStrLn "."
 
+-- Word types: adjective, common_noun, demonstrative_pronoun, deponent_verb, indefinite_pronoun, interrogative_relative_pronoun, main_verb, numeral, ordinal_adjective, personal_pronoun, possessive_pronoun, proper_noun, reciprocal_pronoun
 generateHelpers :: IO ()
 generateHelpers = do
   printCode

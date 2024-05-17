@@ -69,9 +69,11 @@ printCode name args subs = do
   case subs of
     sub0 : subs' -> do
       T.putStrLn " :-"
+      T.putStr "  "
       printExp sub0
       forM_ subs' $ \sub -> do
         T.putStrLn ","
+        T.putStr "  "
         printExp sub
     [] ->
       pure ()
