@@ -8,7 +8,7 @@ import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import Data.Foldable (foldl')
 import Control.Applicative ((<|>))
-import Control.Monad (guard, forM_)
+import Control.Monad (guard, forM_, when)
 import Data.Maybe (fromJust)
 
 import Types
@@ -35,7 +35,9 @@ generateHelpers :: IO ()
 generateHelpers = do
   printCode
     "word_id_and_type"
-    [ Var "Word", Group "word" [ Var "WordId", Var "Type" ] ]
+    [ Var "Word"
+    , Group "word" [ Var "WordId", Var "Type" ]
+    ]
     [ Group "att" $ map Var ["_", "_", "WordId", "Word"]
     , Group "type" $ map Var [ "WordId", "Type" ]
     ]
