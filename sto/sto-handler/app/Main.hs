@@ -5,6 +5,15 @@ import qualified EmbeddedData as ED
 import qualified DataAnalysis as DA
 import qualified PrologGenerator.Morphology as PGM
 import qualified PrologGenerator.Syntax as PGS
+import qualified StoFiles
+
+putFiles :: IO ()
+putFiles = do
+  putStrLn "Morphology XML files:"
+  mapM_ putStrLn =<< StoFiles.morphXmlPaths
+  putStrLn ""
+  putStrLn "Syntax XML files:"
+  mapM_ putStrLn =<< StoFiles.syntaxXmlPaths
 
 putLengths :: IO ()
 putLengths = do
@@ -26,6 +35,7 @@ main = do
   case args of
     ["generateMorphologyProlog"] -> PGM.generateProlog ED.morphologyLexicalEntries
     ["generateSyntaxProlog"] -> PGS.generateProlog ED.syntaxLexicalEntries ED.syntaxSubcategorizationFrames
+    ["files"] -> putFiles
     ["lengths"] -> putLengths
     ["data"] -> putData
     _ -> error "unknown argument"
