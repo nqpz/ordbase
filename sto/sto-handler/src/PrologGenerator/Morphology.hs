@@ -30,7 +30,30 @@ generatePrologSuppressors = forM_  [("type", 2:: Int), ("att", 4)] $ \(p, n) -> 
   putStr $ show n
   T.putStrLn "."
 
--- Word types: adjective, common_noun, demonstrative_pronoun, deponent_verb, indefinite_pronoun, interrogative_relative_pronoun, main_verb, numeral, ordinal_adjective, personal_pronoun, possessive_pronoun, proper_noun, reciprocal_pronoun
+-- Word types:
+--
+-- - adjective
+-- - common_noun
+-- - coordinating_conjunction
+-- - demonstrative_pronoun (den, det, ...)
+-- - deponent_verb (findes, lykkes, ...)
+-- - existential_pronoun (der (only one word))
+-- - general_adverb (altid, inden, bagefter, ...)
+-- - indefinite_pronoun (en, et, alting, ingen, ...)
+-- - infinitive_particle (at (only one word))
+-- - interjection (ak, uha, hvabehar, ...)
+-- - interrogative_relative_pronoun (hvad, hvem, ...)
+-- - main_verb
+-- - numeral (halvfems, fyrre, elleve, ...)
+-- - ordinal_adjective (halvfemsindstyvende, fyrrende, ellevte, ...)
+-- - personal_pronoun (det, hun, hende, mig, ...)
+-- - possessive_pronoun (dets, din, hans, ...)
+-- - preposition (ad, mellem, over, vedrørende, ...)
+-- - proper_noun (Allinge, Amager, ...)
+-- - reciprocal_pronoun (hinanden, hverandre)
+-- - subordinating_conjunction (at, forinden, såfremt, efter, ...)
+-- - unclassified_particle (som (why?))
+-- - unspecified (a la carte, en gros, såvel, ...)
 generateHelpers :: IO ()
 generateHelpers = do
   printCode
