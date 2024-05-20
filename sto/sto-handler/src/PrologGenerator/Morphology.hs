@@ -72,19 +72,27 @@ generateProlog' = mapM_ handleEntry
         handleWordForm :: Text -> StoMorphology.WordForm -> IO ()
         handleWordForm wordId (StoMorphology.WordForm formFeats formRepresentations) = do
           forM_ formFeats $ \feat -> do
-            let val = StoMorphology.featVal feat
+            let att = showAtt $ StoMorphology.featAtt feat
+                val = StoMorphology.featVal feat
             when (val /= "OBSOLETE")
-              $ forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
-              fact "att"
-              [ showAtt $ StoMorphology.featAtt feat
-              , camelCaseToSnakeCase val
-              , wordId
-              , T.concat [ "\""
-                         , getFeat reprFeats StoMorphology.Feat_att_writtenForm
-                         , "\""
-                         ]
-              ]
+              $ handleFormRepresentations wordId att (camelCaseToSnakeCase val) formRepresentations
+          when (null formFeats)
+            $ handleFormRepresentations wordId "none" "none" formRepresentations
           T.putStrLn ""
+
+        handleFormRepresentations :: Text -> Text -> Text
+                                  -> ImmutableArray StoMorphology.FormRepresentation -> IO ()
+        handleFormRepresentations wordId att val formRepresentations =
+          forM_ formRepresentations $ \(StoMorphology.FormRepresentation reprFeats) ->
+            fact "att"
+            [ att
+            , val
+            , wordId
+            , T.concat [ "\""
+                       , getFeat reprFeats StoMorphology.Feat_att_writtenForm
+                       , "\""
+                       ]
+            ]
 
         getFeat feats = fromJust . getFeat' feats
 
