@@ -79,6 +79,7 @@ generateNoun kind args = do
         -- - specifierNoun
         toWord :: (Int, ImmutableArray StoSyntax.Feat) -> [(Text, [Exp])]
         toWord (i, feats) = case getFeat' feats StoSyntax.Feat_att_syntacticFunctionType of
+          -- FIXME: refactor shared parts
           Just "prepositionalComplement" ->
             case getFeat' feats StoSyntax.Feat_att_ppComplementLabel of
               Just "NP" ->
