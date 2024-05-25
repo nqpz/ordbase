@@ -118,13 +118,6 @@ generateNoun kind args = do
             fixme fun
           _ ->
             fixme "unknown"
-          -- i == 1
-          -- StoSyntax.Feat_att_introducer  syntacticConstituentLabel
-          -- Just "M" <- getFeat' feats StoSyntax.Feat_att_npIndex =
-
--- case (i, getFeat' feats StoSyntax.Feat_att_npIndex) of
---                       (1, Just "M") -> results ++ [("KindWord", kindWordReqs)]
---                       (1, _) -> ("KindWord", kindWordReqs) : results
 
 generateFrames :: ImmutableArray StoSyntax.SubcategorizationFrame -> IO ()
 generateFrames frames = do
