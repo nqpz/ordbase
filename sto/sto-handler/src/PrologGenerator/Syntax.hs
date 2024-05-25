@@ -95,6 +95,8 @@ generateNoun kind args = do
                     results' = (T.concat [ "\"", getFeat feats StoSyntax.Feat_att_introducer, "\"" ], []) : results
                     results'' = if i == 1 then ("KindWord", kindWordReqs) : results' else results'
                 in results''
+              -- Just "infinitiveWithoutControl" ->
+              --   [ "\"at\"" main_verb ...
               _ -> fixme "not-np"
           Just "relationalGenitive" ->
             case getFeat' feats StoSyntax.Feat_att_syntacticConstituentLabel of
