@@ -5,6 +5,7 @@ module PrologGenerator
   , fixId
   , camelCaseToSnakeCase
   , fact
+  , generatePrologSuppressors
   , Exp(..)
   , printExp
   , printCode
@@ -43,6 +44,14 @@ camelCaseToSnakeCase = T.concatMap (T.pack . fix)
 
 fact :: Text -> [Text] -> IO ()
 fact name ps = printCode name (map Var ps) []
+
+generatePrologSuppressors :: [(Text, Int)] -> IO ()
+generatePrologSuppressors ts = forM_ ts $ \(p, n) -> do
+  T.putStr ":- discontiguous "
+  T.putStr p
+  T.putStr "/"
+  putStr $ show n
+  T.putStrLn "."
 
 data Exp = Group Text [Exp]
          | Var Text

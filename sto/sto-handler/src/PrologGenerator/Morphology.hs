@@ -17,18 +17,10 @@ import qualified StoMorphology
 
 generateProlog :: ImmutableArray StoMorphology.LexicalEntry -> IO ()
 generateProlog entries = do
-  generatePrologSuppressors
+  generatePrologSuppressors [("type", 2), ("att", 4)]
   generateHelpers
   T.putStrLn ""
   generateProlog' entries
-
-generatePrologSuppressors :: IO ()
-generatePrologSuppressors = forM_  [("type", 2:: Int), ("att", 4)] $ \(p, n) -> do
-  T.putStr ":- discontiguous "
-  T.putStr p
-  T.putStr "/"
-  putStr $ show n
-  T.putStrLn "."
 
 -- Word types:
 --

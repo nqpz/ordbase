@@ -23,6 +23,7 @@ generateProlog :: ImmutableArray StoSyntax.LexicalEntry
                -> IO ()
 generateProlog entries frames = do
   T.putStrLn ":- style_check(-singleton)." -- TEMPORARY
+  generatePrologSuppressors [("noun_group", 2), ("adjective_group", 4)]
   T.putStrLn "eq(X, X)." -- means I can write less code below
   generateEntries entries
   generateFrames frames
@@ -62,7 +63,7 @@ fixme fun = [ (T.concat [ "\"FIXME-", fun, "\"" ], []) ] -- FIXME
 generateNoun :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
 generateNoun kind args = do
   printCode
-    "phrase_group"
+    "noun_group"
     [ Var "Definiteness", Var (T.pack ("[" ++ L.intercalate ", " (map T.unpack words) ++ "]")) ]
     (concat wordReqs)
   where (words, wordReqs) = unzip $ concatMap toWord $ zip [1..] args
@@ -108,7 +109,7 @@ generateNoun kind args = do
                     results =
                       [ (w, [ Group "word_id_and_type"
                               [ Var w
-                              , Group "word" $ map Var [ wid, "common_noun" ] -- TODO: also other categories than common_noun?
+                              , Group "word" $ map Var [ wid, "common_noun" ] -- TODO: also other categories than common_noun? Maybe just don't search for this at all since we're also looking for genitive_case?
                               ]
                             , Group "att" $ map Var [ "case", "genitive_case", wid, w ]
                             ])
@@ -121,17 +122,54 @@ generateNoun kind args = do
           _ ->
             fixme "unknown"
 
--- Relevant word attributes: case
+-- Relevant word attributes: degree, grammatical_gender, grammatical_number
 generateAdjective :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
 generateAdjective kind args = do
-  pure ()
--- Adjective syntactic functions:
--- - clausalComplement
--- - externalComplement
--- - formalComplement
--- - nominalComplement
--- - prepositionalComplement
--- - somPrepComplement
+  printCode
+    "adjective_group"
+    [ Var "Degree", Var "GrammaticalGender", Var "GrammaticalNumber", Var (T.pack ("[" ++ L.intercalate ", " (map T.unpack words) ++ "]")) ]
+    (concat wordReqs)
+  where (words, wordReqs) = unzip $ concatMap toWord $ zip [1..] args
+
+        -- Adjective syntactic functions:
+        -- - clausalComplement
+        -- - externalComplement
+        -- - formalComplement
+        -- - nominalComplement
+        -- - prepositionalComplement
+        -- - somPrepComplement
+        toWord :: (Int, ImmutableArray StoSyntax.Feat) -> [(Text, [Exp])]
+        toWord (i, feats) = case getFeat' feats StoSyntax.Feat_att_syntacticFunctionType of
+          Just "externalComplement" ->
+            case getFeat' feats StoSyntax.Feat_att_syntacticConstituentLabel of
+              Just "NP" ->
+                let w = T.pack ("Word" ++ show i)
+                    -- wid = "_" -- T.pack ("WordId" ++ show i)
+                    adj = T.pack ("Adj" ++ show i)
+                    results =
+                      -- TODO: Okay to not explicitly first look at word class?
+
+                      -- TODO: Currently hardcoded to be unspecified, but the
+                      -- value seems to always be
+                      -- "nominativeCase,accusativeCase,unspecified", so we
+                      -- should also accept the two other cases. Requires uglier
+                      -- Prolog code.
+                      [ (w, [ Group "att" $ map Var [ "case", "unspecified", "_", w ]
+                            , Group "att" $ map Var [ "grammatical_gender", "GrammaticalGender", "_", w ]
+                            , Group "att" $ map Var [ "grammatical_number", "GrammaticalNumber", "_", w ]
+                            ])
+                      , ("\"er\"", []) -- TODO: Support past "var" as well, etc.
+                      , (adj, [ Group "att" $ map Var [ "degree", "Degree", "_", adj ]
+                              , Group "att" $ map Var [ "grammatical_gender", "GrammaticalGender", "_", adj ]
+                              , Group "att" $ map Var [ "grammatical_number", "GrammaticalNumber", "_", adj ] -- TODO: Is this right?
+                              ]) -- TODO: Verify that this only happens on position 1
+                      ]
+                in results
+              _ -> fixme "not-np"
+          Just fun ->
+            fixme fun
+          _ ->
+            fixme "unknown"
 
 -- Relevant word attributes: case (others?)
 generateVerb :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
