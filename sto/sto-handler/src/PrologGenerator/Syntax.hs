@@ -55,7 +55,7 @@ generateEntries = mapM_ handleEntry
 
 type ArgumentWithIndex = (Int, ImmutableArray StoSyntax.Feat)
 
--- Word attributes: case, definiteness, (maybe reflexiveVoice?)
+-- Relevant word attributes: case, definiteness, (maybe reflexiveVoice?)
 generateNoun :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
 generateNoun kind args = do
   printCode
@@ -120,6 +120,32 @@ generateNoun kind args = do
           _ ->
             fixme "unknown"
 
+-- Relevant word attributes: case
+generateAdjective :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
+generateAdjective kind args = do
+  pure ()
+-- Adjective syntactic functions:
+-- - clausalComplement
+-- - externalComplement
+-- - formalComplement
+-- - nominalComplement
+-- - prepositionalComplement
+-- - somPrepComplement
+
+-- Relevant word attributes: case (others?)
+generateVerb :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
+generateVerb kind args = do
+  pure ()
+-- Verb syntactic functions:
+-- - adverbialComplement
+-- - directObject
+-- - formalSubject
+-- - indirectObject
+-- - objectComplement
+-- - prepositionalComplement
+-- - somPrepComplement
+-- - subject
+
 generateFrames :: ImmutableArray StoSyntax.SubcategorizationFrame -> IO ()
 generateFrames frames = do
   printCode
@@ -145,8 +171,8 @@ generateFrames frames = do
                      in case partOfSpeech of
                        Nothing -> pure () -- "not yet analysed" according to the XML, ignore
                        Just "noun" -> mapM_ (generateNoun frame) argumentGroups
-                       Just "adjective" -> pure () -- todo
-                       Just "verb" -> pure () -- todo
+                       Just "adjective" -> mapM_ (generateAdjective frame) argumentGroups
+                       Just "verb" -> mapM_ (generateVerb frame) argumentGroups
                        _ -> error "unexpected part of speech"
                      -- in do
                      --   T.putStrLn frame
