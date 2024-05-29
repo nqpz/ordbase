@@ -55,6 +55,9 @@ generateEntries = mapM_ handleEntry
 
 type ArgumentWithIndex = (Int, ImmutableArray StoSyntax.Feat)
 
+fixme :: Text -> [(Text, [Exp])]
+fixme fun = [ (T.concat [ "\"FIXME-", fun, "\"" ], []) ] -- FIXME
+
 -- Relevant word attributes: case, definiteness, (maybe reflexiveVoice?)
 generateNoun :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
 generateNoun kind args = do
@@ -67,8 +70,6 @@ generateNoun kind args = do
                        , Group "att" $ map Var ["case", "unspecified", "KindWordId", "KindWord"]
                        , Group "att" $ map Var ["definiteness", "Definiteness", "KindWordId", "KindWord"]
                        ]
-
-        fixme fun = [ (T.concat [ "\"FIXME-", fun, "\"" ], []) ] -- FIXME
 
         -- Noun syntactic functions:
         -- - clausalComplement
