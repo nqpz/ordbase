@@ -12,7 +12,7 @@ swipl --stand_alone=true -o sto -c morphology.pl syntax.pl
 ./sto
 ```
 
-Things to try out (TODO: check if all of these still work):
+Things to try out:
 
 ```prolog
 att(definiteness, definite, skib_1, S), att(grammatical_number, plural, skib_1, S), att(case, genitive_case, skib_1, S).
