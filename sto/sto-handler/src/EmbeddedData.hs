@@ -8,7 +8,7 @@ module EmbeddedData
 import qualified Data.ByteString.Lazy as BSL
 import Data.ByteString (ByteString)
 import Data.Store (decodeEx)
-import qualified Codec.Compression.Lzma as Lzma
+import qualified Codec.Lzip as Lzip
 
 import StoFiles (morphXmlPaths, syntaxXmlPaths)
 import FileEmbedding (embedMorphs, embedSyntaxs)
@@ -17,7 +17,7 @@ import qualified StoMorphology
 import qualified StoSyntax
 
 decompress :: ByteString -> ByteString
-decompress = BSL.toStrict . Lzma.decompress . BSL.fromStrict
+decompress = BSL.toStrict . Lzip.decompress . BSL.fromStrict
 
 morphologyLexicalEntriesString :: ByteString
 morphologyLexicalEntriesString = $(embedMorphs morphXmlPaths)

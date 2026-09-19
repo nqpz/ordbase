@@ -13,14 +13,14 @@ import Data.ByteString (ByteString)
 import qualified Data.ByteString.Lazy as BSL
 import Control.Monad (forM)
 import Data.Store (encode)
-import qualified Codec.Compression.Lzma as Lzma
+import qualified Codec.Lzip as Lzip
 
 import ArrayUtils
 import qualified StoMorphology
 import qualified StoSyntax
 
 compress :: ByteString -> ByteString
-compress = BSL.toStrict . Lzma.compress . BSL.fromStrict
+compress = BSL.toStrict . Lzip.compress . BSL.fromStrict
 
 morphsToString :: [FilePath] -> IO ByteString
 morphsToString morphPaths = do
