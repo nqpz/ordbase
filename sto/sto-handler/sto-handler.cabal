@@ -1,9 +1,5 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.36.0.
---
--- see: https://github.com/sol/hpack
-
 name:           sto-handler
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/nqpz/ordbase/sto-handler#readme>
@@ -11,7 +7,7 @@ homepage:       https://github.com/nqpz/ordbase#readme
 bug-reports:    https://github.com/nqpz/ordbase/issues
 author:         Niels G. W. Serup
 maintainer:     ngws@metanohi.name
-copyright:      2024 Niels G. W. Serup
+copyright:      2024, 2026 Niels G. W. Serup
 license:        GPL-3
 build-type:     Simple
 extra-source-files:

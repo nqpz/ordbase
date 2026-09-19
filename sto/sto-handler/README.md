@@ -5,9 +5,9 @@ Handles STO data.
 Run:
 
 ```sh
-stack build
-stack exec -- sto-handler generateMorphologyProlog > morphology.pl
-stack exec -- sto-handler generateSyntaxProlog > syntax.pl
+cabal build
+cabal exec -- sto-handler generateMorphologyProlog > morphology.pl
+cabal exec -- sto-handler generateSyntaxProlog > syntax.pl
 swipl --stand_alone=true -o sto -c morphology.pl syntax.pl
 ./sto
 ```
