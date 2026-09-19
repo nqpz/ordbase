@@ -1,15 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE LambdaCase #-}
 module PrologGenerator.Syntax
   ( generateProlog
   ) where
 
+import Prelude hiding (words)
 import qualified Data.List as L
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import Data.Maybe (fromJust)
-import Data.Foldable (foldl')
 import Control.Applicative ((<|>))
 import Control.Monad (guard, forM_)
 import qualified Data.Array.IArray as ArrI
@@ -31,6 +30,8 @@ generateProlog entries frames = do
 fixFrame :: Text -> Text
 fixFrame frame = T.concat [ "kind_", T.replace "-" "_" frame]
 
+getFeat :: ImmutableArray StoSyntax.Feat
+        -> StoSyntax.Feat_att -> Text
 getFeat feats = fromJust . getFeat' feats
 
 getFeat' :: ImmutableArray StoSyntax.Feat
@@ -124,7 +125,7 @@ generateNoun kind args = do
 
 -- Relevant word attributes: degree, grammatical_gender, grammatical_number
 generateAdjective :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
-generateAdjective kind args = do
+generateAdjective _kind args = do
   printCode
     "adjective_group"
     [ Var "Degree", Var "GrammaticalGender", Var "GrammaticalNumber", Var (T.pack ("[" ++ L.intercalate ", " (map T.unpack words) ++ "]")) ]
@@ -173,7 +174,7 @@ generateAdjective kind args = do
 
 -- Relevant word attributes: case (others?)
 generateVerb :: Text -> [ImmutableArray StoSyntax.Feat] -> IO ()
-generateVerb kind args = do
+generateVerb _kind _args = do
   pure ()
 -- Verb syntactic functions:
 -- - adverbialComplement

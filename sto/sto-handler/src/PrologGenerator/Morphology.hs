@@ -6,7 +6,6 @@ module PrologGenerator.Morphology
 import Data.Text (Text)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
-import Data.Foldable (foldl')
 import Control.Applicative ((<|>))
 import Control.Monad (guard, forM_, when)
 import Data.Maybe (fromJust)
